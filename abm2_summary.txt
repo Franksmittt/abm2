@@ -1,0 +1,3141 @@
+📁 **PROJECT FILE TREE: abm2**
+├── 📄 .eslintrc.json
+├── 📄 .gitignore
+├── 📄 README.md
+├── 📄 components.json
+├── 📄 next-env.d.ts
+├── 📄 next.config.mjs
+├── 📄 package.json
+├── 📄 pnpm
+├── 📄 postcss.config.mjs
+├── 📄 tailwind.config.ts
+├── 📄 tsconfig.json
+│   ├── 📁 src
+│   │   ├── 📁 app
+│   │   │   ├── 📄 globals.css
+│   │   │   ├── 📄 layout.tsx
+│   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 about
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 contact
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 deep-cycle
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 faq
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 fitment
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 fonts
+│   │   │   │   ├── 📄 GeistMonoVF.woff
+│   │   │   │   ├── 📄 GeistVF.woff
+│   │   │   ├── 📁 products
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   │   ├── 📁 brand
+│   │   │   │   │   ├── 📁 [brandName]
+│   │   │   │   │   │   ├── 📄 page.tsx
+│   │   │   │   ├── 📁 type
+│   │   │   │   │   ├── 📁 automotive
+│   │   │   │   │   │   ├── 📄 page.tsx
+│   │   │   │   │   ├── 📁 deep-cycle
+│   │   │   │   │   │   ├── 📄 page.tsx
+│   │   │   │   │   ├── 📁 performance
+│   │   │   │   │   │   ├── 📄 page.tsx
+│   │   │   │   │   ├── 📁 truck-motorcycle
+│   │   │   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 quote
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 services
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 testing
+│   │   │   │   ├── 📄 page.tsx
+│   │   ├── 📁 components
+│   │   │   ├── 📄 theme-provider.tsx
+│   │   │   ├── 📁 content
+│   │   │   │   ├── 📄 ContactForm.tsx
+│   │   │   │   ├── 📄 ProductCard.tsx
+│   │   │   ├── 📁 layout
+│   │   │   │   ├── 📄 FaqPageContent.tsx
+│   │   │   │   ├── 📄 FaqSection.tsx
+│   │   │   │   ├── 📄 Footer.tsx
+│   │   │   │   ├── 📄 Header.tsx
+│   │   │   │   ├── 📄 HeroSection.tsx
+│   │   │   │   ├── 📄 MobileNav.tsx
+│   │   │   │   ├── 📄 ProductListPage.tsx
+│   │   │   │   ├── 📄 ProductSpotlight.tsx
+│   │   │   │   ├── 📄 ServiceGrid.tsx
+│   │   │   │   ├── 📄 StorefrontCTA.tsx
+│   │   │   │   ├── 📄 TestimonialSection.tsx
+│   │   │   │   ├── 📄 ThinCta.tsx
+│   │   │   │   ├── 📄 TrustAuthoritySection.tsx
+│   │   │   ├── 📁 ui
+│   │   │   │   ├── 📄 accordion.tsx
+│   │   │   │   ├── 📄 aspect-ratio.tsx
+│   │   │   │   ├── 📄 button.tsx
+│   │   │   │   ├── 📄 card.tsx
+│   │   │   │   ├── 📄 input.tsx
+│   │   │   │   ├── 📄 label.tsx
+│   │   │   │   ├── 📄 separator.tsx
+│   │   │   │   ├── 📄 sheet.tsx
+│   │   │   │   ├── 📄 textarea.tsx
+│   │   │   │   ├── 📄 toggle.tsx
+│   │   ├── 📁 lib
+│   │   │   ├── 📄 product-mock-data.ts
+│   │   │   ├── 📄 utils.ts
+│   │   │   ├── 📁 db
+
+====================================================================================================
+
+📄 **INDIVIDUAL FILE CONTENTS**
+
+====================================================================================================
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\.eslintrc.json--------------------------------------------------------------------------------{
+  "extends": ["next/core-web-vitals", "next/typescript"]
+}
+
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\.gitignore--------------------------------------------------------------------------------# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\README.md--------------------------------------------------------------------------------This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\components.json--------------------------------------------------------------------------------{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "tailwind.config.ts",
+    "css": "src/app/globals.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "iconLibrary": "lucide",
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
+  },
+  "registries": {}
+}
+
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\next-env.d.ts--------------------------------------------------------------------------------/// <reference types="next" />
+/// <reference types="next/image-types/global" />
+
+// NOTE: This file should not be edited
+// see https://nextjs.org/docs/basic-features/typescript for more information.
+
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\next.config.mjs--------------------------------------------------------------------------------/** @type {import('next').NextConfig} */
+const nextConfig = {};
+
+export default nextConfig;
+
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\package.json--------------------------------------------------------------------------------{
+  "name": "abm2",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:push": "drizzle-kit push"
+  },
+  "dependencies": {
+    "@radix-ui/react-accordion": "^1.2.0",
+    "@radix-ui/react-aspect-ratio": "^1.1.0",
+    "@radix-ui/react-dialog": "^1.1.1",
+    "@radix-ui/react-label": "^2.1.7",
+    "@radix-ui/react-separator": "^1.1.0",
+    "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-toggle": "^1.1.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.395.0",
+    "next": "14.2.3",
+    "next-themes": "^0.3.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@types/node": "20.11.24",
+    "@types/react": "18.3.26",
+    "@types/react-dom": "18.3.7",
+    "autoprefixer": "10.4.19",
+    "drizzle-kit": "^0.21.4",
+    "eslint": "8.57.1",
+    "eslint-config-next": "14.2.3",
+    "pg": "^8.11.5",
+    "postcss": "8.4.38",
+    "tailwindcss": "3.4.1",
+    "typescript": "5.4.5"
+  }
+}
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\pnpm--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\postcss.config.mjs--------------------------------------------------------------------------------/** @type {import('postcss-load-config').Config} */
+const config = {
+  plugins: {
+    tailwindcss: {},
+  },
+};
+
+export default config;
+
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\tailwind.config.ts--------------------------------------------------------------------------------// tailwind.config.ts
+import type { Config } from "tailwindcss";
+
+const config = {
+  // The darkMode setting is correct
+  darkMode: ["class"],
+  // The content paths are correct
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}", // Ensure this covers the src/ directory
+  ],
+  prefix: "",
+  theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
+    // The extend block is where all customisations must live to prevent conflicts
+    extend: {
+      colors: {
+        // Define Alberton Battery Mart Brand Colors
+        battery: {
+          DEFAULT: "hsl(0 90% 48%)", // Bright Red 
+          foreground: "hsl(0 0% 100%)", // White text on the button
+        },
+        // Base colors (These map to CSS variables defined in globals.css)
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))", // Maps to Bright Red
+          foreground: "hsl(var(--primary-foreground))", // Maps to White
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
+    },
+  },
+  plugins: [require("tailwindcss-animate")],
+} satisfies Config;
+
+export default config;
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\tsconfig.json--------------------------------------------------------------------------------{
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
+
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\app\globals.css--------------------------------------------------------------------------------@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 10% 12%;       /* Dark Grey (Background) */
+    --foreground: 0 0% 100%;       /* White (Text/Foreground) */
+
+    --primary: 0 90% 48%;          /* Bright Red */
+    --primary-foreground: 0 0% 100%; /* White */
+
+    --card: 220 10% 18%;           /* Slightly lighter dark grey for cards */
+    --card-foreground: 0 0% 100%;
+
+    --secondary: 210 10% 40%;      /* Mid Grey */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 10% 25%;
+    --muted-foreground: 210 10% 70%;
+
+    --accent: 210 10% 40%;
+    --accent-foreground: 0 0% 100%;
+
+    --border: 210 10% 30%;
+    --input: 210 10% 30%;
+    --ring: 0 90% 48%;
+
+    --radius: 0.5rem;
+    --chart-1: 0 90% 48%;
+  }
+
+  .dark {
+    /* Since the light mode is already dark, we use the same palette */
+    --background: 220 10% 12%;
+    --foreground: 0 0% 100%;
+
+    --primary: 0 90% 48%;
+    --primary-foreground: 0 0% 100%;
+
+    --card: 220 10% 18%;
+    --card-foreground: 0 0% 100%;
+
+    --secondary: 210 10% 40%;
+    --secondary-foreground: 0 0% 100%;
+    
+    --muted: 210 10% 25%;
+    --muted-foreground: 210 10% 70%;
+
+    --accent: 210 10% 40%;
+    --accent-foreground: 0 0% 100%;
+  }
+}
+
+/* Base styles for h1, p, etc. */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\app\layout.tsx--------------------------------------------------------------------------------// src/app/layout.tsx
+
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
+import Header from "@/components/layout/Header"; 
+import Footer from "@/components/layout/Footer"; 
+
+const inter = Inter({ subsets: ["latin"] });
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {/* Header remains fixed at the top */}
+          <Header /> 
+
+          {/* The main structural wrapper sets a minimum height of the screen and uses flex-col.
+            This ensures the footer is pushed to the bottom of the content.
+          */}
+          <div className="flex flex-col min-h-screen">
+            {/* The main tag contains the page content.
+              flex-grow ensures it takes up all remaining vertical space.
+              pt-20 compensates for the fixed 80px (5rem) height of the Header.
+            */}
+            <main className="flex-grow w-full pt-20">
+                {children}
+            </main>
+          </div>
+          
+          {/* Footer is placed after the main content */}
+          <Footer /> 
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\app\page.tsx--------------------------------------------------------------------------------// src/app/page.tsx
+
+import HeroSection from "@/components/layout/HeroSection";
+import ServiceGrid from "@/components/layout/ServiceGrid"; 
+import ProductSpotlight from "@/components/layout/ProductSpotlight"; 
+import TrustAuthoritySection from "@/components/layout/TrustAuthoritySection"; 
+import TestimonialSection from "@/components/layout/TestimonialSection"; 
+import FaqSection from "@/components/layout/FaqSection"; // <-- NEW IMPORT
+import ThinCta from "@/components/layout/ThinCta"; // <-- NEW IMPORT
+import StorefrontCTA from "@/components/layout/StorefrontCTA"; 
+
+export default function HomePage() {
+  return (
+    <div className="w-full">
+      {/* 1. High-Impact Hero Section (Dark) */}
+      <HeroSection />
+
+      {/* 2. Conversion-Focused Service Grid (Dark) */}
+      <ServiceGrid />
+
+      {/* 3. Product Authority Spotlight (Dark) */}
+      <ProductSpotlight />
+
+      {/* 4. Trust & Authority Section (Dark) */}
+      <TrustAuthoritySection />
+
+      {/* 5. FAQ Section (SUBTLE CONTRAST: Uses bg-card for visual break) */}
+      <FaqSection />
+
+      {/* 6. Testimonial Section (Social Proof & Final Trust - Dark) */}
+      <TestimonialSection />
+
+      {/* 7. Thin CTA (MAXIMUM CONTRAST: Full Red band for final urgency) */}
+      <ThinCta />
+
+      {/* 8. Storefront CTA / Final Conversion Block (Dark Card on Dark BG) */}
+      <StorefrontCTA />
+
+      {/* Page content ends here and flows into the Footer from layout.tsx */}
+    </div>
+  );
+}
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\app\about\page.tsx--------------------------------------------------------------------------------// src/app/about/page.tsx
+
+import { Battery } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
+export default function AboutPage() {
+  return (
+    <div className="container py-16 space-y-8 max-w-4xl">
+      <h1 className="text-5xl font-extrabold text-foreground">Our Story: Powering Alberton</h1>
+      <p className="text-xl text-muted-foreground">
+        Founded on the principle of reliable power and honest service, Alberton Battery Mart has grown to be the area's trusted multi-brand battery specialist. We focus on providing solutions, not just products.
+      </p>
+
+      <div className="grid md:grid-cols-2 gap-8 pt-4">
+        <div className="space-y-4">
+          <h2 className="text-2xl font-bold text-battery">Mission & Values</h2>
+          <p className="text-muted-foreground">
+            We prioritize customer safety and satisfaction, offering free on-site battery testing and expert diagnostics to ensure you always drive away with peace of mind. We stock only quality, warrantied brands like Willard, Enertec, and Exide.
+          </p>
+        </div>
+        <div className="space-y-4">
+          <h2 className="text-2xl font-bold text-battery">Why We Lead</h2>
+          <p className="text-muted-foreground">
+            Our commitment to the local community means we offer the fastest mobile response times and maintain the widest stock range, from standard car batteries to complex solar backup units.
+          </p>
+        </div>
+      </div>
+
+      <div className="pt-8 text-center">
+        <Button asChild size="lg" variant="default" className="bg-battery hover:bg-battery/80 text-white">
+          <Link href="/products">View Our Full Product Range</Link>
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\app\contact\page.tsx--------------------------------------------------------------------------------// src/app/contact/page.tsx
+
+import { Mail, MapPin, Clock, Phone, MessageSquare } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button"; // Import Button
+import { Card, CardContent } from "@/components/ui/card"; // Import Card
+import ContactForm from "@/components/content/ContactForm"; // Import the form
+
+// --- FINAL VERIFIED CONTACT DETAILS ---
+const CONTACT_DETAILS = {
+  primaryPhone: "0101096211",
+  whatsAppNumber: "082 304 6926", // Display number
+  whatsAppLink: "27823046926", // Link format
+  email: "admin@albaertonbatterymart.co.za",
+  address: "28 St Columb Rd, New Redruth, Alberton, 1450",
+  hours: "Mon - Fri: 8:00am - 5:00pm | Sat: 8:00am - 1:00pm",
+  mapsLink: "https://maps.app.goo.gl/w13E2jc81bMM3uty5",
+};
+
+const IFRAME_SRC = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.683815614464!2d28.12046317541756!3d-26.27192337703497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e951bf317cfb98d%3A0x33408b268a9458a6!2sAlberton%20Battery%20Mart!5e0!3m2!1sen!2sza!4v1761999180110!5m2!1sen!2sza";
+
+export default function ContactPage() {
+  return (
+    <div className="container py-16 space-y-12">
+      <h1 className="text-5xl font-extrabold text-foreground text-center">Get in Touch with Our Experts</h1>
+      <p className="text-xl text-muted-foreground max-w-4xl mx-auto text-center">
+        Call us for immediate assistance, or use the form below for detailed inquiries.
+      </p>
+
+      {/* Grid: Contact Options, Form, and Map */}
+      <div className="grid lg:grid-cols-3 gap-10 pt-6">
+        
+        {/* Column 1: Contact Details & CTAs */}
+        <div className="lg:col-span-1 space-y-6">
+          
+          <h2 className="text-3xl font-bold text-battery mb-4">Immediate Contact</h2>
+          
+          {/* CTA: Phone Call (High Urgency) */}
+          <Card className="bg-card border-l-4 border-battery">
+            <CardContent className="p-4 space-y-2">
+              <div className="flex items-center space-x-3">
+                <Phone className="h-6 w-6 text-battery" />
+                <h3 className="text-xl font-bold text-foreground">Mobile Callouts / Shop Line</h3>
+              </div>
+              <p className="text-2xl font-extrabold text-foreground">{CONTACT_DETAILS.primaryPhone}</p>
+              <Button asChild variant="battery" className="w-full mt-2">
+                <a href={`tel:${CONTACT_DETAILS.primaryPhone}`}>Call Us Now</a>
+              </Button>
+            </CardContent>
+          </Card>
+          
+          {/* CTA: WhatsApp (Messaging Only) - CRITICAL CLARITY */}
+          <Card className="bg-card border-l-4 border-green-600">
+            <CardContent className="p-4 space-y-2">
+              <div className="flex items-center space-x-3">
+                <MessageSquare className="h-6 w-6 text-green-600" />
+                <h3 className="text-xl font-bold text-foreground">WhatsApp Messaging Only</h3>
+              </div>
+              <p className="text-lg text-muted-foreground">**Please note: This number is for messaging only. No calls.**</p>
+              <Button asChild variant="secondary" className="w-full mt-2 bg-green-600 hover:bg-green-700 text-white">
+                <a href={`https://wa.me/${CONTACT_DETAILS.whatsAppLink}`} target="_blank" rel="noopener noreferrer">
+                  Message {CONTACT_DETAILS.whatsAppNumber}
+                </a>
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Other Details */}
+          <div className="space-y-4 pt-4 border-t border-border">
+            <h3 className="text-2xl font-bold text-foreground">Location & Hours</h3>
+            
+            <div className="flex items-start space-x-4">
+              <MapPin className="h-6 w-6 text-battery flex-shrink-0" />
+              <p className="text-lg text-foreground">
+                <a href={CONTACT_DETAILS.mapsLink} target="_blank" className="hover:text-battery">
+                  {CONTACT_DETAILS.address} (Click for Directions)
+                </a>
+              </p>
+            </div>
+            
+            <div className="flex items-center space-x-4">
+              <Clock className="h-6 w-6 text-battery" />
+              <p className="text-lg text-foreground">{CONTACT_DETAILS.hours}</p>
+            </div>
+            
+            <div className="flex items-center space-x-4">
+              <Mail className="h-6 w-6 text-battery" />
+              <Link href={`mailto:${CONTACT_DETAILS.email}`} className="text-lg text-foreground hover:text-battery">
+                {CONTACT_DETAILS.email}
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Column 2: Contact Form */}
+        <div className="lg:col-span-2">
+          <h2 className="text-3xl font-bold text-foreground mb-6">Send Us a Detailed Inquiry</h2>
+          <ContactForm />
+        </div>
+      </div>
+
+      {/* Full Width Section for Map */}
+      <div className="w-full pt-16">
+        <h2 className="text-3xl font-bold text-foreground mb-6 text-center">Find Us on the Map</h2>
+        <div className="bg-card rounded-lg overflow-hidden border border-border aspect-video shadow-xl">
+          {/* Embedded Map (Zero API Cost) */}
+          <iframe 
+            src={IFRAME_SRC} 
+            width="100%" 
+            height="100%" 
+            allowFullScreen={false} 
+            loading="lazy" 
+            referrerPolicy="no-referrer-when-downgrade"
+            className="w-full h-full"
+            title="Google Maps Location of Alberton Battery Mart"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\app\deep-cycle\page.tsx--------------------------------------------------------------------------------// src/app/deep-cycle/page.tsx
+import { redirect } from 'next/navigation';
+
+// Redirect to the main segmented listing page for consolidation and SEO
+export default function DeepCycleRedirectPage() {
+  redirect('/products/type/deep-cycle');
+}
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\app\faq\page.tsx--------------------------------------------------------------------------------// src/app/faq/page.tsx
+import FaqPageContent from "@/components/layout/FaqPageContent";
+
+// This page serves as the dedicated SEO resource for FAQ keywords
+export default function FaqPage() {
+  return <FaqPageContent />;
+}
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\app\fitment\page.tsx--------------------------------------------------------------------------------// src/app/fitment/page.tsx
+import { Zap, ShieldCheck, Phone } from "lucide-react"; // <-- Phone added here!
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
+const EMERGENCY_PHONE = "0101096211";
+
+export default function FitmentPage() {
+  return (
+    <div className="container py-16 text-center space-y-8 max-w-3xl">
+      <ShieldCheck className="h-12 w-12 text-battery mx-auto" />
+      <h1 className="text-5xl font-extrabold text-foreground">Professional & Free Battery Fitment</h1>
+      <p className="text-xl text-muted-foreground">
+        When you purchase a battery from us, the **fitment service is entirely free**—you only pay for the battery and the callout fee. This ensures a professional, warrantied installation every time.
+      </p>
+      
+      <div className="bg-card p-6 rounded-lg border border-border shadow-lg space-y-4">
+        <h2 className="text-2xl font-bold text-battery">Why Professional Fitment Matters</h2>
+        <ul className="text-left text-foreground space-y-2">
+            <li className="flex items-start space-x-3"><Zap className="h-5 w-5 text-battery flex-shrink-0 mt-1" /><span>**Warranty Validation:** Manufacturer warranties often require professional installation.</span></li>
+            <li className="flex items-start space-x-3"><Zap className="h-5 w-5 text-battery flex-shrink-0 mt-1" /><span>**Start/Stop Systems:** We correctly register and recalibrate the battery to your vehicle's Battery Monitoring System (BMS).</span></li>
+            <li className="flex items-start space-x-3"><Zap className="h-5 w-5 text-battery flex-shrink-0 mt-1" /><span>**Corrosion Prevention:** Clean terminals, anti-corrosion spray, and secure mounting guaranteed.</span></li>
+        </ul>
+      </div>
+
+      <Button asChild size="xl" variant="battery" className="mt-8 shadow-lg">
+        <a href={`tel:${EMERGENCY_PHONE}`} className="flex items-center space-x-3 mx-auto">
+          <Phone className="h-6 w-6" />
+          <span>Call Us to Book Your Free Fitment</span>
+        </a>
+      </Button>
+    </div>
+  );
+}
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\app\products\page.tsx--------------------------------------------------------------------------------// src/app/products/page.tsx
+import ProductListPage from "@/components/layout/ProductListPage";
+import { MOCK_PRODUCTS } from "@/lib/product-mock-data";
+
+// Show the full mock catalog on the main products page
+const ALL_PRODUCTS = MOCK_PRODUCTS; 
+
+export default function ProductsBasePage() {
+  return (
+    <ProductListPage
+      title="Complete Battery Product Catalog"
+      description="Your single source for Willard, Enertec, Exide, and specialized Deep Cycle batteries in Alberton."
+      products={ALL_PRODUCTS}
+    />
+  );
+}
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\app\products\brand\[brandName]\page.tsx--------------------------------------------------------------------------------// src/app/products/brand/[brandName]/page.tsx
+import ProductListPage from "@/components/layout/ProductListPage";
+import { MOCK_PRODUCTS } from "@/lib/product-mock-data"; 
+import { notFound } from 'next/navigation'; // Optional: Use this if you want a 404 page
+
+interface BrandPageProps {
+  params: {
+    brandName: string; // This is the variable segment from the URL
+  };
+}
+
+// Helper function to create a clean, capitalized title
+const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+
+const getTitle = (brand: string) => {
+    const capitalized = capitalize(brand);
+    return `${capitalized} Batteries: Full Maintenance-Free Range`;
+};
+
+export default function BrandListingPage({ params }: BrandPageProps) {
+  const brandName = params.brandName;
+  const brandTitle = getTitle(brandName);
+  
+  // Filter mock data based on brand name (case-insensitive check against the product name)
+  const BRAND_PRODUCTS = MOCK_PRODUCTS.filter(p => 
+    p.name.toLowerCase().includes(brandName.toLowerCase())
+  );
+  
+  // Optional: Use the Next.js notFound() function if the list is empty
+  // if (BRAND_PRODUCTS.length === 0) {
+  //   notFound();
+  // }
+
+  return (
+    <ProductListPage
+      title={brandTitle}
+      description={`View all batteries stocked from the ${capitalize(brandName)} manufacturer. Guaranteed quality and warranty.`}
+      products={BRAND_PRODUCTS}
+    />
+  );
+}
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\app\products\type\automotive\page.tsx--------------------------------------------------------------------------------// src/app/products/type/automotive/page.tsx
+import ProductListPage from "@/components/layout/ProductListPage";
+import { MOCK_PRODUCTS } from "@/lib/product-mock-data";
+
+// Filters for: Standard Automotive (since performance/AGM is a separate category)
+const STANDARD_AUTOMOTIVE_PRODUCTS = MOCK_PRODUCTS.filter(p => 
+  p.category === 'Standard Automotive'
+);
+
+export default function StandardAutomotiveBatteriesPage() {
+  return (
+    <ProductListPage
+      title="Standard Maintenance-Free Car Batteries"
+      description="The high-quality replacement batteries for older vehicles and general sedans. Best value and warranty."
+      products={STANDARD_AUTOMOTIVE_PRODUCTS}
+    />
+  );
+}
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\app\products\type\deep-cycle\page.tsx--------------------------------------------------------------------------------// src/app/products/type/deep-cycle/page.tsx
+import ProductListPage from "@/components/layout/ProductListPage";
+import { MOCK_PRODUCTS } from "@/lib/product-mock-data";
+
+// Filters for: Deep Cycle/Solar
+const DEEP_CYCLE_PRODUCTS = MOCK_PRODUCTS.filter(p => 
+  p.category === 'Deep Cycle/Solar'
+);
+
+export default function DeepCycleBatteriesPage() {
+  return (
+    <ProductListPage
+      title="Solar, Inverter & Deep Cycle Batteries"
+      description="High-end LiFePO₄ and AGM Deep Cycle solutions for uninterrupted backup power during load shedding, camping, or marine use."
+      products={DEEP_CYCLE_PRODUCTS}
+    />
+  );
+}
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\app\products\type\performance\page.tsx--------------------------------------------------------------------------------// src/app/products/type/performance/page.tsx
+import ProductListPage from "@/components/layout/ProductListPage";
+import { MOCK_PRODUCTS } from "@/lib/product-mock-data";
+
+// Filters for: Performance AGM/EFB
+const PERFORMANCE_PRODUCTS = MOCK_PRODUCTS.filter(p => 
+  p.category === 'Performance AGM/EFB'
+);
+
+export default function PerformanceBatteriesPage() {
+  return (
+    <ProductListPage
+      title="Performance & Start/Stop (AGM/EFB) Batteries"
+      description="The specialized, high-capacity batteries required for modern vehicles with Start/Stop systems and advanced electronics. Longest warranty available."
+      products={PERFORMANCE_PRODUCTS}
+    />
+  );
+}
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\app\products\type\truck-motorcycle\page.tsx--------------------------------------------------------------------------------// src/app/products/type/truck-motorcycle/page.tsx
+import ProductListPage from "@/components/layout/ProductListPage";
+import { MOCK_PRODUCTS } from "@/lib/product-mock-data";
+
+// Filters for: Truck/Powersport
+const TRUCK_MOTORCYCLE_PRODUCTS = MOCK_PRODUCTS.filter(p => 
+  p.category === 'Truck/Powersport'
+);
+
+export default function TruckMotorcycleBatteriesPage() {
+  return (
+    <ProductListPage
+      title="Truck, Commercial & Powersport Batteries"
+      description="Specialized high-CCA commercial batteries for trucks, lorries, buses, and dedicated motorcycle/ATV batteries."
+      products={TRUCK_MOTORCYCLE_PRODUCTS}
+    />
+  );
+}
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\app\quote\page.tsx--------------------------------------------------------------------------------// src/app/quote/page.tsx
+
+import { Battery, Mail, Phone } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+const EMERGENCY_PHONE = "0101096211";
+const EMAIL_ADDRESS = "admin@albaertonbatterymart.co.za";
+
+export default function QuotePage() {
+  return (
+    <div className="container py-16 text-center space-y-10 max-w-2xl">
+      <Battery className="h-16 w-16 text-battery mx-auto" />
+      <h1 className="text-5xl font-extrabold text-foreground">Request a Solar, Inverter, or Bulk Order Quote</h1>
+      <p className="text-xl text-muted-foreground">
+        Use the form below for all non-emergency, large-scale, or specialized energy system inquiries. Our expert will contact you within 4 hours during business days.
+      </p>
+
+      {/* Future: Quote Form Component */}
+      <div className="bg-card p-8 rounded-lg border border-border shadow-xl">
+        <h3 className="text-2xl font-bold text-foreground mb-4">Your Quote Request Details</h3>
+        <div className="h-48 bg-secondary/20 flex items-center justify-center rounded-md text-muted-foreground">
+          [Placeholder for Detailed Quote Form Component]
+        </div>
+      </div>
+
+      <p className="text-lg text-foreground">
+        For immediate assistance, please call us directly:
+      </p>
+      
+      <div className="flex justify-center space-x-4">
+        <Button asChild size="lg" variant="battery">
+          <a href={`tel:${EMERGENCY_PHONE}`} className="flex items-center space-x-2">
+            <Phone className="h-5 w-5" />
+            <span>Call Now</span>
+          </a>
+        </Button>
+        <Button asChild size="lg" variant="outline">
+          <a href={`mailto:${EMAIL_ADDRESS}`} className="flex items-center space-x-2">
+            <Mail className="h-5 w-5" />
+            <span>Email Inquiry</span>
+          </a>
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\app\services\page.tsx--------------------------------------------------------------------------------// src/app/services/page.tsx
+import { Phone, MapPin, Zap, ShieldCheck, Clock, Gauge } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
+
+const EMERGENCY_PHONE = "010 109 6211";
+const WHATSAPP_NUMBER_LINK = "27823046926";
+
+export default function ServicesPage() {
+  return (
+    <div className="container py-16 space-y-16">
+      
+      {/* ------------------------------------------- */}
+      {/* SECTION 1: HERO & PRIMARY CTA (H1 Focus) */}
+      {/* ------------------------------------------- */}
+      <div className="text-center space-y-4 border-b border-border pb-10">
+        <h1 className="text-5xl md:text-6xl font-extrabold text-foreground">
+          Professional Battery <span className="text-battery">Services</span> in Alberton
+        </h1>
+        <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
+          We are the local, certified experts providing complete battery solutions: **Free Fitment, Advanced Diagnostics, and Convenient Mobile Service** for all vehicle types.
+        </p>
+        <Button asChild size="xl" variant="battery" className="mt-6 shadow-lg">
+          <a href={`tel:${EMERGENCY_PHONE}`} className="flex items-center space-x-3 mx-auto">
+            <Phone className="h-6 w-6" />
+            <span>Call Our Mobile Service Now: {EMERGENCY_PHONE}</span>
+          </a>
+        </Button>
+      </div>
+
+      {/* ------------------------------------------- */}
+      {/* SECTION 2: MOBILE SERVICE LOGISTICS (Logistical USP) */}
+      {/* ------------------------------------------- */}
+      <div className="grid lg:grid-cols-12 gap-10">
+        <div className="lg:col-span-5 space-y-6">
+          <Zap className="h-12 w-12 text-battery" />
+          <h2 className="text-4xl font-bold text-foreground">
+            Fast Mobile Battery Callout & Fitment
+          </h2>
+          <p className="text-lg text-muted-foreground">
+            Our specialized callout service ensures minimal vehicle downtime. We bring the exact battery your vehicle requires, perform the swap, and get you back on the road—wherever you are in the Alberton area.
+          </p>
+          
+          {/* UPDATED HOURS LAYOUT */}
+          <div className="space-y-2 pt-2 text-lg text-foreground">
+              <h3 className="font-bold text-battery">Trading Hours & Availability</h3>
+              <p className="flex items-center space-x-3">
+                  <Clock className="h-5 w-5 flex-shrink-0" />
+                  <span>Mon – Fri: **7:30 AM – 5:30 PM**</span>
+              </p>
+              <p className="flex items-center space-x-3">
+                  <Clock className="h-5 w-5 flex-shrink-0" />
+                  <span>Saturday: **8:00 AM – 1:00 PM**</span>
+              </p>
+          </div>
+
+          <div className="flex items-center space-x-3 text-lg font-semibold text-foreground">
+            <MapPin className="h-5 w-5 text-battery" />
+            <p>Focused Callout Zones: New Redruth, Meyersdal, Alberton Central.</p>
+          </div>
+          <Button asChild variant="secondary" className="mt-4 bg-green-600 hover:bg-green-700 text-white">
+            <a href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`} target="_blank">
+              WhatsApp Us for Quick Service Booking
+            </a>
+          </Button>
+        </div>
+        
+        {/* Mobile Service Card Grid */}
+        <div className="lg:col-span-7 grid md:grid-cols-2 gap-6">
+            <div className="bg-card p-6 rounded-lg border border-border shadow-md">
+              <h3 className="text-xl font-bold text-battery">On-Site Convenience</h3>
+              <p className="text-sm text-muted-foreground mt-1">We eliminate towing fees and the inconvenience of waiting at a workshop. The full service is performed at your location.</p>
+            </div>
+            <div className="bg-card p-6 rounded-lg border border-border shadow-md">
+              <h3 className="text-xl font-bold text-battery">Extended Service Window</h3>
+              <p className="text-sm text-muted-foreground mt-1">We exploit the convenience gap by offering service outside of standard shop hours.</p>
+            </div>
+            <div className="bg-card p-6 rounded-lg border border-border shadow-md">
+              <h3 className="text-xl font-bold text-battery">Payment Simplicity</h3>
+              <p className="text-sm text-muted-foreground mt-1">Accepting all major credit/debit cards on-site via mobile payment terminals.</p>
+            </div>
+            <div className="bg-card p-6 rounded-lg border border-border shadow-md">
+              <h3 className="text-xl font-bold text-battery">Multi-Brand Authority</h3>
+              <p className="text-sm text-muted-foreground mt-1">We offer the full spectrum of products, from OEM Raylite alternatives to specialized LiFePO₄ solar solutions.</p>
+            </div>
+        </div>
+      </div>
+
+      <Separator className="bg-border" />
+
+      {/* ------------------------------------------- */}
+      {/* SECTION 3: DIAGNOSTICS & WARRANTY (Authority) */}
+      {/* ------------------------------------------- */}
+      <div className="grid lg:grid-cols-12 gap-10">
+        
+        <div className="lg:col-span-7 space-y-6">
+          <ShieldCheck className="h-12 w-12 text-battery" />
+          <h2 className="text-4xl font-bold text-foreground">
+            Advanced Diagnostics & Guaranteed Warranty
+          </h2>
+          <p className="text-lg text-muted-foreground">
+            A battery swap is only half the job. Our process includes comprehensive support to ensure the problem is solved completely, not temporarily.
+          </p>
+
+          <div className="space-y-4">
+            <h3 className="text-2xl font-semibold text-foreground">Comprehensive Starting System Checks</h3>
+            <ul className="space-y-2 text-lg text-foreground bg-card p-4 rounded-lg border border-border">
+              <li className="flex items-start space-x-3">
+                <Gauge className="h-5 w-5 text-battery mt-1 flex-shrink-0" />
+                <span>FREE Alternator Testing: This critical post-replacement check is included to prevent underlying charging issues.</span>
+              </li>
+              <li className="flex items-start space-x-3">
+                <ShieldCheck className="h-5 w-5 text-battery mt-1 flex-shrink-0" />
+                <span>24 to 36-Month Warranty: Displayed prominently on every product. Professional fitment is required for manufacturer warranty adherence.</span>
+              </li>
+              <li className="flex items-start space-x-3">
+                <Zap className="h-5 w-5 text-battery mt-1 flex-shrink-0" />
+                <span>Battery Monitoring System (BMS) Recalibration: Essential for modern vehicles to ensure the new battery communicates correctly.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        {/* Image/Visual Placeholder */}
+        <div className="lg:col-span-5 flex items-center justify-center">
+            <div className="w-full h-80 bg-secondary/20 rounded-lg flex items-center justify-center border-2 border-dashed border-border">
+                <p className="text-muted-foreground">Placeholder: Image of Technician Running Diagnostics</p>
+            </div>
+        </div>
+      </div>
+      
+      {/* Final Conversion Funnel */}
+      <div className="w-full text-center pt-10">
+        <h3 className="text-3xl font-extrabold text-foreground mb-4">
+          Don't Guess Your Battery Needs. Get Expert Help.
+        </h3>
+        <Button asChild size="xl" variant="battery" className="mt-4 shadow-xl">
+          <a href={`tel:${EMERGENCY_PHONE}`} className="flex items-center justify-center space-x-3 mx-auto">
+            <Phone className="h-6 w-6" />
+            <span>Call Now: {EMERGENCY_PHONE}</span>
+          </a>
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\app\testing\page.tsx--------------------------------------------------------------------------------// src/app/testing/page.tsx
+import { Gauge, Phone } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+const EMERGENCY_PHONE = "0101096211";
+
+export default function TestingPage() {
+  return (
+    <div className="container py-16 text-center space-y-8 max-w-3xl">
+      <Gauge className="h-12 w-12 text-battery mx-auto" />
+      <h1 className="text-5xl font-extrabold text-foreground">Free On-Site Battery Testing</h1>
+      <p className="text-xl text-muted-foreground">
+        Every service call includes a professional diagnostic test to confirm your battery's health and performance. This service is complimentary with all fitments.
+      </p>
+      
+      <div className="bg-card p-6 rounded-lg border border-border shadow-lg space-y-3">
+        <h2 className="text-2xl font-bold text-battery">Alternator Check Included</h2>
+        <p className="text-foreground">
+          We go further than a simple voltage check. Our technicians test your **alternator output and charging circuit** to prevent premature failure on your new battery.
+        </p>
+      </div>
+
+      <Button asChild size="xl" variant="battery" className="mt-8 shadow-lg">
+        <a href={`tel:${EMERGENCY_PHONE}`} className="flex items-center space-x-3 mx-auto">
+          <Phone className="h-6 w-6" />
+          <span>Call Now to Schedule Free Testing</span>
+        </a>
+      </Button>
+    </div>
+  );
+}
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\theme-provider.tsx--------------------------------------------------------------------------------// src/components/theme-provider.tsx
+"use client";
+
+import * as React from "react";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+
+// Define ThemeProviderProps as the exact props required by the inner component.
+// This is the correct, idiomatic way to safely wrap components.
+type ThemeProviderProps = React.ComponentProps<typeof NextThemesProvider>;
+
+export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
+  return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
+}
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\content\ContactForm.tsx--------------------------------------------------------------------------------// src/components/content/ContactForm.tsx
+"use client";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { useState } from "react";
+import { Send } from "lucide-react";
+
+// NOTE: This is a placeholder. In a real application, the form data 
+// would be submitted to an API Route Handler or a Server Action.
+
+const ContactForm = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Placeholder: Simulate API submission delay
+    setTimeout(() => {
+      console.log("Form Submitted:", formData);
+      alert("Thank you! Your message has been sent.");
+      setIsSubmitting(false);
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    }, 1500);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <Label htmlFor="name">Full Name</Label>
+          <Input id="name" name="name" type="text" value={formData.name} onChange={handleChange} required className="bg-background border-border text-foreground" />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="email">Email Address</Label>
+          <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required className="bg-background border-border text-foreground" />
+        </div>
+      </div>
+      
+      <div className="space-y-2">
+        <Label htmlFor="subject">Subject</Label>
+        <Input id="subject" name="subject" type="text" value={formData.subject} onChange={handleChange} required className="bg-background border-border text-foreground" />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="message">Your Message</Label>
+        <Textarea id="message" name="message" rows={5} value={formData.message} onChange={handleChange} required className="bg-background border-border text-foreground" />
+      </div>
+
+      <Button type="submit" variant="battery" className="w-full h-12 text-lg" disabled={isSubmitting}>
+        <Send className="h-5 w-5 mr-2" />
+        {isSubmitting ? "Sending..." : "Submit Inquiry"}
+      </Button>
+    </form>
+  );
+};
+
+export default ContactForm;
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\content\ProductCard.tsx--------------------------------------------------------------------------------// src/components/content/ProductCard.tsx
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Zap, Gauge, Shield, Tag, Phone } from "lucide-react";
+import Link from "next/link"; // For future product details page links
+import Image from "next/image"; // Placeholder for future Image component use
+import { ProductCardData } from "@/lib/product-mock-data";
+
+interface ProductCardProps {
+  product: ProductCardData;
+}
+
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  // Logic to determine if this is a premium/performance battery
+  const isHighPerformance = product.isAGM || product.warrantyMonths >= 36;
+  const EMERGENCY_PHONE = "0101096211";
+
+  // Specs array for easy display
+  const specs = [
+    { icon: Zap, label: "CCA", value: `${product.cca}`, unit: 'CCA' },
+    { icon: Gauge, label: "Capacity", value: `${product.ahCapacity}`, unit: 'Ah' },
+    { icon: Shield, label: "Warranty", value: `${product.warrantyMonths}`, unit: 'Months' },
+    { icon: Tag, label: "Guide Price", value: product.priceAnchor, unit: '' },
+  ];
+
+  return (
+    <Card className="flex flex-col overflow-hidden bg-card border-border shadow-lg hover:shadow-battery/30 transition-shadow h-full">
+      
+      {/* Product Header and Image Placeholder */}
+      <CardHeader className="p-0 relative">
+        {/* Placeholder Image Area */}
+        <div className="w-full h-48 bg-secondary/20 flex items-center justify-center relative">
+          <span className="text-muted-foreground text-sm">Image Placeholder: {product.sku}</span>
+        </div>
+        
+        {/* Performance Badge */}
+        {isHighPerformance && (
+          <div className="absolute top-3 left-3 bg-battery text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+            PREMIUM {product.warrantyMonths}M WARRANTY
+          </div>
+        )}
+      </CardHeader>
+
+      {/* Product Details */}
+      <CardContent className="p-6 flex-grow space-y-4">
+        <CardTitle className="text-xl font-extrabold text-foreground min-h-[3rem] tracking-tight">
+          {product.name}
+        </CardTitle>
+        
+        {/* Technical Specs Grid */}
+        <div className="grid grid-cols-2 gap-x-4 gap-y-3 pt-2">
+          {specs.map((spec) => (
+            <div key={spec.label} className="flex items-center space-x-2">
+              <spec.icon className="h-4 w-4 text-battery flex-shrink-0" />
+              <div className="text-sm">
+                {/* Highlights Price/CCA/Warranty Value in Bold */}
+                <p className="font-bold text-foreground leading-none">{spec.value}{spec.unit}</p>
+                <p className="text-xs text-muted-foreground">{spec.label}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </CardContent>
+      
+      {/* Footer: Conversion CTA */}
+      <CardFooter className="p-4 border-t border-border">
+        <Button asChild variant="battery" className="w-full">
+          <a href={`tel:${EMERGENCY_PHONE}`} className="flex items-center justify-center space-x-2">
+            <Phone className="h-5 w-5" />
+            <span>Call for Quote & Fitment</span>
+          </a>
+        </Button>
+      </CardFooter>
+    </Card>
+  );
+};
+
+export default ProductCard;
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\layout\FaqPageContent.tsx--------------------------------------------------------------------------------// src/components/layout/FaqPageContent.tsx
+import { Button } from "@/components/ui/button"; 
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Mail, Phone } from "lucide-react";
+import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
+
+// --- CONTACT DETAILS (Lead Gen) ---
+const PRIMARY_PHONE = "0101096211";
+const EMAIL_ADDRESS = "admin@albaertonbatterymart.co.za";
+
+// Highly relevant, objection-handling questions (8 total)
+// This expanded set is rich in keywords like EFB, AGM, Alternator, etc.
+const faqItems = [
+  {
+    question: "1. Is the mobile callout service free?",
+    answer: "Our mobile callout includes a service fee for travel time and on-site assistance. However, the **battery testing and fitment service itself are 100% free.** You only pay for the battery and the callout fee, ensuring you receive transparent, fixed pricing.",
+  },
+  {
+    question: "2. How long is the warranty period on your batteries?",
+    answer: "We offer warranties ranging from 24 to 36 months on premium batteries. The specific warranty period is clearly displayed on every product and validated with our professional fitment service.",
+  },
+  {
+    question: "3. Do you stock batteries for Start/Stop (EFB & AGM) vehicles?",
+    answer: "Yes. We stock and specialize in **EFB (Enhanced Flooded Battery) and AGM (Absorbed Glass Mat) technology** required by modern vehicles, eliminating the risk of using an incorrect, warranty-voiding battery.",
+  },
+  {
+    question: "4. Do I need an appointment for a battery replacement?",
+    answer: "While you can visit our storefront directly during trading hours, we recommend calling first, especially for mobile service, to schedule the fastest dispatch time and ensure immediate availability of your specific battery code.",
+  },
+  {
+    question: "5. How do I know if my alternator is faulty?",
+    answer: "If your battery keeps failing after a recent replacement, your alternator is likely the issue. We offer a **free on-site alternator diagnostic test** with every fitment to identify and solve this problem permanently.",
+  },
+  {
+    question: "6. Which brands do you stock, and why?",
+    answer: "We are a multi-brand stockist, offering the best options from **Willard, Enertec, and Exide**. This flexibility allows us to guarantee the best fit for your vehicle's specifications and your budget, unlike single-brand centers.",
+  },
+  {
+    question: "7. Do you sell batteries for solar and backup power?",
+    answer: "Yes. We stock a full range of deep cycle batteries, including high-end Lithium ($\text{LiFePO}_{4}$) and AGM models, designed specifically for home inverters, solar setups, and load shedding mitigation.",
+  },
+  {
+    question: "8. Where is your physical store located?",
+    answer: `Our physical store is located at **28 St Columb Rd, New Redruth, Alberton, 1450.** We encourage in-store visits for expert consultation and over-the-counter sales.`,
+  },
+];
+
+const FaqPageContent = () => {
+  // Split the 8 questions into two arrays of 4 each for the desktop 2-column view
+  const firstColumn = faqItems.slice(0, 4);
+  const secondColumn = faqItems.slice(4, 8);
+
+  return (
+    // Background is white (bg-white) for the clean visual break 
+    <section className="w-full bg-white py-16"> 
+      <div className="container px-4 md:px-6 lg:px-8">
+        
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-extrabold tracking-tight text-black">
+            Frequently Asked Questions (FAQ)
+          </h1>
+          <p className="text-xl text-gray-700 mt-3">
+            Get instant answers from Alberton's battery experts.
+          </p>
+        </div>
+
+        <div className="max-w-6xl mx-auto">
+          {/* Main Grid for 2 Columns on desktop, stacking on mobile */}
+          <div className="grid md:grid-cols-2 gap-x-12 gap-y-6">
+            
+            {/* Column 1 */}
+            <Accordion type="single" collapsible className="w-full">
+              {firstColumn.map((item, index) => (
+                <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-300"> 
+                  <AccordionTrigger className="text-lg font-semibold text-black hover:text-battery">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-700 text-base leading-relaxed">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+            
+            {/* Column 2 */}
+            <Accordion type="single" collapsible className="w-full">
+              {secondColumn.map((item, index) => (
+                <AccordionItem key={index} value={`item-${index + 4}`} className="border-b border-gray-300"> 
+                  <AccordionTrigger className="text-lg font-semibold text-black hover:text-battery">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-700 text-base leading-relaxed">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+
+          </div>
+        </div>
+        
+        <Separator className="bg-gray-300 mt-16 max-w-4xl mx-auto" />
+
+        {/* Lead Generation Hook: Final Contact CTA */}
+        <div className="text-center pt-10">
+          <h2 className="text-3xl font-extrabold text-black mb-4">
+            Need Expert Advice or Immediate Service?
+          </h2>
+          <p className="text-lg text-gray-700 mb-6">
+            Call us now for a guaranteed quote and fast service booking.
+          </p>
+          <div className="flex justify-center space-x-4">
+            <Button asChild size="xl" variant="battery" className="shadow-lg">
+              <a href={`tel:${PRIMARY_PHONE}`}>
+                <Phone className="h-5 w-5 mr-2" /> Call Now: {PRIMARY_PHONE}
+              </a>
+            </Button>
+            <Button asChild size="xl" variant="outline" className="text-black border-black hover:bg-gray-200">
+              <a href={`mailto:${EMAIL_ADDRESS}`}>
+                <Mail className="h-5 w-5 mr-2" /> Email Inquiry
+              </a>
+            </Button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+export default FaqPageContent;
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\layout\FaqSection.tsx--------------------------------------------------------------------------------// src/components/layout/FaqSection.tsx
+import { Button } from "@/components/ui/button"; 
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+
+// Highly relevant, objection-handling questions (8 total)
+const faqItems = [
+  {
+    question: "Is the mobile callout service free?",
+    answer: "Our mobile callout includes a service fee for travel time and on-site assistance. **However, the battery testing and fitment service itself are 100% free.** You only pay for the battery and the callout fee, ensuring you get transparent, fixed pricing.",
+  },
+  {
+    question: "How long is your warranty period?",
+    answer: "We offer warranties up to 36 months on premium batteries (Willard EFB, Enertec AGM) and a minimum of 12 months on all standard automotive batteries. The specific warranty period is clearly stated on your invoice.",
+  },
+  {
+    question: "Can I get a new battery without an appointment?",
+    answer: "Yes, you can visit our storefront directly at 28 St Columb Rd during trading hours for immediate counter sales. For mobile service, please call us first to schedule the fastest dispatch time.",
+  },
+  {
+    question: "Do you only do automotive batteries?",
+    answer: "No. We are specialists in both automotive (cars, trucks, 4x4) and deep cycle batteries, including Lithium (LiFePO₄) and AGM models for solar, inverters, and backup power solutions.",
+  },
+  {
+    question: "What is an EFB or AGM battery?",
+    answer: "EFB (Enhanced Flooded Battery) and AGM (Absorbed Glass Mat) are advanced batteries required for modern vehicles with Start/Stop systems. Using a standard battery in these cars will void the warranty and lead to premature failure.",
+  },
+  {
+    question: "How do I know if my alternator is faulty?",
+    answer: "If your battery keeps dying even after replacement, your alternator is likely the issue. We offer a **free on-site alternator diagnostic test** with every battery fitment to catch this problem early.",
+  },
+  {
+    question: "Which brands do you stock?",
+    answer: "We are a multi-brand stockist, guaranteeing the best fit for your budget and vehicle. We officially stock Willard, Enertec, Exide, and high-quality generic batteries for all vehicle makes.",
+  },
+  {
+    question: "Where is your physical store located?",
+    answer: "Our physical store is located at **28 St Columb Rd, New Redruth, Alberton, 1450.** We encourage in-store visits for over-the-counter sales and expert service.",
+  },
+];
+
+const FaqSection = () => {
+  // Split the 8 questions into two arrays of 4 each
+  const firstColumn = faqItems.slice(0, 4);
+  const secondColumn = faqItems.slice(4, 8);
+
+  return (
+    // Background is white (bg-white) for a strong visual contrast 
+    <section className="w-full bg-white py-20"> 
+      <div className="container px-4 md:px-6 lg:px-8">
+        
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-extrabold tracking-tight text-black">
+            Questions & Answers
+          </h2>
+          <p className="text-xl text-gray-700 mt-3">
+            Your instant answers to the most common battery problems.
+          </p>
+        </div>
+
+        <div className="max-w-6xl mx-auto">
+          {/* Main Grid for 2 Columns (4 rows deep) */}
+          <div className="grid md:grid-cols-2 gap-x-12 gap-y-6">
+            
+            {/* Column 1 */}
+            <Accordion type="single" collapsible className="w-full">
+              {firstColumn.map((item, index) => (
+                <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-300"> 
+                  <AccordionTrigger className="text-lg font-semibold text-black hover:text-battery">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-700 text-base leading-relaxed">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+            
+            {/* Column 2 */}
+            <Accordion type="single" collapsible className="w-full">
+              {secondColumn.map((item, index) => (
+                <AccordionItem key={index} value={`item-${index + 4}`} className="border-b border-gray-300"> 
+                  <AccordionTrigger className="text-lg font-semibold text-black hover:text-battery">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-700 text-base leading-relaxed">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+
+          </div>
+        </div>
+        
+        {/* Lead Generation Hook: CTA after FAQ */}
+        <div className="text-center pt-10">
+          <p className="text-lg text-black mb-4">
+            Still have questions? Talk directly to a certified technician:
+          </p>
+          <Button asChild size="lg" variant="battery" className="shadow-lg">
+            <a href="tel:0101096211">Call Us Now for Expert Advice</a>
+          </Button>
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+export default FaqSection;
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\layout\Footer.tsx--------------------------------------------------------------------------------// src/components/layout/Footer.tsx
+import Link from "next/link";
+// MapPin is correctly imported here, along with all other necessary icons
+import { Battery, Facebook, Instagram, Phone, Mail, MapPin, MessageSquare } from "lucide-react"; 
+import { Button } from "@/components/ui/button";
+
+const Footer = () => {
+  const currentYear = new Date().getFullYear();
+  
+  // --- FINAL VERIFIED CONTACT DETAILS ---
+  const PRIMARY_PHONE = "0101096211";
+  const EMAIL_ADDRESS = "admin@albaertonbatterymart.co.za";
+  const ADDRESS = "28 St Columb Rd, New Redruth, Alberton, 1450";
+  // --- FINAL AGREED UPON HOURS ---
+  const WEEKDAY_HOURS = "7:30 AM – 5:30 PM";
+  const SATURDAY_HOURS = "8:00 AM – 1:00 PM";
+  const WHATSAPP_NUMBER_LINK = "27823046926";
+
+  // --- AGENCY DETAILS ---
+  const AGENCY_NAME = "Endpoint Media";
+  const AGENCY_URL = "https://www.endpointmedia.co.za";
+
+  const footerLinks = [
+    {
+      title: "Products & Services",
+      links: [
+        { href: "/products", label: "Car Batteries" },
+        { href: "/deep-cycle", label: "Deep Cycle Batteries" },
+        { href: "/testing", label: "Battery Testing" },
+        { href: "/fitment", label: "Free Fitment" },
+      ],
+    },
+    {
+      title: "Company & Hours",
+      links: [
+        { href: "/about", label: "About Us" },
+        { href: "/faq", label: "FAQ" },
+        // --- UPDATED HOURS DISPLAY ---
+        { label: `Mon-Fri: ${WEEKDAY_HOURS}` },
+        { label: `Sat: ${SATURDAY_HOURS}` },
+      ],
+    },
+  ];
+
+  return (
+    <footer className="w-full border-t border-border bg-background pt-16 pb-6 text-muted-foreground">
+      <div className="container px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-5">
+          
+          {/* Column 1: Logo & Mission Statement (Expanded) */}
+          <div className="col-span-2 md:col-span-1 lg:col-span-2 space-y-4">
+            <Link href="/" className="flex items-center space-x-3">
+              <Battery className="h-6 w-6 text-battery-foreground bg-battery rounded-full p-1" />
+              <span className="text-xl font-extrabold tracking-tight text-foreground">
+                ALBERTON <span className="text-battery">BATTERY MART</span>
+              </span>
+            </Link>
+            
+            {/* Expanded Mission Statement */}
+            <p className="text-sm">
+              The most powerful batteries for the lowest prices. Specialists in reliable power, free on-site testing, and guaranteed friendly service. Our mission is to keep Alberton driving.
+            </p>
+            
+            {/* --- MOVED EMAIL ADDRESS HERE --- */}
+            <p className="flex items-center space-x-2 text-sm pt-1">
+              <Mail className="h-4 w-4 text-battery flex-shrink-0" />
+              <Link href={`mailto:${EMAIL_ADDRESS}`} className="hover:text-battery transition-colors">
+                {EMAIL_ADDRESS}
+              </Link>
+            </p>
+            
+            <div className="flex space-x-4 pt-2">
+              <Link href="#" aria-label="Facebook">
+                <Facebook className="h-5 w-5 hover:text-battery transition-colors" />
+              </Link>
+              <Link href="#" aria-label="Instagram">
+                <Instagram className="h-5 w-5 hover:text-battery transition-colors" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Columns 2 & 3: Navigation Links & Hours */}
+          {footerLinks.map((section) => (
+            <div key={section.title} className="space-y-4">
+              <h3 className="text-lg font-semibold text-foreground mb-3">
+                {section.title}
+              </h3>
+              <ul className="space-y-2">
+                {section.links.map((link) => (
+                  <li key={link.href || link.label}>
+                    {link.href ? (
+                        <Link href={link.href} className="text-sm hover:text-battery transition-colors">
+                            {link.label}
+                        </Link>
+                    ) : (
+                        <p className="text-sm">{link.label}</p> // Non-link content (hours)
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          {/* Column 4: Contact & Location (Revised CTA) */}
+          <div className="col-span-2 md:col-span-1 space-y-4">
+            <h3 className="text-lg font-semibold text-foreground mb-3">
+              Contact & Location
+            </h3>
+            
+            {/* Phone */}
+            <p className="flex items-center space-x-2 text-sm">
+              <Phone className="h-4 w-4 text-battery" />
+              <Link href={`tel:${PRIMARY_PHONE}`} className="hover:text-battery transition-colors">
+                {PRIMARY_PHONE}
+              </Link>
+            </p>
+
+            {/* Address */}
+            <p className="flex items-start space-x-2 text-sm">
+              <MapPin className="h-4 w-4 text-battery mt-1 flex-shrink-0" />
+              <span>{ADDRESS}</span>
+            </p>
+            
+            {/* --- REVISED WHATSAPP CTA BUTTON --- */}
+            <Button asChild variant="secondary" className="mt-4 bg-green-600 hover:bg-green-700 text-white shadow-lg">
+              <a href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center space-x-2">
+                <MessageSquare className="h-5 w-5" />
+                <span>Send WhatsApp</span>
+              </a>
+            </Button>
+          </div>
+
+        </div>
+        
+        {/* Copyright and Agency Credit Row */}
+        <div className="mt-16 border-t border-border pt-6 text-center text-xs space-y-1">
+          {/* Copyright */}
+          <div>
+            &copy; {currentYear} Alberton Battery Mart. All rights reserved.
+          </div>
+          {/* Agency Credit (Endpoint Media) */}
+          <div className="text-xs text-muted-foreground">
+            Designed, Developed & Maintained by&nbsp;
+            <a 
+              href={AGENCY_URL} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="hover:text-battery transition-colors font-medium"
+            >
+              {AGENCY_NAME}
+            </a>.
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\layout\Header.tsx--------------------------------------------------------------------------------// src/components/layout/Header.tsx
+import Link from "next/link";
+import { Battery, Phone, MessageSquare } from "lucide-react"; 
+import { Button } from "@/components/ui/button";
+import MobileNav from "@/components/layout/MobileNav"; 
+
+const Header = () => {
+  const PRIMARY_PHONE = "0101096211"; 
+  const WHATSAPP_NUMBER_LINK = "27823046926"; 
+
+  const navItems = [
+    { href: "/", label: "Home" },
+    { href: "/products", label: "Batteries" },
+    { href: "/services", label: "Fitment & Testing" },
+    { href: "/contact", label: "Contact Us" },
+  ];
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/90 backdrop-blur-sm">
+      {/* Container ensures consistent horizontal padding and centering */}
+      <div className="container flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
+        
+        {/* Logo and Brand Name - Consistent sizing */}
+        <Link href="/" className="flex items-center space-x-3">
+          <Battery className="h-6 w-6 text-battery-foreground bg-battery rounded-full p-1" />
+          <span className="text-xl font-extrabold tracking-tight text-foreground">
+            ALBERTON <span className="text-battery">BATTERY MART</span>
+          </span>
+        </Link>
+
+        {/* Desktop Navigation Links - HIDDEN on mobile (md:flex) */}
+        <nav className="hidden md:flex space-x-6">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-foreground transition-colors hover:text-battery font-medium"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Desktop CTAs - HIDDEN on mobile (hidden md:flex) */}
+        <div className="hidden md:flex items-center space-x-3">
+          
+          <Button asChild variant="battery" size="sm">
+            <a href={`tel:${PRIMARY_PHONE}`} className="flex items-center space-x-2">
+              <Phone className="h-4 w-4" />
+              <span>Call Us</span>
+            </a>
+          </Button>
+
+          <Button asChild variant="secondary" size="sm" className="bg-green-600 hover:bg-green-700 text-white">
+            <a href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2">
+              <MessageSquare className="h-4 w-4" />
+              <span>WhatsApp</span>
+            </a>
+          </Button>
+
+        </div>
+        
+        {/* Mobile Navigation Trigger - VISIBLE on mobile (md:hidden) */}
+        <MobileNav />
+
+      </div>
+    </header>
+  );
+};
+
+export default Header;
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\layout\HeroSection.tsx--------------------------------------------------------------------------------// src/components/layout/HeroSection.tsx
+
+// 1. IMPORT NECESSARY UI COMPONENTS (shadcn/ui)
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+
+// 2. IMPORT NECESSARY ICONS (lucide-react)
+import { Zap, MapPin, Clock, ShieldCheck, Phone, MessageSquare } from "lucide-react";
+
+// 3. IMPORT NECESSARY NEXT.JS/REACT COMPONENTS
+import Link from "next/link"; 
+import React from "react"; // Explicit import for React is good practice
+
+// 4. DEFINE GLOBAL CONSTANTS USED IN THE COMPONENT
+const EMERGENCY_PHONE = "0101096211"; 
+const WHATSAPP_NUMBER_LINK = "27823046926"; 
+
+const HeroSection = () => {
+  // Core Headline: Broken into sections for color control
+  const coreHeadline = (
+    <>
+      <span className="text-battery">Mobile</span> Battery Replacement: 
+      <span className="text-battery"> Free Testing</span> & 
+      <span className="text-battery"> Fitment</span> On-Site.
+    </>
+  );
+
+  const calloutWording = "Stuck? Our mobile team brings the right battery to you—fast. Get an immediate assessment and quote now.";
+
+  return (
+    // min-h-screen ensures it fills the viewport height
+    <section className="relative w-full overflow-hidden min-h-screen bg-background flex items-center justify-center">
+      <div className="container px-4 md:px-6 lg:px-8 z-10 relative">
+        <div className="grid lg:grid-cols-12 gap-12 items-center">
+          
+          {/* Left Column: Headline and Callout CTAs */}
+          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+            
+            {/* Primary Urgent Headline: White and Bright Red Mix */}
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-tight">
+              {coreHeadline}
+            </h1>
+            
+            {/* Secondary Assurance & Callout CTA */}
+            <p className="text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0">
+              {calloutWording}
+            </p>
+
+            {/* Primary CTAs: Immediate Contact */}
+            <div className="flex justify-center lg:justify-start space-x-4 pt-2">
+              
+              {/* Call Us Button (Primary Emergency CTA) */}
+              <Button asChild size="xl" variant="battery" className="shadow-lg">
+                <a href={`tel:${EMERGENCY_PHONE}`} className="flex items-center space-x-2">
+                  <Phone className="h-5 w-5" />
+                  <span className="text-lg font-bold">Call Us Now</span>
+                </a>
+              </Button>
+
+              {/* WhatsApp Button (Secondary Communication CTA) */}
+              <Button asChild variant="secondary" size="xl" className="bg-green-600 hover:bg-green-700 text-white">
+                <a href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2">
+                  <MessageSquare className="h-5 w-5" />
+                  <span className="text-lg font-bold">WhatsApp Us</span>
+                </a>
+              </Button>
+            </div>
+          </div>
+          
+          {/* Right Column: Key Trust & Service Card */}
+          <div className="lg:col-span-5 flex justify-center">
+            <Card className="bg-card border-battery shadow-2xl shadow-battery/20 w-full max-w-sm">
+              <CardContent className="p-6 space-y-6">
+                
+                {/* Urgent Service Card Title */}
+                <div className="flex items-center space-x-3 text-2xl font-bold text-battery">
+                  <Clock className="h-6 w-6" />
+                  <span>The Alberton Service Guarantee</span>
+                </div>
+
+                {/* Trust Factor List */}
+                <ul className="space-y-4 text-foreground">
+                  <li className="flex items-start space-x-3">
+                    <Zap className="h-5 w-5 text-battery mt-1" />
+                    <span className="text-lg">
+                      Extended Hours Mobile Service available for emergency fitment appointments.
+                    </span>
+                  </li>
+                  <li className="flex items-start space-x-3">
+                    <MapPin className="h-5 w-5 text-battery mt-1" />
+                    <span className="text-lg">
+                      Fast local service guaranteed in high-value suburbs: New Redruth, Meyersdal, & Alberton Central.
+                    </span>
+                  </li>
+                  <li className="flex items-start space-x-3">
+                    <ShieldCheck className="h-5 w-5 text-battery mt-1" />
+                    <span className="text-lg">
+                      Professional Diagnostics: Alternator check done on-site after fitment.
+                    </span>
+                  </li>
+                </ul>
+
+                {/* Secondary CTA: Quote Request for Solar/B2B */}
+                <Button asChild variant="outline" className="w-full mt-4 border-2 border-primary hover:bg-secondary">
+                  <Link href="/quote">Request Solar/Inverter Quote</Link>
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+
+      {/* Background element for visual interest */}
+      <div className="absolute inset-0 z-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#FFF 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
+    </section>
+  );
+};
+
+export default HeroSection;
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\layout\MobileNav.tsx--------------------------------------------------------------------------------// src/components/layout/MobileNav.tsx
+"use client";
+
+import { useState } from 'react';
+import Link from "next/link";
+import { Menu, Battery } from "lucide-react"; // Removed unused 'X' icon
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+
+// Define navigation links centrally
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/products", label: "Batteries" },
+  { href: "/services", label: "Fitment & Testing" },
+  { href: "/contact", label: "Contact Us" },
+  { href: "/quote", label: "Get A Quote", isCta: true },
+];
+
+const MobileNav = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const PRIMARY_PHONE = "0101096211"; 
+  const WHATSAPP_NUMBER_LINK = "27823046926"; 
+
+  return (
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+      <SheetTrigger asChild>
+        <Button variant="ghost" size="icon" className="md:hidden">
+          <Menu className="h-6 w-6 text-foreground" />
+          <span className="sr-only">Toggle navigation menu</span>
+        </Button>
+      </SheetTrigger>
+      <SheetContent side="right" className="w-full bg-background border-l border-border sm:max-w-xs">
+        <SheetHeader className="pb-6">
+          <SheetTitle>
+            <Link href="/" className="flex items-center space-x-2" onClick={() => setIsOpen(false)}>
+              <Battery className="h-6 w-6 text-battery-foreground bg-battery rounded-full p-1" />
+              <span className="text-lg font-extrabold tracking-tight text-foreground">
+                ALBERTON <span className="text-battery">BATTERY MART</span>
+              </span>
+            </Link>
+          </SheetTitle>
+        </SheetHeader>
+        <nav className="flex flex-col space-y-4 pt-4">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`text-xl font-medium ${item.isCta ? 'text-battery hover:text-battery/80' : 'text-foreground hover:text-battery'} transition-colors`}
+              onClick={() => setIsOpen(false)} 
+            >
+              {item.label}
+            </Link>
+          ))}
+          
+          {/* Mobile CTAs for immediate contact */}
+          <div className="flex flex-col space-y-3 pt-6">
+            <Button asChild variant="battery" size="lg">
+              <a href={`tel:${PRIMARY_PHONE}`}>Call Us: {PRIMARY_PHONE}</a>
+            </Button>
+            <Button asChild variant="secondary" size="lg" className="bg-green-600 hover:bg-green-700 text-white">
+              <a href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`} target="_blank" rel="noopener noreferrer">WhatsApp Us</a>
+            </Button>
+          </div>
+        </nav>
+      </SheetContent>
+    </Sheet>
+  );
+};
+
+export default MobileNav;
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\layout\ProductListPage.tsx--------------------------------------------------------------------------------// src/components/layout/ProductListPage.tsx
+import { MOCK_PRODUCTS, ProductCardData } from "@/lib/product-mock-data";
+import ProductCard from "@/components/content/ProductCard";
+import { Button } from "@/components/ui/button";
+import { Phone } from "lucide-react";
+
+// This template is designed to accept a title and a filtered list of products
+interface ProductListPageProps {
+  title: string;
+  description: string;
+  products: ProductCardData[];
+}
+
+const ProductListPage: React.FC<ProductListPageProps> = ({ title, description, products }) => {
+  const EMERGENCY_PHONE = "0101096211";
+
+  return (
+    <div className="w-full bg-background py-16">
+      <div className="container px-4 md:px-6 lg:px-8 space-y-12">
+        
+        {/* Page Header */}
+        <div className="text-center space-y-3 border-b border-border pb-6">
+          <h1 className="text-5xl font-extrabold text-battery">{title}</h1>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">{description}</p>
+        </div>
+
+        {/* Product Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          {products.length > 0 ? (
+            products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))
+          ) : (
+            <div className="lg:col-span-4 text-center py-20 bg-card/50 rounded-lg">
+              <h3 className="text-2xl font-semibold text-foreground">No matching products found.</h3>
+              <p className="text-muted-foreground mt-2">Try a different category or call us for direct assistance.</p>
+            </div>
+          )}
+        </div>
+        
+        {/* Final Conversion CTA */}
+        <div className="text-center pt-8">
+          <p className="text-2xl font-bold text-foreground mb-4">Need immediate help or a specific quote?</p>
+          <Button asChild size="xl" variant="battery">
+            <a href={`tel:${EMERGENCY_PHONE}`} className="flex items-center justify-center space-x-3 mx-auto">
+              <Phone className="h-6 w-6" />
+              <span>CALL NOW: {EMERGENCY_PHONE}</span>
+            </a>
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProductListPage;
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\layout\ProductSpotlight.tsx--------------------------------------------------------------------------------// src/components/layout/ProductSpotlight.tsx
+import { Card, CardContent } from "@/components/ui/card";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import Image from "next/image";
+
+const ProductSpotlight = () => {
+  const categories = [
+    {
+      title: "1. Standard Automotive Batteries",
+      description: "Reliable, warrantied replacement batteries for older vehicles, sedans, and standard hatchbacks. Best prices on all major codes (e.g., 619, 646).",
+      imagePath: "/images/automotive-battery-spotlight.jpg", 
+      ctaText: "Shop Standard Car Power",
+      ctaHref: "/products/type/automotive", // <-- CORRECTED LINK
+      color: "text-foreground", 
+      iconBg: "bg-battery/20",
+    },
+    {
+      title: "2. Performance & Start/Stop (AGM/EFB)",
+      description: "Advanced AGM/EFB technology for modern Start/Stop vehicles (VW, BMW, Ford Ranger). Superior charge acceptance and longer life.",
+      imagePath: "/images/agm-efb-spotlight.jpg", 
+      ctaText: "Explore AGM/EFB Range",
+      ctaHref: "/products/type/performance", // <-- CORRECTED LINK
+      color: "text-battery", 
+      iconBg: "bg-battery/30",
+    },
+    {
+      title: "3. Deep Cycle, Solar & Backup Power",
+      description: "High-end LiFePO₄ and AGM Deep Cycle batteries for home inverters, solar, camping, and extended leisure use.",
+      imagePath: "/images/solar-battery-spotlight.jpg", 
+      ctaText: "View Backup Solutions",
+      ctaHref: "/products/type/deep-cycle", // <-- CORRECTED LINK
+      color: "text-green-500", 
+      iconBg: "bg-green-500/20",
+    },
+    {
+      title: "4. Truck, Commercial & Powersport",
+      description: "Heavy-duty commercial batteries (Truck/Lorry), and specialized batteries for Motorcycles and ATVs. High CCA for powerful engines.",
+      imagePath: "/images/truck-motorcycle-spotlight.jpg", 
+      ctaText: "Shop Heavy Duty Range",
+      ctaHref: "/products/type/truck-motorcycle", // <-- CORRECTED LINK
+      color: "text-yellow-500", 
+      iconBg: "bg-yellow-500/20",
+    },
+  ];
+
+  // ... rest of the component (rendering logic is unchanged) ...
+
+  return (
+    <section className="w-full bg-background py-16">
+      <div className="container px-4 md:px-6 lg:px-8 space-y-12">
+        
+        {/* Section Headline */}
+        <div className="text-center">
+          <h2 className="text-4xl font-bold tracking-tight text-foreground">
+            Our Products: Find Your Perfect Power Solution
+          </h2>
+          <p className="text-xl text-muted-foreground mt-2">
+            We stock and fit all major technologies across 4 specialized categories.
+          </p>
+        </div>
+
+        {/* Grid of Four Category Cards (2 rows, 2 columns) */}
+        <div className="grid md:grid-cols-2 gap-8">
+          {categories.map((category, index) => (
+            <Card 
+              key={index} 
+              className="group flex flex-col overflow-hidden bg-card border-border shadow-2xl hover:border-battery transition-colors duration-300"
+            >
+              <div className="w-full">
+                {/* Image Placeholder using AspectRatio for responsive consistency */}
+                <AspectRatio ratio={16 / 9}>
+                  {/* IMPORTANT: Placeholder reminder */}
+                  <div className={`w-full h-full ${category.iconBg} flex items-center justify-center text-xs text-foreground/50`}>
+                    Placeholder for {category.imagePath}
+                  </div>
+                </AspectRatio>
+              </div>
+
+              <CardContent className="p-6 space-y-4 flex-grow flex flex-col">
+                <h3 className={`text-2xl font-extrabold ${category.color}`}>
+                  {category.title}
+                </h3>
+                <p className="text-muted-foreground flex-grow">
+                  {category.description}
+                </p>
+                <div className="pt-2">
+                  <Button asChild variant="default" className="group-hover:bg-battery group-hover:text-white transition-colors duration-300">
+                    <Link href={category.ctaHref}>
+                      {category.ctaText}
+                    </Link>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default ProductSpotlight;
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\layout\ServiceGrid.tsx--------------------------------------------------------------------------------// src/components/layout/ServiceGrid.tsx
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Zap, Lightbulb, Battery, ShieldCheck } from "lucide-react"; 
+import NextLink from "next/link";
+import { Button } from "@/components/ui/button";
+
+const ServiceGrid = () => {
+  // Service blocks designed to capture distinct market needs (Automotive, Solar, Trust)
+  const serviceBlocks = [
+    {
+      title: "Mobile Emergency Service",
+      icon: Zap,
+      description: "Fast on-site fitment, diagnostics, and alternator checks. Call us for immediate, guaranteed assistance.",
+      ctaText: "Call Now: 010 109 6211",
+      ctaHref: "tel:0101096211",
+      variant: "battery", // Bright Red for Urgency
+      keyFact: "Free Testing & Fitment On-Site", 
+    },
+    {
+      title: "Multi-Brand Authority",
+      icon: Battery,
+      description: "Stocking Willard, Enertec, Exide, and more. Find the perfect OEM-spec battery for any vehicle.",
+      ctaText: "Shop Car Batteries",
+      ctaHref: "/products/automotive",
+      variant: "outline", // White outline for Product Search
+      keyFact: "All EFB & AGM Technologies Stocked", 
+    },
+    {
+      title: "Solar & Backup Power",
+      icon: Lightbulb,
+      description: "LiFePO₄ and Deep Cycle batteries for load shedding solutions. Turnkey system design available.",
+      ctaText: "Get Solar Quote",
+      ctaHref: "/quote/solar",
+      variant: "secondary", // Secondary color for long-term investment
+      keyFact: "Expert Advice on LiFePO₄ Systems", 
+    },
+  ];
+
+  return (
+    <section className="w-full bg-card py-16">
+      <div className="container px-4 md:px-6 lg:px-8 space-y-10">
+        
+        {/* Section Headline */}
+        <div className="text-center">
+          <h2 className="text-4xl font-bold tracking-tight text-foreground">
+            Alberton&apos;s Local Battery & Energy Experts {/* <-- FIX APPLIED HERE */}
+          </h2>
+          <p className="text-xl text-muted-foreground mt-2">
+            Service, Selection, and Solutions for Every Power Need.
+          </p>
+        </div>
+
+        {/* Grid of Featured Services */}
+        <div className="grid md:grid-cols-3 gap-8">
+          {serviceBlocks.map((block, index) => (
+            <Card key={index} className="flex flex-col h-full bg-background border-battery shadow-lg hover:shadow-battery/40 transition-shadow">
+              <CardHeader className="space-y-4 flex-grow">
+                <div className="flex items-center space-x-3 text-battery">
+                  <block.icon className="h-6 w-6" />
+                  <CardTitle className="text-2xl font-bold text-foreground">{block.title}</CardTitle>
+                </div>
+                <p className="text-muted-foreground">{block.description}</p>
+                
+                {/* Highlighted Fact */}
+                <div className="pt-2 text-sm text-battery font-semibold border-t border-dashed border-border">
+                    <ShieldCheck className="h-4 w-4 inline mr-2 align-text-bottom"/> {block.keyFact}
+                </div>
+
+              </CardHeader>
+              <CardContent className="p-6 pt-0">
+                <Button asChild variant={block.variant as "default"} className="w-full">
+                  {/* Note: Using <a> directly for tel: link, <NextLink> for internal next.js navigation */}
+                  {block.ctaHref.startsWith("tel:") ? (
+                    <a href={block.ctaHref}>{block.ctaText}</a>
+                  ) : (
+                    <NextLink href={block.ctaHref}>{block.ctaText}</NextLink>
+                  )}
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+        
+        {/* Secondary Trust Signal Row */}
+        <div className="flex justify-center text-center pt-8">
+            <p className="text-lg text-foreground">
+                Trusted Brands: Willard, Enertec, Exide, Sabat, and more. <span className="text-battery font-semibold">Up to 36-Month Warranty Available.</span>
+            </p>
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+export default ServiceGrid;
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\layout\StorefrontCTA.tsx--------------------------------------------------------------------------------// src/components/layout/StorefrontCTA.tsx
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { MapPin, Clock, Phone } from "lucide-react";
+// Removed unused NextLink import
+
+const StorefrontCTA = () => {
+  const STORE_ADDRESS = "28 St Columb Rd, New Redruth, Alberton, 1450";
+  const STORE_HOURS = "Mon - Fri: 8:00am - 5:00pm | Sat: 8:00am - 1:00pm";
+  const STORE_PHONE = "0101096211";
+  const DIRECTIONS_LINK = "https://maps.app.goo.gl/w13E2jc81bMM3uty5";
+
+  return (
+    <section className="w-full bg-background py-16">
+      <div className="container px-4 md:px-6 lg:px-8">
+        <Card className="bg-card border-battery shadow-2xl shadow-battery/20 p-8 md:p-12 text-center">
+          <h2 className="text-4xl font-extrabold tracking-tight text-foreground mb-4">
+            Visit Our Storefront or Talk to an Expert
+          </h2>
+          <p className="text-xl text-muted-foreground mb-10 max-w-3xl mx-auto">
+            Need counter service or a large commercial order? Find us in Alberton Central. We have the area&apos;s widest selection in stock, ready to go.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 text-foreground">
+            {/* Left Column: Location Details */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-center space-x-3">
+                <MapPin className="h-6 w-6 text-battery" />
+                <h3 className="text-2xl font-bold">Store Location</h3>
+              </div>
+              <p className="text-lg">{STORE_ADDRESS}</p>
+              <Button asChild variant="outline" className="w-full max-w-xs mt-4 border-2 border-primary hover:bg-secondary">
+                <a href={DIRECTIONS_LINK} target="_blank" rel="noopener noreferrer">
+                  Get Directions
+                </a>
+              </Button>
+            </div>
+
+            {/* Right Column: Hours & Contact */}
+            <div className="space-y-4 md:border-l md:border-border md:pl-12">
+              <div className="flex items-center justify-center space-x-3">
+                <Clock className="h-6 w-6 text-battery" />
+                <h3 className="text-2xl font-bold">Trading Hours</h3>
+              </div>
+              <p className="text-lg">{STORE_HOURS}</p>
+              <Button asChild variant="battery" className="w-full max-w-xs mt-4">
+                <a href={`tel:${STORE_PHONE}`} className="flex items-center justify-center space-x-2">
+                  <Phone className="h-5 w-5" />
+                  <span>Call Store: {STORE_PHONE}</span>
+                </a>
+              </Button>
+            </div>
+          </div>
+        </Card>
+      </div>
+    </section>
+  );
+};
+
+export default StorefrontCTA;
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\layout\TestimonialSection.tsx--------------------------------------------------------------------------------// src/components/layout/TestimonialSection.tsx
+import { Card, CardContent } from "@/components/ui/card";
+import { Quote, Star } from "lucide-react";
+
+// Mock testimonial data (will eventually come from a database or CMS)
+const testimonials = [
+  {
+    quote: "Absolute life-saver! My battery died in Meyersdal and their mobile unit was there in under 30 minutes. Free fitment and alternator test on the spot. Highly recommend!",
+    author: "Chris R.",
+    source: "Google Review",
+    rating: 5,
+  },
+  {
+    quote: "Got a great deal on a Willard EFB battery, much better price than the dealership. The team provided expert advice on why I needed the EFB model for my start/stop car.",
+    author: "Nandi M.",
+    source: "In-Store Customer",
+    rating: 5,
+  },
+  {
+    quote: "Called for a quote on a LiFePO₄ solar battery. The specialist was knowledgeable and didn't push the most expensive option. Excellent service and delivered next day.",
+    author: "Zane L.",
+    source: "Backup Power Client",
+    rating: 4,
+  },
+];
+
+// Helper component for rating stars
+const StarRating = ({ rating }: { rating: number }) => (
+  <div className="flex space-x-0.5 text-battery">
+    {Array.from({ length: 5 }, (_, index) => (
+      <Star 
+        key={index} 
+        className={`h-4 w-4 ${index < rating ? 'fill-current' : 'fill-muted'}`}
+      />
+    ))}
+  </div>
+);
+
+
+const TestimonialSection = () => {
+  return (
+    <section className="w-full bg-card py-20">
+      <div className="container px-4 md:px-6 lg:px-8 space-y-12">
+        
+        {/* Section Headline */}
+        <div className="text-center">
+          <h2 className="text-4xl font-extrabold tracking-tight text-foreground">
+            Trusted by Alberton Drivers and Businesses
+          </h2>
+          <p className="text-xl text-muted-foreground mt-3">
+            What our customers say about our products and service.
+          </p>
+        </div>
+
+        {/* Grid of Testimonials */}
+        <div className="grid md:grid-cols-3 gap-8">
+          {testimonials.map((testimonial, index) => (
+            <Card key={index} className="flex flex-col h-full p-6 bg-background border-border shadow-lg">
+              
+              <Quote className="h-6 w-6 text-battery mb-4" />
+              
+              <CardContent className="flex-grow space-y-4 p-0">
+                <StarRating rating={testimonial.rating} />
+                {/* FIXED: Replaced unescaped quotes with &quot; */}
+                <p className="text-lg italic text-foreground leading-relaxed">
+                  &quot;{testimonial.quote}&quot;
+                </p>
+              </CardContent>
+              
+              <div className="mt-6 pt-4 border-t border-border">
+                <p className="text-sm font-semibold text-battery">{testimonial.author}</p>
+                <p className="text-xs text-muted-foreground">{testimonial.source}</p>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default TestimonialSection;
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\layout\ThinCta.tsx--------------------------------------------------------------------------------// src/components/layout/ThinCta.tsx
+import { Button } from "@/components/ui/button";
+import { Phone, MessageSquare } from "lucide-react";
+// Removed unused 'Link' import
+
+// --- CONTACT DETAILS ---
+const PRIMARY_PHONE = "0101096211"; 
+const WHATSAPP_NUMBER_LINK = "27823046926"; 
+
+const ThinCta = () => {
+  return (
+    <section className="w-full bg-battery py-8"> {/* Full Bright Red background for maximum contrast */}
+      <div className="container px-4 md:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between text-white space-y-4 md:space-y-0">
+        
+        <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight">
+          Emergency Battery Help: Call Us Now.
+        </h3>
+        
+        <div className="flex space-x-4">
+          
+          {/* Call Us Button (White border over Red background) */}
+          <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
+            <a href={`tel:${PRIMARY_PHONE}`} className="flex items-center space-x-2">
+              <Phone className="h-5 w-5" />
+              <span>Call: {PRIMARY_PHONE}</span>
+            </a>
+          </Button>
+
+          {/* WhatsApp Button (White border over Red background) */}
+          <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
+            <a href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2">
+              <MessageSquare className="h-5 w-5" />
+              <span>WhatsApp Now</span>
+            </a>
+          </Button>
+        </div>
+        
+      </div>
+    </section>
+  );
+};
+
+export default ThinCta;
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\layout\TrustAuthoritySection.tsx--------------------------------------------------------------------------------// src/components/layout/TrustAuthoritySection.tsx
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button"; 
+import { Separator } from "@/components/ui/separator";
+import { Gauge, Zap, CalendarCheck, MapPin } from "lucide-react";
+import Link from "next/link"; // Required for the Button's 'asChild' behavior
+
+// Differentiator blocks based on key competitive advantages.
+const trustBlocks = [
+  {
+    icon: CalendarCheck,
+    title: "Up to 36-Month Warranty",
+    description: "Full peace of mind guaranteed. We stand by our multi-brand selection, offering warranties that meet or exceed industry standards.",
+  },
+  {
+    icon: Gauge,
+    title: "Free On-Site Diagnostics",
+    description: "Expert battery health and alternator testing included with every fitment. Ensure your vehicle's charging system is running perfectly.",
+  },
+  {
+    icon: Zap,
+    title: "Multi-Brand Authority",
+    description: "Official stockists of Willard, Enertec, Exide, and more. We offer unbiased, expert advice on the right battery for your car's specs.",
+  },
+  {
+    icon: MapPin,
+    title: "Local Alberton Speed",
+    description: "Focused on the local area (New Redruth, Meyersdal, Alberton Central) for the fastest emergency response times in the south.",
+  },
+];
+
+const TrustAuthoritySection = () => {
+  return (
+    <section className="w-full bg-background py-20">
+      <div className="container px-4 md:px-6 lg:px-8 space-y-12">
+        
+        {/* Section Headline */}
+        <div className="text-center">
+          <h2 className="text-4xl font-extrabold tracking-tight text-foreground">
+            Why Alberton Battery Mart is the Right Choice
+          </h2>
+          <p className="text-xl text-muted-foreground mt-3">
+            Service You Can Trust. Products That Last.
+          </p>
+        </div>
+
+        {/* Grid of Trust Factors */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {trustBlocks.map((block, index) => (
+            <Card key={index} className="flex flex-col items-center text-center p-6 bg-card border-border shadow-md transition-all hover:border-battery/50 hover:shadow-battery/20">
+              <block.icon className="h-10 w-10 text-battery mb-4" />
+              <h3 className="text-xl font-bold text-foreground mb-2">
+                {block.title}
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                {block.description}
+              </p>
+            </Card>
+          ))}
+        </div>
+        
+        {/* Call-to-Action for Full Catalog */}
+        <div className="text-center pt-8">
+            <Separator className="bg-border mb-8 max-w-lg mx-auto" />
+            <h3 className="text-2xl font-bold text-foreground mb-4">
+                Ready for the most reliable power?
+            </h3>
+            <p className="text-lg text-muted-foreground mb-6">
+                Browse our full range, or call our expert team for instant advice.
+            </p>
+            <Button asChild size="lg" variant="battery">
+                <Link href="/products/automotive">View All Batteries Now</Link>
+            </Button>
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+export default TrustAuthoritySection;
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\ui\accordion.tsx--------------------------------------------------------------------------------"use client"
+
+import * as React from "react"
+import * as AccordionPrimitive from "@radix-ui/react-accordion"
+import { ChevronDown } from "lucide-react"
+
+import { cn } from "@/lib/utils"
+
+const Accordion = AccordionPrimitive.Root
+
+const AccordionItem = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
+>(({ className, ...props }, ref) => (
+  <AccordionPrimitive.Item
+    ref={ref}
+    className={cn("border-b", className)}
+    {...props}
+  />
+))
+AccordionItem.displayName = "AccordionItem"
+
+const AccordionTrigger = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Trigger>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
+>(({ className, children, ...props }, ref) => (
+  <AccordionPrimitive.Header className="flex">
+    <AccordionPrimitive.Trigger
+      ref={ref}
+      className={cn(
+        "flex flex-1 items-center justify-between py-4 text-sm font-medium transition-all hover:underline text-left [&[data-state=open]>svg]:rotate-180",
+        className
+      )}
+      {...props}
+    >
+      {children}
+      <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" />
+    </AccordionPrimitive.Trigger>
+  </AccordionPrimitive.Header>
+))
+AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName
+
+const AccordionContent = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
+>(({ className, children, ...props }, ref) => (
+  <AccordionPrimitive.Content
+    ref={ref}
+    className="overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+    {...props}
+  >
+    <div className={cn("pb-4 pt-0", className)}>{children}</div>
+  </AccordionPrimitive.Content>
+))
+AccordionContent.displayName = AccordionPrimitive.Content.displayName
+
+export { Accordion, AccordionItem, AccordionTrigger, AccordionContent }
+
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\ui\aspect-ratio.tsx--------------------------------------------------------------------------------"use client"
+
+import * as AspectRatioPrimitive from "@radix-ui/react-aspect-ratio"
+
+const AspectRatio = AspectRatioPrimitive.Root
+
+export { AspectRatio }
+
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\ui\button.tsx--------------------------------------------------------------------------------// src/components/ui/button.tsx
+
+import * as React from "react"
+import { Slot } from "@radix-ui/react-slot"
+import { cva, type VariantProps } from "class-variance-authority"
+
+import { cn } from "@/lib/utils"
+
+const buttonVariants = cva(
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+        // Custom variant added for Alberton's Bright Red brand color
+        battery: "bg-battery text-battery-foreground shadow-sm hover:bg-battery/80", 
+        
+        destructive:
+          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+        outline:
+          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+        secondary:
+          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
+      },
+      size: {
+        default: "h-9 px-4 py-2",
+        sm: "h-8 rounded-md px-3 text-xs",
+        lg: "h-10 rounded-md px-8",
+        // Custom size added for large, high-impact CTA in the Hero Section
+        xl: "h-12 rounded-lg px-10 text-lg", 
+        icon: "h-9 w-9",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+)
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button"
+    return (
+      <Comp
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)
+Button.displayName = "Button"
+
+export { Button, buttonVariants }
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\ui\card.tsx--------------------------------------------------------------------------------import * as React from "react"
+
+import { cn } from "@/lib/utils"
+
+const Card = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "rounded-xl border bg-card text-card-foreground shadow",
+      className
+    )}
+    {...props}
+  />
+))
+Card.displayName = "Card"
+
+const CardHeader = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex flex-col space-y-1.5 p-6", className)}
+    {...props}
+  />
+))
+CardHeader.displayName = "CardHeader"
+
+const CardTitle = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("font-semibold leading-none tracking-tight", className)}
+    {...props}
+  />
+))
+CardTitle.displayName = "CardTitle"
+
+const CardDescription = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("text-sm text-muted-foreground", className)}
+    {...props}
+  />
+))
+CardDescription.displayName = "CardDescription"
+
+const CardContent = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
+))
+CardContent.displayName = "CardContent"
+
+const CardFooter = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex items-center p-6 pt-0", className)}
+    {...props}
+  />
+))
+CardFooter.displayName = "CardFooter"
+
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
+
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\ui\input.tsx--------------------------------------------------------------------------------import * as React from "react"
+
+import { cn } from "@/lib/utils"
+
+const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
+  ({ className, type, ...props }, ref) => {
+    return (
+      <input
+        type={type}
+        className={cn(
+          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+          className
+        )}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)
+Input.displayName = "Input"
+
+export { Input }
+
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\ui\label.tsx--------------------------------------------------------------------------------"use client"
+
+import * as React from "react"
+import * as LabelPrimitive from "@radix-ui/react-label"
+import { cva, type VariantProps } from "class-variance-authority"
+
+import { cn } from "@/lib/utils"
+
+const labelVariants = cva(
+  "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+)
+
+const Label = React.forwardRef<
+  React.ElementRef<typeof LabelPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> &
+    VariantProps<typeof labelVariants>
+>(({ className, ...props }, ref) => (
+  <LabelPrimitive.Root
+    ref={ref}
+    className={cn(labelVariants(), className)}
+    {...props}
+  />
+))
+Label.displayName = LabelPrimitive.Root.displayName
+
+export { Label }
+
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\ui\separator.tsx--------------------------------------------------------------------------------"use client"
+
+import * as React from "react"
+import * as SeparatorPrimitive from "@radix-ui/react-separator"
+
+import { cn } from "@/lib/utils"
+
+const Separator = React.forwardRef<
+  React.ElementRef<typeof SeparatorPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root>
+>(
+  (
+    { className, orientation = "horizontal", decorative = true, ...props },
+    ref
+  ) => (
+    <SeparatorPrimitive.Root
+      ref={ref}
+      decorative={decorative}
+      orientation={orientation}
+      className={cn(
+        "shrink-0 bg-border",
+        orientation === "horizontal" ? "h-[1px] w-full" : "h-full w-[1px]",
+        className
+      )}
+      {...props}
+    />
+  )
+)
+Separator.displayName = SeparatorPrimitive.Root.displayName
+
+export { Separator }
+
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\ui\sheet.tsx--------------------------------------------------------------------------------"use client"
+
+import * as React from "react"
+import * as SheetPrimitive from "@radix-ui/react-dialog"
+import { cva, type VariantProps } from "class-variance-authority"
+import { X } from "lucide-react"
+
+import { cn } from "@/lib/utils"
+
+const Sheet = SheetPrimitive.Root
+
+const SheetTrigger = SheetPrimitive.Trigger
+
+const SheetClose = SheetPrimitive.Close
+
+const SheetPortal = SheetPrimitive.Portal
+
+const SheetOverlay = React.forwardRef<
+  React.ElementRef<typeof SheetPrimitive.Overlay>,
+  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay>
+>(({ className, ...props }, ref) => (
+  <SheetPrimitive.Overlay
+    className={cn(
+      "fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      className
+    )}
+    {...props}
+    ref={ref}
+  />
+))
+SheetOverlay.displayName = SheetPrimitive.Overlay.displayName
+
+const sheetVariants = cva(
+  "fixed z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out",
+  {
+    variants: {
+      side: {
+        top: "inset-x-0 top-0 border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
+        bottom:
+          "inset-x-0 bottom-0 border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
+        left: "inset-y-0 left-0 h-full w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm",
+        right:
+          "inset-y-0 right-0 h-full w-3/4 border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm",
+      },
+    },
+    defaultVariants: {
+      side: "right",
+    },
+  }
+)
+
+interface SheetContentProps
+  extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
+    VariantProps<typeof sheetVariants> {}
+
+const SheetContent = React.forwardRef<
+  React.ElementRef<typeof SheetPrimitive.Content>,
+  SheetContentProps
+>(({ side = "right", className, children, ...props }, ref) => (
+  <SheetPortal>
+    <SheetOverlay />
+    <SheetPrimitive.Content
+      ref={ref}
+      className={cn(sheetVariants({ side }), className)}
+      {...props}
+    >
+      <SheetPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
+        <X className="h-4 w-4" />
+        <span className="sr-only">Close</span>
+      </SheetPrimitive.Close>
+      {children}
+    </SheetPrimitive.Content>
+  </SheetPortal>
+))
+SheetContent.displayName = SheetPrimitive.Content.displayName
+
+const SheetHeader = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) => (
+  <div
+    className={cn(
+      "flex flex-col space-y-2 text-center sm:text-left",
+      className
+    )}
+    {...props}
+  />
+)
+SheetHeader.displayName = "SheetHeader"
+
+const SheetFooter = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) => (
+  <div
+    className={cn(
+      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
+      className
+    )}
+    {...props}
+  />
+)
+SheetFooter.displayName = "SheetFooter"
+
+const SheetTitle = React.forwardRef<
+  React.ElementRef<typeof SheetPrimitive.Title>,
+  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Title>
+>(({ className, ...props }, ref) => (
+  <SheetPrimitive.Title
+    ref={ref}
+    className={cn("text-lg font-semibold text-foreground", className)}
+    {...props}
+  />
+))
+SheetTitle.displayName = SheetPrimitive.Title.displayName
+
+const SheetDescription = React.forwardRef<
+  React.ElementRef<typeof SheetPrimitive.Description>,
+  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Description>
+>(({ className, ...props }, ref) => (
+  <SheetPrimitive.Description
+    ref={ref}
+    className={cn("text-sm text-muted-foreground", className)}
+    {...props}
+  />
+))
+SheetDescription.displayName = SheetPrimitive.Description.displayName
+
+export {
+  Sheet,
+  SheetPortal,
+  SheetOverlay,
+  SheetTrigger,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetFooter,
+  SheetTitle,
+  SheetDescription,
+}
+
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\ui\textarea.tsx--------------------------------------------------------------------------------import * as React from "react"
+
+import { cn } from "@/lib/utils"
+
+const Textarea = React.forwardRef<
+  HTMLTextAreaElement,
+  React.ComponentProps<"textarea">
+>(({ className, ...props }, ref) => {
+  return (
+    <textarea
+      className={cn(
+        "flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+        className
+      )}
+      ref={ref}
+      {...props}
+    />
+  )
+})
+Textarea.displayName = "Textarea"
+
+export { Textarea }
+
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\components\ui\toggle.tsx--------------------------------------------------------------------------------"use client"
+
+import * as React from "react"
+import * as TogglePrimitive from "@radix-ui/react-toggle"
+import { cva, type VariantProps } from "class-variance-authority"
+
+import { cn } from "@/lib/utils"
+
+const toggleVariants = cva(
+  "inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 data-[state=on]:bg-accent data-[state=on]:text-accent-foreground [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  {
+    variants: {
+      variant: {
+        default: "bg-transparent",
+        outline:
+          "border border-input bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground",
+      },
+      size: {
+        default: "h-9 px-2 min-w-9",
+        sm: "h-8 px-1.5 min-w-8",
+        lg: "h-10 px-2.5 min-w-10",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+)
+
+const Toggle = React.forwardRef<
+  React.ElementRef<typeof TogglePrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof TogglePrimitive.Root> &
+    VariantProps<typeof toggleVariants>
+>(({ className, variant, size, ...props }, ref) => (
+  <TogglePrimitive.Root
+    ref={ref}
+    className={cn(toggleVariants({ variant, size, className }))}
+    {...props}
+  />
+))
+
+Toggle.displayName = TogglePrimitive.Root.displayName
+
+export { Toggle, toggleVariants }
+
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\lib\product-mock-data.ts--------------------------------------------------------------------------------// src/lib/product-mock-data.ts
+// Defines the structure and supplies the data for the Product Card component.
+
+// 1. Define the TypeScript interface for a Product Card
+export interface ProductCardData {
+  id: number;
+  name: string; 
+  sku: string; // The battery code, e.g., "619"
+  category: string; // e.g., "Standard Automotive"
+  ahCapacity: number; // Amp-Hour
+  cca: number; // Cold Cranking Amps
+  warrantyMonths: number; 
+  priceAnchor: string; // Price string with ZAR symbol, e.g., "R 1,450.00"
+  isAGM: boolean; // Flag for high-end technology (AGM/EFB)
+  imagePath: string; // For future image loading
+}
+
+// 2. Define static Willard mock data for display (10 popular models + 1 EFB model)
+export const MOCK_PRODUCTS: ProductCardData[] = [
+  {
+    id: 101,
+    name: "Willard 619 Car Battery",
+    sku: "619",
+    category: "Standard Automotive",
+    ahCapacity: 43,
+    cca: 325,
+    warrantyMonths: 24,
+    priceAnchor: "R 1,450.00",
+    isAGM: false,
+    imagePath: "/images/willard-619.jpg",
+  },
+  {
+    id: 102,
+    name: "Willard 652 Car Battery",
+    sku: "652",
+    category: "Standard Automotive",
+    ahCapacity: 70,
+    cca: 590,
+    warrantyMonths: 24,
+    priceAnchor: "R 2,150.00",
+    isAGM: false,
+    imagePath: "/images/willard-652.jpg",
+  },
+  {
+    id: 103,
+    name: "Willard 669 Car Battery",
+    sku: "669",
+    category: "Standard Automotive",
+    ahCapacity: 80,
+    cca: 590,
+    warrantyMonths: 24,
+    priceAnchor: "R 3,000.00",
+    isAGM: false,
+    imagePath: "/images/willard-669.jpg",
+  },
+  {
+    id: 104,
+    name: "Willard 668 Car Battery",
+    sku: "668",
+    category: "Standard Automotive",
+    ahCapacity: 80,
+    cca: 590,
+    warrantyMonths: 24,
+    priceAnchor: "R 2,950.00",
+    isAGM: false,
+    imagePath: "/images/willard-668.jpg",
+  },
+  {
+    id: 105,
+    name: "Willard 657 Car Battery",
+    sku: "657",
+    category: "Standard Automotive",
+    ahCapacity: 70,
+    cca: 590,
+    warrantyMonths: 24,
+    priceAnchor: "R 2,400.00",
+    isAGM: false,
+    imagePath: "/images/willard-657.jpg",
+  },
+  {
+    id: 106,
+    name: "Willard 651/647 Car Battery",
+    sku: "651",
+    category: "Standard Automotive",
+    ahCapacity: 60,
+    cca: 460,
+    warrantyMonths: 24,
+    priceAnchor: "R 2,200.00",
+    isAGM: false,
+    imagePath: "/images/willard-651.jpg",
+  },
+  {
+    id: 107,
+    name: "Willard 616 Car Battery",
+    sku: "616",
+    category: "Standard Automotive",
+    ahCapacity: 35,
+    cca: 280,
+    warrantyMonths: 24,
+    priceAnchor: "R 1,550.00",
+    isAGM: false,
+    imagePath: "/images/willard-616.jpg",
+  },
+  {
+    id: 108,
+    name: "Willard 628/9 Car Battery",
+    sku: "628",
+    category: "Standard Automotive",
+    ahCapacity: 50,
+    cca: 335,
+    warrantyMonths: 24,
+    priceAnchor: "R 1,600.00",
+    isAGM: false,
+    imagePath: "/images/willard-628.jpg",
+  },
+  {
+    id: 109,
+    name: "Willard 658 Car Battery",
+    sku: "658",
+    category: "Standard Automotive",
+    ahCapacity: 90,
+    cca: 630,
+    warrantyMonths: 24,
+    priceAnchor: "R 3,050.00",
+    isAGM: false,
+    imagePath: "/images/willard-658.jpg",
+  },
+  {
+    id: 110,
+    name: "Willard 646 Car Battery",
+    sku: "646",
+    category: "Standard Automotive",
+    ahCapacity: 55,
+    cca: 380,
+    warrantyMonths: 24,
+    priceAnchor: "R 1,900.00",
+    isAGM: false,
+    imagePath: "/images/willard-646.jpg",
+  },
+  // Placeholder for a high-performance battery to demonstrate the badge logic
+  {
+    id: 201,
+    name: "Willard EFB Start/Stop",
+    sku: "W668EFB",
+    category: "Performance AGM/EFB",
+    ahCapacity: 75,
+    cca: 780,
+    warrantyMonths: 36, // Higher warranty for EFB/AGM types
+    priceAnchor: "R 3,499.00",
+    isAGM: true,
+    imagePath: "/images/willard-efb.jpg",
+  },
+];
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\lib\utils.ts--------------------------------------------------------------------------------import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+
+
