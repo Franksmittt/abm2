@@ -1,0 +1,11 @@
+id,name,sku,category,brandName,ahCapacity,cca,warrantyMonths,costPrice_INPUT,margin_CALC_FORMULA,sellingPrice_OUTPUT,isAGM,imagePath
+101,Willard 619 Maintenance-Free,619,Standard Automotive,Willard,43,325,24,1000.00,=I2*1.30,"R 1,300.00",FALSE,/images/willard-619.jpg
+102,Willard 652 Maintenance-Free,652,Standard Automotive,Willard,70,590,24,2000.00,=I3*1.30,"R 2,600.00",FALSE,/images/willard-652.jpg
+103,Willard 658 High Performance,658,Standard Automotive,Willard,68,600,25,2750.00,=I4*1.25,"R 3,437.50",FALSE,/images/willard-658.jpg
+104,Willard 668 Commercial,668,Standard Automotive,Willard,90,720,25,3200.00,=I5*1.25,"R 4,000.00",FALSE,/images/willard-668.jpg
+105,Willard 628 EFB Start/Stop,628,Performance AGM/EFB,Willard,70,680,36,3900.00,=I6*1.20,"R 4,680.00",TRUE,/images/willard-628-efb.jpg
+201,Exide 646 Eco,646,Standard Automotive,Exide,55,380,24,1650.00,=I7*1.30,"R 2,145.00",FALSE,/images/exide-646.jpg
+202,Exide 652 High Cycle,652,Standard Automotive,Exide,70,600,24,2550.00,=I8*1.25,"R 3,187.50",FALSE,/images/exide-652.jpg
+203,Exide 658 AGM Performance,658,Performance AGM/EFB,Exide,72,720,36,4100.00,=I9*1.20,"R 4,920.00",TRUE,/images/exide-658-agm.jpg
+204,Exide 668 AGM Premium,668,Performance AGM/EFB,Exide,95,850,36,4800.00,=I10*1.20,"R 5,760.00",TRUE,/images/exide-668-agm.jpg
+301,Willard 646 Maintenance-Free,646,Standard Automotive,Willard,55,380,24,1700.00,=I11*1.30,"R 2,210.00",FALSE,/images/willard-646.jpg

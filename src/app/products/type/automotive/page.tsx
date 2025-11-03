@@ -1,18 +1,75 @@
 // src/app/products/type/automotive/page.tsx
 import ProductListPage from "@/components/layout/ProductListPage";
-import { MOCK_PRODUCTS } from "@/lib/product-mock-data";
+import { ALL_PRODUCTS, ProductCardData } from "@/data/products";
+import CategoryFilterSidebar from "@/components/layout/CategoryFilterSidebar";
+import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button"; 
+import { Phone } from "lucide-react"; 
 
-// Filters for: Standard Automotive (since performance/AGM is a separate category)
-const STANDARD_AUTOMOTIVE_PRODUCTS = MOCK_PRODUCTS.filter(p => 
-  p.category === 'Standard Automotive'
+// --- VERIFIED CONTACT ---
+const EMERGENCY_PHONE_DISPLAY = "010 109 6211"; // Formatted for display
+const EMERGENCY_PHONE_LINK = "0101096211"; // Unformatted for tel: link
+
+// Filters for: Standard Automotive 
+const AUTOMOTIVE_PRODUCTS = ALL_PRODUCTS.filter((p: ProductCardData) => 
+  p.category === 'Standard Automotive' || p.category === 'Performance AGM/EFB'
 );
+
+// Helper function to extract unique brands and SKUs/sizes
+const getFilterOptions = (products: ProductCardData[]) => {
+    const brands = Array.from(new Set(products.map(p => p.brandName)));
+    const sizes = Array.from(new Set(products.map(p => p.sku)));
+    return { brands, sizes };
+};
+const { brands, sizes } = getFilterOptions(AUTOMOTIVE_PRODUCTS);
 
 export default function StandardAutomotiveBatteriesPage() {
   return (
-    <ProductListPage
-      title="Standard Maintenance-Free Car Batteries"
-      description="The high-quality replacement batteries for older vehicles and general sedans. Best value and warranty."
-      products={STANDARD_AUTOMOTIVE_PRODUCTS}
-    />
+    <div className="container py-16 space-y-12">
+        
+        <div className="text-center space-y-3">
+            <h1 className="text-5xl md:text-6xl font-extrabold text-foreground">
+                <span className="text-battery">Car Battery</span> Catalog: Standard & Performance
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
+                All certified maintenance-free batteries for your vehicle, including specialized EFB/AGM required for Start/Stop systems.
+            </p>
+            <Separator className="pt-4" />
+        </div>
+        
+        {/* Primary CTA Button on this page (Fixed number display) */}
+        <div className="text-center">
+            <Button asChild size="xl" variant="battery" className="shadow-lg">
+                <a href={`tel:${EMERGENCY_PHONE_LINK}`} className="flex items-center space-x-3 mx-auto">
+                    <Phone className="h-6 w-6" />
+                    <span>Call Our Mobile Service Now: {EMERGENCY_PHONE_DISPLAY}</span>
+                </a>
+            </Button>
+        </div>
+
+
+        {/* --- MAIN LAYOUT: SIDEBAR + PRODUCT GRID --- */}
+        <div className="flex flex-col lg:flex-row gap-8">
+            
+            {/* Left Column: Filtering Sidebar */}
+            <div className="lg:w-64 lg:flex-shrink-0">
+                <CategoryFilterSidebar
+                    currentCategory="Car Batteries"
+                    allBrands={brands}
+                    allSizes={sizes}
+                />
+            </div>
+
+            {/* Right Column: Product List */}
+            <div className="lg:flex-grow">
+                <ProductListPage
+                    title="All Automotive Batteries"
+                    description={`Displaying ${AUTOMOTIVE_PRODUCTS.length} products ready for fitment.`}
+                    products={AUTOMOTIVE_PRODUCTS}
+                />
+            </div>
+
+        </div>
+    </div>
   );
 }

@@ -2,9 +2,10 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Zap, Gauge, Shield, Tag, Phone } from "lucide-react";
-import Link from "next/link"; // For future product details page links
-import Image from "next/image"; // Placeholder for future Image component use
-import { ProductCardData } from "@/lib/product-mock-data";
+import Link from "next/link";
+// *** FIX: Import the optimized Image component ***
+import Image from "next/image"; 
+import { ProductCardData } from "@/data/products"; 
 
 interface ProductCardProps {
   product: ProductCardData;
@@ -12,7 +13,8 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   // Logic to determine if this is a premium/performance battery
-  const isHighPerformance = product.isAGM || product.warrantyMonths >= 36;
+  const isHighPerformance = product.isAGM ||
+  product.warrantyMonths >= 36;
   const EMERGENCY_PHONE = "0101096211";
 
   // Specs array for easy display
@@ -22,15 +24,25 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     { icon: Shield, label: "Warranty", value: `${product.warrantyMonths}`, unit: 'Months' },
     { icon: Tag, label: "Guide Price", value: product.priceAnchor, unit: '' },
   ];
-
   return (
     <Card className="flex flex-col overflow-hidden bg-card border-border shadow-lg hover:shadow-battery/30 transition-shadow h-full">
       
-      {/* Product Header and Image Placeholder */}
+      {/* Product Header and Image Area */}
       <CardHeader className="p-0 relative">
-        {/* Placeholder Image Area */}
+        
+        {/* Container for the Next.js Image component */}
         <div className="w-full h-48 bg-secondary/20 flex items-center justify-center relative">
-          <span className="text-muted-foreground text-sm">Image Placeholder: {product.sku}</span>
+          
+          {/* *** FIX: Optimized Next.js Image component implementation *** */}
+          <Image 
+            src={product.imagePath} // e.g., /images/w-619.jpg
+            alt={product.name}
+            fill // Fills the parent div (h-48, w-full)
+            style={{ objectFit: 'contain' }} // Ensures the full battery image is visible
+            sizes="(max-width: 768px) 100vw, 33vw" // Aids optimization for the current layout
+            className="p-4" // Padding to prevent image from touching container edges
+          />
+          
         </div>
         
         {/* Performance Badge */}
@@ -43,7 +55,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
       {/* Product Details */}
       <CardContent className="p-6 flex-grow space-y-4">
-        <CardTitle className="text-xl font-extrabold text-foreground min-h-[3rem] tracking-tight">
+        {/* Title (Fix applied previously: prevents overflow) */}
+        <CardTitle className="text-xl font-extrabold text-foreground min-h-[3rem] tracking-tight overflow-hidden whitespace-nowrap text-ellipsis">
           {product.name}
         </CardTitle>
         

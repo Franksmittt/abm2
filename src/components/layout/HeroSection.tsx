@@ -5,57 +5,67 @@ import { Zap, MapPin, Clock, ShieldCheck, Phone, MessageSquare } from "lucide-re
 import Link from "next/link";
 import React from "react";
 
-// FINAL FORMATTING AND ACCURACY
-const EMERGENCY_PHONE = "010 109 6211";
+// --- FINAL VERIFIED CONTACT DETAILS & FORMATTING ---
+const EMERGENCY_PHONE = "010 109 6211"; // Formatted for display
 const WHATSAPP_NUMBER_LINK = "27823046926";
 const WEEKDAY_HOURS = "08:00 AM – 5:00 PM";
 const SATURDAY_HOURS = "08:00 AM – 12:00 PM";
-
 const HeroSection = () => {
-  // CLEANED HEADLINE
+  // CLEANED HEADLINE: Removed "Free Testing" and asterisks
   const coreHeadline = (
     <>
       <span className="text-battery">Mobile</span> Battery Replacement:
-      <span className="text-battery"> Free Testing</span> &
+      <span className="text-battery"> Guaranteed Testing</span> &
       <span className="text-battery"> Fitment</span> On-Site.
     </>
   );
-
-  // CLEANED WORDING (Humanized)
+  // CLEANED WORDING: Removed "free"
   const calloutWording = "Don't get stuck. Our dedicated mobile team brings the right battery to you fast. Get an immediate assessment and quote now.";
-
   return (
     <section className="relative w-full overflow-hidden min-h-screen bg-background flex items-center justify-center">
       <div className="container px-4 md:px-6 lg:px-8 z-10 relative">
+        {/* FIX 1: Reduced vertical spacing from space-y-6 to space-y-4 in this column to save vertical room. */}
         <div className="grid lg:grid-cols-12 gap-12 items-center">
 
           {/* Left Column: Headline and Callout CTAs */}
-          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+          <div className="lg:col-span-7 space-y-4 text-center lg:text-left">
 
             {/* Primary Urgent Headline: White and Bright Red Mix */}
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-tight">
               {coreHeadline}
             </h1>
 
             {/* Secondary Assurance & Callout CTA */}
-            <p className="text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0">
+            {/* FIX 2: Reduced font size from text-xl to text-lg to save vertical space. */}
+            <p className="text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0">
               {calloutWording}
             </p>
 
             {/* Primary CTAs: Immediate Contact */}
-            <div className="flex justify-center lg:justify-start space-x-4 pt-2">
+            <div className="flex flex-col items-center md:flex-row md:justify-start space-y-4 md:space-y-0 md:space-x-4 pt-2">
 
               {/* Call Us Button */}
-              <Button asChild size="xl" variant="battery" className="shadow-lg">
-                <a href={`tel:${EMERGENCY_PHONE}`} className="flex items-center space-x-2">
+              <Button 
+                asChild 
+                size="xl" 
+                variant="battery" 
+                className="shadow-lg w-full max-w-xs" 
+              >
+                {/* NOTE: The tel: link uses the number without spaces for dialer compatibility */}
+                <a href={`tel:${EMERGENCY_PHONE.replace(/ /g, '')}`} className="flex items-center justify-center space-x-2">
                   <Phone className="h-5 w-5" />
                   <span className="text-lg font-bold">Call Us Now</span>
                 </a>
               </Button>
 
               {/* WhatsApp Button */}
-              <Button asChild variant="secondary" size="xl" className="bg-green-600 hover:bg-green-700 text-white">
-                <a href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2">
+              <Button 
+                asChild 
+                variant="secondary" 
+                size="xl" 
+                className="bg-green-600 hover:bg-green-700 text-white w-full max-w-xs" 
+              >
+                <a href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center space-x-2">
                   <MessageSquare className="h-5 w-5" />
                   <span className="text-lg font-bold">WhatsApp Us</span>
                 </a>
@@ -76,7 +86,6 @@ const HeroSection = () => {
 
                 {/* Trust Factor List */}
                 <ul className="space-y-4 text-foreground">
-                  {/* CORRECTED CLAIM (Removed Emergency/After Hours) */}
                   <li className="flex items-start space-x-3">
                     <Zap className="h-5 w-5 text-battery mt-1" />
                     <span className="text-lg">

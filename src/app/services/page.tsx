@@ -5,37 +5,35 @@ import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 
 // --- FINAL VERIFIED CONTACT DETAILS & HOURS ---
-const EMERGENCY_PHONE = "010 109 6211";
+const EMERGENCY_PHONE_DISPLAY = "010 109 6211";
+const EMERGENCY_PHONE_LINK = "0101096211";
 const WHATSAPP_NUMBER_LINK = "27823046926";
-const WEEKDAY_HOURS = "08:00 AM – 5:00 PM"; // FINAL CORRECT HOURS
-const SATURDAY_HOURS = "08:00 AM – 12:00 PM"; // FINAL CORRECT HOURS
+const WEEKDAY_HOURS = "08:00 AM – 5:00 PM"; 
+const SATURDAY_HOURS = "08:00 AM – 12:00 PM"; 
 
 export default function ServicesPage() {
   return (
     <div className="container py-16 space-y-16">
       
-      {/* ------------------------------------------- */}
       {/* SECTION 1: HERO & PRIMARY CTA (H1 Focus) */}
-      {/* ------------------------------------------- */}
       <div className="text-center space-y-4 border-b border-border pb-10">
         <h1 className="text-5xl md:text-6xl font-extrabold text-foreground">
           Professional Battery <span className="text-battery">Services</span> in Alberton
         </h1>
-        {/* CORRECTED CLAIM: Removed "Advanced Diagnostics" from summary text to be more general */}
+        {/* CLEANED CLAIM: Removed "Free" from Fitment */}
         <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
-          We are the local, certified experts providing complete battery solutions: Free Fitment, Diagnostics, and Convenient Mobile Service for all vehicle types.
+          We are the local, certified experts providing complete battery solutions: Fitment, Diagnostics, and Convenient Mobile Service for all vehicle types.
         </p>
         <Button asChild size="xl" variant="battery" className="mt-6 shadow-lg">
-          <a href={`tel:${EMERGENCY_PHONE}`} className="flex items-center space-x-3 mx-auto">
+          <a href={`tel:${EMERGENCY_PHONE_LINK}`} className="flex items-center space-x-3 mx-auto">
             <Phone className="h-6 w-6" />
-            <span>Call Our Mobile Service Now: {EMERGENCY_PHONE}</span>
+            {/* FIX APPLIED: Uses correctly formatted number in display */}
+            <span>Call Our Mobile Service Now: {EMERGENCY_PHONE_DISPLAY}</span> 
           </a>
         </Button>
       </div>
 
-      {/* ------------------------------------------- */}
       {/* SECTION 2: MOBILE SERVICE LOGISTICS (Logistical USP) */}
-      {/* ------------------------------------------- */}
       <div className="grid lg:grid-cols-12 gap-10">
         <div className="lg:col-span-5 space-y-6">
           <Zap className="h-12 w-12 text-battery" />
@@ -51,12 +49,10 @@ export default function ServicesPage() {
               <h3 className="font-bold text-battery">Trading Hours & Availability</h3>
               <p className="flex items-center space-x-3">
                   <Clock className="h-5 w-5 flex-shrink-0" />
-                  {/* FINAL CORRECT HOURS */}
                   <span>Mon – Fri: {WEEKDAY_HOURS}</span>
               </p>
               <p className="flex items-center space-x-3">
                   <Clock className="h-5 w-5 flex-shrink-0" />
-                  {/* FINAL CORRECT HOURS */}
                   <span>Saturday: {SATURDAY_HOURS}</span>
               </p>
           </div>
@@ -79,7 +75,6 @@ export default function ServicesPage() {
               <p className="text-sm text-muted-foreground mt-1">We eliminate towing fees and the inconvenience of waiting at a workshop. The full service is performed at your location.</p>
             </div>
             <div className="bg-card p-6 rounded-lg border border-border shadow-md">
-              {/* CLEANED WORDING: Removed "Extended Service Window" */}
               <h3 className="text-xl font-bold text-battery">Convenient Service Window</h3>
               <p className="text-sm text-muted-foreground mt-1">We offer our callout service during our standard business hours for your convenience.</p>
             </div>
@@ -96,9 +91,7 @@ export default function ServicesPage() {
 
       <Separator className="bg-border" />
 
-      {/* ------------------------------------------- */}
       {/* SECTION 3: DIAGNOSTICS & WARRANTY (Authority) */}
-      {/* ------------------------------------------- */}
       <div className="grid lg:grid-cols-12 gap-10">
         
         <div className="lg:col-span-7 space-y-6">
@@ -113,10 +106,9 @@ export default function ServicesPage() {
           <div className="space-y-4">
             <h3 className="text-2xl font-semibold text-foreground">Comprehensive Starting System Checks</h3>
             <ul className="space-y-2 text-lg text-foreground bg-card p-4 rounded-lg border border-border">
-              {/* CLEANED WORDING: Removed ** */}
               <li className="flex items-start space-x-3">
                 <Gauge className="h-5 w-5 text-battery mt-1 flex-shrink-0" />
-                <span>FREE Alternator Testing: This critical post-replacement alternator check is included to prevent underlying charging issues.</span>
+                <span>Alternator Testing: This critical post-replacement alternator check is included to prevent underlying charging issues.</span>
               </li>
               <li className="flex items-start space-x-3">
                 <ShieldCheck className="h-5 w-5 text-battery mt-1 flex-shrink-0" />
@@ -144,9 +136,9 @@ export default function ServicesPage() {
           Don't Guess Your Battery Needs. Get Expert Help.
         </h3>
         <Button asChild size="xl" variant="battery" className="mt-4 shadow-xl">
-          <a href={`tel:${EMERGENCY_PHONE}`} className="flex items-center justify-center space-x-3 mx-auto">
+          <a href={`tel:${EMERGENCY_PHONE_LINK}`} className="flex items-center justify-center space-x-3 mx-auto">
             <Phone className="h-6 w-6" />
-            <span>Call Now: {EMERGENCY_PHONE}</span>
+            <span>Call Now: {EMERGENCY_PHONE_DISPLAY}</span>
           </a>
         </Button>
       </div>

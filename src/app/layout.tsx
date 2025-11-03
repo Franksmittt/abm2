@@ -1,12 +1,20 @@
-// src/app/layout.tsx
+// C:\Users\User1\abm2\src\app\layout.tsx
+import { Inter } from 'next/font/google';
+import './globals.css';
+import { ThemeProvider } from "@/components/theme-provider"; 
+import { GTM_ID } from '@/lib/gtm-constants'; 
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
-import Header from "@/components/layout/Header"; 
-import Footer from "@/components/layout/Footer"; 
+const inter = Inter({ subsets: ['latin'] });
 
-const inter = Inter({ subsets: ["latin"] });
+// --- Standardized Next.js Metadata for SEO ---
+export const metadata = {
+  // Primary Target Keywords: Mobile Battery Replacement, Fitment, Alberton
+  title: 'Alberton Battery Mart | Mobile Battery Replacement & Fitment Service', 
+  description: 'Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal. We bring the Willard & Exide battery to you. Call for a quote!',
+  metadataBase: new URL('https://yourdomain.com'), 
+};
 
 export default function RootLayout({
   children,
@@ -15,31 +23,39 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* --- GTM HEAD SNIPPET --- */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','${GTM_ID}');`,
+          }}
+        />
+      </head>
+
       <body className={inter.className}>
+        <noscript>
+          <iframe 
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0" 
+            width="0" 
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
-          disableTransitionOnChange
         >
-          {/* Header remains fixed at the top */}
           <Header /> 
-
-          {/* The main structural wrapper sets a minimum height of the screen and uses flex-col.
-            This ensures the footer is pushed to the bottom of the content.
-          */}
-          <div className="flex flex-col min-h-screen">
-            {/* The main tag contains the page content.
-              flex-grow ensures it takes up all remaining vertical space.
-              pt-20 compensates for the fixed 80px (5rem) height of the Header.
-            */}
-            <main className="flex-grow w-full pt-20">
-                {children}
-            </main>
+          <div className="pt-20">
+            {children} 
           </div>
-          
-          {/* Footer is placed after the main content */}
-          <Footer /> 
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

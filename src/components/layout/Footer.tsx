@@ -2,20 +2,19 @@
 import Link from "next/link";
 import { Battery, Facebook, Instagram, Phone, Mail, MapPin, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  
   // FINAL VERIFIED CONTACT DETAILS & HOURS
-  const PRIMARY_PHONE = "010 109 6211"; // Standardized format
+  // *** FIX APPLIED: Formatted phone number with spaces ***
+  const PRIMARY_PHONE = "010 109 6211";
   const EMAIL_ADDRESS = "admin@albaertonbatterymart.co.za";
   const ADDRESS = "28 St Columb Rd, New Redruth, Alberton, 1450";
   const WEEKDAY_HOURS = "08:00 AM – 5:00 PM"; // Standardized hours
-  const SATURDAY_HOURS = "08:00 AM – 12:00 PM"; // Standardized hours
+  const SATURDAY_HOURS = "08:00 AM – 12:00 PM";
+  // Standardized hours
   const WHATSAPP_NUMBER_LINK = "27823046926";
   const AGENCY_NAME = "Endpoint Media";
   const AGENCY_URL = "https://www.endpointmedia.co.za";
-
   const footerLinks = [
     {
       title: "Products & Services",
@@ -37,7 +36,6 @@ const Footer = () => {
       ],
     },
   ];
-
   return (
     <footer className="w-full border-t border-border bg-background pt-16 pb-6 text-muted-foreground">
       <div className="container px-4 sm:px-6 lg:px-8">
@@ -54,7 +52,8 @@ const Footer = () => {
 
             {/* Expanded Mission Statement (Humanized) */}
             <p className="text-sm">
-              The most powerful batteries for the lowest prices. Specialists in reliable power, free on-site testing, and guaranteed friendly service. Our mission is to keep Alberton driving.
+              The most powerful batteries for the lowest prices. Specialists in reliable power, free on-site testing, and guaranteed friendly service.
+              Our mission is to keep Alberton driving.
             </p>
 
             {/* EMAIL ADDRESS */}
@@ -84,7 +83,8 @@ const Footer = () => {
               <ul className="space-y-2">
                 {section.links.map((link) => (
                   <li key={link.href || link.label}>
-                    {link.href ? (
+                    {link.href ?
+                    (
                         <Link href={link.href} className="text-sm hover:text-battery transition-colors">
                             {link.label}
                         </Link>
@@ -106,8 +106,9 @@ const Footer = () => {
             {/* Phone (CLEANED FORMAT) */}
             <p className="flex items-center space-x-2 text-sm">
               <Phone className="h-4 w-4 text-battery" />
-              <Link href={`tel:${PRIMARY_PHONE}`} className="hover:text-battery transition-colors">
-                {PRIMARY_PHONE}
+              <Link href={`tel:${PRIMARY_PHONE.replace(/ /g, '')}`} className="hover:text-battery transition-colors">
+                {/* *** FIX APPLIED: Display formatted number *** */}
+                {PRIMARY_PHONE} 
               </Link>
             </p>
 
@@ -132,7 +133,7 @@ const Footer = () => {
         <div className="mt-16 border-t border-border pt-6 text-center text-xs space-y-1">
           {/* Copyright */}
           <div>
-            &copy; {currentYear} Alberton Battery Mart. All rights reserved.
+            ©{currentYear} Alberton Battery Mart. All rights reserved.
           </div>
           {/* Agency Credit (Endpoint Media) */}
           <div className="text-xs text-muted-foreground">

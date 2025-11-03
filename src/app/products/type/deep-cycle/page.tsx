@@ -1,11 +1,13 @@
 // src/app/products/type/deep-cycle/page.tsx
 import ProductListPage from "@/components/layout/ProductListPage";
-import { MOCK_PRODUCTS } from "@/lib/product-mock-data";
+// --- FIX: Update import path to the new data source and pull in the interface ---
+import { ALL_PRODUCTS, ProductCardData } from "@/data/products";
 
 // Filters for: Deep Cycle/Solar
-const DEEP_CYCLE_PRODUCTS = MOCK_PRODUCTS.filter(p => 
+const DEEP_CYCLE_PRODUCTS = ALL_PRODUCTS.filter((p: ProductCardData) => 
   p.category === 'Deep Cycle/Solar'
 );
+// --- FIX: Explicitly typed 'p' as ProductCardData to resolve TS7006 error ---
 
 export default function DeepCycleBatteriesPage() {
   return (

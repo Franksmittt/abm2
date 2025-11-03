@@ -1,42 +1,34 @@
-// src/app/page.tsx
-
+// C:\Users\User1\abm2\src\app\page.tsx
 import HeroSection from "@/components/layout/HeroSection";
-import ServiceGrid from "@/components/layout/ServiceGrid"; 
-import ProductSpotlight from "@/components/layout/ProductSpotlight"; 
-import TrustAuthoritySection from "@/components/layout/TrustAuthoritySection"; 
-import TestimonialSection from "@/components/layout/TestimonialSection"; 
-import FaqSection from "@/components/layout/FaqSection"; // <-- NEW IMPORT
-import ThinCta from "@/components/layout/ThinCta"; // <-- NEW IMPORT
-import StorefrontCTA from "@/components/layout/StorefrontCTA"; 
+import ThinCta from "@/components/layout/ThinCta";
+import ProductSpotlight from "@/components/content/ProductSpotlight"; 
+import ServiceGrid from "@/components/layout/ServiceGrid"; // Core service features/categories
+import TestimonialSection from "@/components/layout/TestimonialSection"; // Social proof
 
-export default function HomePage() {
+export default function Home() {
   return (
-    <div className="w-full">
-      {/* 1. High-Impact Hero Section (Dark) */}
+    // The main tag serves as the root container for the page content
+    <main>
+      
+      {/* 1. PRIMARY HERO SECTION (First screen content, fixed height) */}
       <HeroSection />
-
-      {/* 2. Conversion-Focused Service Grid (Dark) */}
-      <ServiceGrid />
-
-      {/* 3. Product Authority Spotlight (Dark) */}
-      <ProductSpotlight />
-
-      {/* 4. Trust & Authority Section (Dark) */}
-      <TrustAuthoritySection />
-
-      {/* 5. FAQ Section (SUBTLE CONTRAST: Uses bg-card for visual break) */}
-      <FaqSection />
-
-      {/* 6. Testimonial Section (Social Proof & Final Trust - Dark) */}
-      <TestimonialSection />
-
-      {/* 7. Thin CTA (MAXIMUM CONTRAST: Full Red band for final urgency) */}
+      
+      {/* 2. PRODUCT SPOTLIGHT (Randomized product showcase) */}
+      <ProductSpotlight count={3} /> 
+      
+      {/* 3. CORE SERVICE FEATURES / CATEGORIES (4-column grid) */}
+      <ServiceGrid /> 
+      
+      {/* 4. TESTIMONIALS / SOCIAL PROOF */}
+      <TestimonialSection /> 
+      
+      {/* 5. THIN CONVERSION CTA (Bottom-of-page contact funnel) */}
       <ThinCta />
-
-      {/* 8. Storefront CTA / Final Conversion Block (Dark Card on Dark BG) */}
-      <StorefrontCTA />
-
-      {/* Page content ends here and flows into the Footer from layout.tsx */}
-    </div>
+      
+      {/* Additional layout components you may have, such as: */}
+      {/* <TrustAuthoritySection /> */}
+      {/* <StorefrontCTA /> */}
+      
+    </main>
   );
 }
