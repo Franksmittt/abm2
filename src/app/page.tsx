@@ -1,33 +1,57 @@
-// C:\Users\User1\abm2\src\app\page.tsx
-import HeroSection from "@/components/layout/HeroSection";
-import ThinCta from "@/components/layout/ThinCta";
-import ProductSpotlight from "@/components/content/ProductSpotlight"; 
-import ServiceGrid from "@/components/layout/ServiceGrid"; // Core service features/categories
-import TestimonialSection from "@/components/layout/TestimonialSection"; // Social proof
+// src/app/page.tsx
+import dynamic from 'next/dynamic';
+import HeroSection from "@/components/layout/HeroSection"; // Keep this one static
+
+// Lazy-load all components below the fold
+const TrustAuthoritySection = dynamic(() => import('@/components/layout/TrustAuthoritySection'));
+const ServiceGrid = dynamic(() => import('@/components/layout/ServiceGrid'));
+const ProductSpotlight = dynamic(() => import('@/components/content/ProductSpotlight'));
+const StorefrontCTA = dynamic(() => import('@/components/layout/StorefrontCTA'));
+const TestimonialSection = dynamic(() => import('@/components/layout/TestimonialSection'));
+const FaqSection = dynamic(() => import('@/components/layout/FaqSection'));
+const ContactForm = dynamic(() => import('@/components/content/ContactForm'));
+const ThinCta = dynamic(() => import('@/components/layout/ThinCta'));
 
 export default function Home() {
   return (
-    // The main tag serves as the root container for the page content
     <main>
       
-      {/* 1. PRIMARY HERO SECTION (First screen content, fixed height) */}
+      {/* 1. HERO: Grabs immediate attention & captures urgent leads. */}
       <HeroSection />
       
-      {/* 2. PRODUCT SPOTLIGHT (Randomized product showcase) */}
-      <ProductSpotlight count={3} /> 
-      
-      {/* 3. CORE SERVICE FEATURES / CATEGORIES (4-column grid) */}
+      {/* 2. TRUST & AUTHORITY: Instantly builds trust and authority. Answers "Why you?" */}
+      <TrustAuthoritySection />
+
+      {/* 3. CORE SERVICES: Shows what you do. (Car, Truck, Solar, etc.) */}
       <ServiceGrid /> 
       
-      {/* 4. TESTIMONIALS / SOCIAL PROOF */}
+      {/* 4. PRODUCT SPOTLIGHT: Shows what you sell. (FIXED to 3 products) */}
+      <ProductSpotlight count={3} /> 
+      
+      {/* 5. LOCAL SEO & PHYSICAL PROOF: Cements your local presence. "We are a real store." */}
+      <StorefrontCTA />
+      
+      {/* 6. SOCIAL PROOF: Builds trust with user reviews. */}
       <TestimonialSection /> 
-      
-      {/* 5. THIN CONVERSION CTA (Bottom-of-page contact funnel) */}
+
+      {/* 7. EXPERTISE & FAQ: Overcomes customer objections and builds expert status. */}
+      <FaqSection />
+
+      {/* 8. DIRECT LEAD CAPTURE: A full contact form for non-urgent/bulk inquiries. */}
+      <section className="container py-16 max-w-4xl mx-auto">
+        <div className="text-center space-y-3 mb-10">
+            <h2 className="text-4xl font-extrabold text-foreground">
+              Have a Specific Inquiry?
+            </h2>
+            <p className="text-xl text-muted-foreground">
+              For bulk orders, solar quotes, or non-urgent questions, send us a message.
+            </p>
+        </div>
+        <ContactForm />
+      </section>
+
+      {/* 9. FINAL CTA: The final, unmissable call to action. */}
       <ThinCta />
-      
-      {/* Additional layout components you may have, such as: */}
-      {/* <TrustAuthoritySection /> */}
-      {/* <StorefrontCTA /> */}
       
     </main>
   );

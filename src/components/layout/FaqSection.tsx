@@ -1,5 +1,5 @@
 // src/components/layout/FaqSection.tsx
-import { Button } from "@/components/ui/button"; 
+import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 // Highly relevant, objection-handling questions (8 total)
@@ -44,15 +44,17 @@ const FaqSection = () => {
   const secondColumn = faqItems.slice(4, 8);
 
   return (
-    // Background is white (bg-white) for a strong visual contrast 
-    <section className="w-full bg-white py-20"> 
+    // --- THEME FIX: Changed bg-white to bg-card and added border-y for visual separation ---
+    <section className="w-full bg-card border-y border-border py-20"> 
       <div className="container px-4 md:px-6 lg:px-8">
         
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-extrabold tracking-tight text-black">
+          {/* --- THEME FIX: Changed text-black to text-foreground --- */}
+          <h2 className="text-4xl font-extrabold tracking-tight text-foreground">
             Questions & Answers
           </h2>
-          <p className="text-xl text-gray-700 mt-3">
+          {/* --- THEME FIX: Changed text-gray-700 to text-muted-foreground --- */}
+          <p className="text-xl text-muted-foreground mt-3">
             Your instant answers to the most common battery problems.
           </p>
         </div>
@@ -63,29 +65,35 @@ const FaqSection = () => {
             
             {/* Column 1 */}
             <Accordion type="single" collapsible className="w-full">
-              {firstColumn.map((item, index) => (
-                <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-300"> 
-                  <AccordionTrigger className="text-lg font-semibold text-black hover:text-battery">
+             {firstColumn.map((item, index) => (
+                // --- THEME FIX: Changed border-gray-300 to border-border ---
+                <AccordionItem key={index} value={`item-${index}`} className="border-b border-border"> 
+                  {/* --- THEME FIX: Changed text-black to text-foreground --- */}
+                  <AccordionTrigger className="text-lg font-semibold text-foreground hover:text-battery">
                     {item.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-gray-700 text-base leading-relaxed">
+                   {/* --- THEME FIX: Changed text-gray-700 to text-muted-foreground --- */}
+                   <AccordionContent className="text-muted-foreground text-base leading-relaxed">
                     {item.answer}
                   </AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
-            
+             
             {/* Column 2 */}
             <Accordion type="single" collapsible className="w-full">
               {secondColumn.map((item, index) => (
-                <AccordionItem key={index} value={`item-${index + 4}`} className="border-b border-gray-300"> 
-                  <AccordionTrigger className="text-lg font-semibold text-black hover:text-battery">
+                // --- THEME FIX: Changed border-gray-300 to border-border ---
+                <AccordionItem key={index} value={`item-${index + 4}`} className="border-b border-border"> 
+                  {/* --- THEME FIX: Changed text-black to text-foreground --- */}
+                  <AccordionTrigger className="text-lg font-semibold text-foreground hover:text-battery">
                     {item.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-gray-700 text-base leading-relaxed">
+                  {/* --- THEME FIX: Changed text-gray-700 to text-muted-foreground --- */}
+                  <AccordionContent className="text-muted-foreground text-base leading-relaxed">
                     {item.answer}
                   </AccordionContent>
-                </AccordionItem>
+                 </AccordionItem>
               ))}
             </Accordion>
 
@@ -94,8 +102,9 @@ const FaqSection = () => {
         
         {/* Lead Generation Hook: CTA after FAQ */}
         <div className="text-center pt-10">
-          <p className="text-lg text-black mb-4">
-            Still have questions? Talk directly to a certified technician:
+          {/* --- THEME FIX: Changed text-black to text-foreground --- */}
+          <p className="text-lg text-foreground mb-4">
+             Still have questions? Talk directly to a certified technician:
           </p>
           <Button asChild size="lg" variant="battery" className="shadow-lg">
             <a href="tel:0101096211">Call Us Now for Expert Advice</a>

@@ -6,24 +6,45 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import { Send } from "lucide-react";
+import { Send, AlertTriangle, CheckCircle } from "lucide-react"; // --- NEW: Added CheckCircle
 
-// NOTE: This is a placeholder. In a real application, the form data 
-// would be submitted to an API Route Handler or a Server Action.
+// --- NEW: Define a type for the dataLayer ---
+declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+}
 
 const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false); // --- NEW: Success state
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+    setIsSuccess(false);
+
     // Placeholder: Simulate API submission delay
     setTimeout(() => {
       console.log("Form Submitted:", formData);
-      alert("Thank you! Your message has been sent.");
+      
+      // --- NEW: FIRE THE GOOGLE "GENERATE_LEAD" EVENT ---
+      // This sends the conversion to your existing GTM script
+      try {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'generate_lead',
+          'value': 'contact_form_submission'
+        });
+        console.log("GA4 Event: generate_lead pushed to dataLayer.");
+      } catch (error) {
+        console.error("Error pushing to dataLayer:", error);
+      }
+      // --- END NEW EVENT ---
+
       setIsSubmitting(false);
+      setIsSuccess(true); // --- NEW: Set success
       setFormData({ name: '', email: '', subject: '', message: '' });
     }, 1500);
   };
@@ -35,8 +56,31 @@ const ContactForm = () => {
     });
   };
 
+  // --- NEW: Show success message if form was sent ---
+  if (isSuccess) {
+    return (
+      <div className="p-8 bg-card border border-green-500 text-green-300 rounded-lg flex flex-col items-center space-y-4 text-center">
+        <CheckCircle className="h-12 w-12 text-green-500" />
+        <h3 className="text-2xl font-bold text-foreground">Thank You!</h3>
+        <p className="text-lg text-muted-foreground">
+          Your message has been sent successfully. We will be in touch shortly.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      
+      {/* --- DEMO MODE WARNING --- */}
+      <div className="p-4 bg-yellow-900/20 border border-yellow-700 text-yellow-300 rounded-lg flex items-center space-x-3">
+        <AlertTriangle className="h-5 w-5 flex-shrink-0" />
+        <p className="text-sm font-medium">
+          <strong>Demo Mode:</strong> This form is not active. Submissions will only be logged to the console and fire a test conversion event.
+        </p>
+      </div>
+      {/* --- END WARNING --- */}
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="name">Full Name</Label>
@@ -44,7 +88,7 @@ const ContactForm = () => {
         </div>
         <div className="space-y-2">
           <Label htmlFor="email">Email Address</Label>
-          <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required className="bg-background border-border text-foreground" />
+           <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required className="bg-background border-border text-foreground" />
         </div>
       </div>
       

@@ -2,7 +2,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MapPin, Clock, Phone } from "lucide-react";
-import Link from "next/link"; 
+import Link from "next/link";
 
 const StorefrontCTA = () => {
   // FINAL VERIFIED CONTACT DETAILS & HOURS
@@ -19,7 +19,7 @@ const StorefrontCTA = () => {
             Visit Our Storefront or Talk to an Expert
           </h2>
           <p className="text-xl text-muted-foreground mb-10 max-w-3xl mx-auto">
-            Need counter service or a large commercial order? Find us in Alberton Central. We have the area's widest selection in stock, ready to go.
+             Need counter service or a large commercial order? Find us in Alberton Central. We have the area's widest selection in stock, ready to go.
           </p>
 
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 text-foreground">
@@ -31,25 +31,25 @@ const StorefrontCTA = () => {
               </div>
               <p className="text-lg">{STORE_ADDRESS}</p>
               <Button asChild variant="outline" className="w-full max-w-xs mt-4 border-2 border-primary hover:bg-secondary">
-                <a href={DIRECTIONS_LINK} target="_blank" rel="noopener noreferrer">
+               <a href={DIRECTIONS_LINK} target="_blank" rel="noopener noreferrer">
                   Get Directions
                 </a>
               </Button>
             </div>
 
             {/* Right Column: Hours & Contact */}
-            <div className="space-y-4 md:border-l md:border-border md:pl-12">
+             <div className="space-y-4 md:border-l md:border-border md:pl-12">
               <div className="flex items-center justify-center space-x-3">
                 <Clock className="h-6 w-6 text-battery" />
                 <h3 className="text-2xl font-bold">Trading Hours</h3>
               </div>
               <p className="text-lg">{STORE_HOURS}</p>
-              <Button asChild variant="battery" className="w-full max-w-xs mt-4">
+               <Button asChild variant="battery" className="w-full max-w-xs mt-4">
                 <a href={`tel:${STORE_PHONE}`} className="flex items-center justify-center space-x-2">
                   <Phone className="h-5 w-5" />
                   <span>Call Store: {STORE_PHONE}</span>
                 </a>
-              </Button>
+               </Button>
             </div>
           </div>
         </Card>

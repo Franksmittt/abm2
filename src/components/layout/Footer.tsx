@@ -1,28 +1,29 @@
 // src/components/layout/Footer.tsx
 import Link from "next/link";
-import { Battery, Facebook, Instagram, Phone, Mail, MapPin, MessageSquare } from "lucide-react";
+import { Battery, Facebook, Instagram, Phone, Mail, MapPin, MessageSquare, Truck, Bike } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  // FINAL VERIFIED CONTACT DETAILS & HOURS
-  // *** FIX APPLIED: Formatted phone number with spaces ***
   const PRIMARY_PHONE = "010 109 6211";
   const EMAIL_ADDRESS = "admin@albaertonbatterymart.co.za";
   const ADDRESS = "28 St Columb Rd, New Redruth, Alberton, 1450";
-  const WEEKDAY_HOURS = "08:00 AM – 5:00 PM"; // Standardized hours
+  const WEEKDAY_HOURS = "08:00 AM – 5:00 PM";
   const SATURDAY_HOURS = "08:00 AM – 12:00 PM";
-  // Standardized hours
   const WHATSAPP_NUMBER_LINK = "27823046926";
   const AGENCY_NAME = "Endpoint Media";
   const AGENCY_URL = "https://www.endpointmedia.co.za";
+
   const footerLinks = [
     {
       title: "Products & Services",
       links: [
-        { href: "/products", label: "Car Batteries" },
-        { href: "/deep-cycle", label: "Deep Cycle Batteries" },
-        { href: "/testing", label: "Battery Testing" },
-        { href: "/fitment", label: "Free Fitment" },
+        { href: "/products/type/automotive", label: "Car Batteries" },
+        { href: "/products/type/truck-commercial", label: "Truck & Commercial" }, 
+        { href: "/products/type/motorcycle", label: "Motorcycle Batteries" }, 
+        { href: "/products/type/deep-cycle", label: "Deep Cycle & Solar" }, 
+        { href: "/services", label: "Mobile Fitment" },
+        { href: "/testing", label: "Free Battery Testing" },
       ],
     },
     {
@@ -30,12 +31,14 @@ const Footer = () => {
       links: [
         { href: "/about", label: "About Us" },
         { href: "/faq", label: "FAQ" },
-        // UPDATED HOURS DISPLAY
+        { href: "/blog", label: "Blog" }, // <-- ADDED THIS
+        { href: "/contact", label: "Contact Us" },
         { label: `Mon-Fri: ${WEEKDAY_HOURS}` },
         { label: `Sat: ${SATURDAY_HOURS}` },
       ],
     },
   ];
+
   return (
     <footer className="w-full border-t border-border bg-background pt-16 pb-6 text-muted-foreground">
       <div className="container px-4 sm:px-6 lg:px-8">
@@ -50,13 +53,10 @@ const Footer = () => {
               </span>
             </Link>
 
-            {/* Expanded Mission Statement (Humanized) */}
             <p className="text-sm">
-              The most powerful batteries for the lowest prices. Specialists in reliable power, free on-site testing, and guaranteed friendly service.
-              Our mission is to keep Alberton driving.
+               The most powerful batteries for the lowest prices. Specialists in reliable power, free on-site testing, and guaranteed friendly service. Our mission is to keep Alberton driving.
             </p>
 
-            {/* EMAIL ADDRESS */}
             <p className="flex items-center space-x-2 text-sm pt-1">
               <Mail className="h-4 w-4 text-battery flex-shrink-0" />
               <Link href={`mailto:${EMAIL_ADDRESS}`} className="hover:text-battery transition-colors">
@@ -69,7 +69,7 @@ const Footer = () => {
                 <Facebook className="h-5 w-5 hover:text-battery transition-colors" />
               </Link>
               <Link href="#" aria-label="Instagram">
-                <Instagram className="h-5 w-5 hover:text-battery transition-colors" />
+                 <Instagram className="h-5 w-5 hover:text-battery transition-colors" />
               </Link>
             </div>
           </div>
@@ -83,13 +83,12 @@ const Footer = () => {
               <ul className="space-y-2">
                 {section.links.map((link) => (
                   <li key={link.href || link.label}>
-                    {link.href ?
-                    (
+                    {link.href ? (
                         <Link href={link.href} className="text-sm hover:text-battery transition-colors">
                             {link.label}
                         </Link>
                     ) : (
-                        <p className="text-sm">{link.label}</p> // Non-link content (hours)
+                        <p className="text-sm">{link.label}</p> 
                     )}
                   </li>
                 ))}
@@ -103,22 +102,18 @@ const Footer = () => {
               Contact & Location
             </h3>
 
-            {/* Phone (CLEANED FORMAT) */}
             <p className="flex items-center space-x-2 text-sm">
               <Phone className="h-4 w-4 text-battery" />
               <Link href={`tel:${PRIMARY_PHONE.replace(/ /g, '')}`} className="hover:text-battery transition-colors">
-                {/* *** FIX APPLIED: Display formatted number *** */}
-                {PRIMARY_PHONE} 
+                 {PRIMARY_PHONE} 
               </Link>
             </p>
 
-            {/* Address */}
             <p className="flex items-start space-x-2 text-sm">
               <MapPin className="h-4 w-4 text-battery mt-1 flex-shrink-0" />
               <span>{ADDRESS}</span>
             </p>
 
-            {/* REVISED WHATSAPP CTA BUTTON */}
             <Button asChild variant="secondary" className="mt-4 bg-green-600 hover:bg-green-700 text-white shadow-lg">
               <a href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center space-x-2">
                 <MessageSquare className="h-5 w-5" />
@@ -131,13 +126,11 @@ const Footer = () => {
 
         {/* Copyright and Agency Credit Row */}
         <div className="mt-16 border-t border-border pt-6 text-center text-xs space-y-1">
-          {/* Copyright */}
           <div>
-            ©{currentYear} Alberton Battery Mart. All rights reserved.
+             ©{currentYear} Alberton Battery Mart. All rights reserved.
           </div>
-          {/* Agency Credit (Endpoint Media) */}
           <div className="text-xs text-muted-foreground">
-            Designed, Developed & Maintained by&nbsp;
+            Designed, Developed & Maintained by 
             <a
               href={AGENCY_URL}
               target="_blank"

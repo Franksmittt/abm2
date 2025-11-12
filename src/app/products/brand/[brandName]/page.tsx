@@ -1,93 +1,102 @@
-// src/app/products/page.tsx
+// src/app/products/brand/[brandName]/page.tsx
 import ProductListPage from "@/components/layout/ProductListPage";
-import { ALL_PRODUCTS } from "@/data/products";
-import { Card, CardContent } from "@/components/ui/card";
-import { Battery, Zap, Truck, Sun, Car, LayoutGrid } from "lucide-react";
-import Link from "next/link";
+import { ALL_PRODUCTS, ProductCardData } from "@/data/products";
+import { notFound } from 'next/navigation';
+import CategoryFilterSidebar from "@/components/layout/CategoryFilterSidebar";
 import { Separator } from "@/components/ui/separator";
-import CodeLookup from "@/components/content/CodeLookup"; // NEW IMPORT
+import { Metadata, ResolvingMetadata } from 'next';
 
-// Group all unique filtering paths
-const filterLinks = {
-    category: [
-        { title: "Standard Automotive", icon: Car, href: "/products/type/automotive" },
-        { title: "Performance AGM/EFB", icon: Zap, href: "/products/type/performance" },
-        { title: "Deep Cycle / Solar", icon: Sun, href: "/products/type/deep-cycle" },
-        { title: "Truck & Powersport", icon: Truck, href: "/products/type/truck-motorcycle" },
-        { title: "Show All Products", icon: LayoutGrid, href: "/products/all" },
-    ],
-    brand: [
-        { title: "Willard Batteries", icon: Battery, href: "/products/brand/willard" },
-        { title: "Enertec Batteries", icon: Battery, href: "/products/brand/enertec" },
-        { title: "Exide Batteries", icon: Battery, href: "/products/brand/exide" },
-    ]
+// This function tells Next.js which brands to pre-build
+export function generateStaticParams() {
+  const brands = Array.from(new Set(ALL_PRODUCTS.map(p => p.brandName)));
+  return brands.map(brand => ({
+    brandName: brand.toLowerCase(),
+  }));
+}
+
+// Props interface for the dynamic page
+interface BrandPageProps {
+  params: {
+    brandName: string; // This comes from the folder name [brandName]
+  };
+}
+
+// --- NEW: Dynamic Metadata for SEO ---
+export async function generateMetadata({ params }: BrandPageProps): Promise<Metadata> {
+  const brandName = params.brandName.charAt(0).toUpperCase() + params.brandName.slice(1);
+  return {
+    title: `${brandName} Batteries in Alberton | Alberton Battery Mart`,
+    description: `Shop our full range of ${brandName} batteries in Alberton. We stock car, truck, and motorcycle batteries, all with free fitment and testing.`,
+  };
+}
+
+// Helper to filter products and capitalize the brand name
+const getBrandData = (brandSlug: string) => {
+    const products = ALL_PRODUCTS.filter(p => 
+        p.brandName.toLowerCase() === brandSlug.toLowerCase()
+    );
+    const brandName = products.length > 0 ? products[0].brandName : brandSlug;
+    
+    // --- NEW: Get filters based on *these* products ---
+    const brands = Array.from(new Set(products.map(p => p.brandName)));
+    const sizes = Array.from(new Set(products.map(p => p.sku)));
+    
+    return { products, brandName, brands, sizes };
 };
 
-export default function ProductsBasePage() {
+// --- NEW: Universal Capacity Filters (can be customized) ---
+const allCapacityFilters = [
+    { label: "Small (Under 20 Ah)", min: 0, max: 20 },
+    { label: "Medium (20-75 Ah)", min: 20, max: 75 },
+    { label: "Large (75-100 Ah)", min: 75, max: 100 },
+    { label: "Heavy Duty (100 Ah+)", min: 100, max: 9999 },
+];
+
+// The new page component
+export default function BrandPage({ params }: BrandPageProps) {
+  const { brandName: brandSlug } = params;
+  const { products, brandName, brands, sizes } = getBrandData(brandSlug);
+
+  if (products.length === 0) {
+    notFound(); // Show 404 if the brand doesn't exist
+  }
+
   return (
-    <div className="container py-16 space-y-16">
+    <div className="container py-16 space-y-12">
         
-        {/* H1 and Introduction (SEO Focus) */}
-        <div className="text-center space-y-4">
+        {/* --- NEW: Page Header --- */}
+        <div className="text-center space-y-3">
             <h1 className="text-5xl md:text-6xl font-extrabold text-foreground">
-                Find Your Perfect <span className="text-battery">Battery</span> Solution
+                <span className="text-battery">{brandName}</span> Batteries
             </h1>
             <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
-                Shop our certified multi-brand selection by category, vehicle type, or specific battery code. All prices include a competitive warranty.
+              Browse our complete catalog of {brandName} batteries. All products include free fitment and testing.
             </p>
+            <Separator className="pt-4" />
         </div>
 
-        {/* ------------------------------------------- */}
-        {/* FILTER SECTION 1: SHOP BY CATEGORY/TYPE */}
-        {/* ------------------------------------------- */}
-        <div className="space-y-6">
-            <h2 className="text-3xl font-bold text-foreground text-center">1. Shop by Vehicle or Power Type</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
-                {filterLinks.category.map((item, index) => (
-                    <Card key={index} className="hover:border-battery transition-colors shadow-lg">
-                        <Link href={item.href}>
-                            <CardContent className="flex flex-col items-center justify-center p-6 text-center h-full">
-                                <item.icon className="h-8 w-8 text-battery mb-3" />
-                                <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
-                            </CardContent>
-                        </Link>
-                    </Card>
-                ))}
+        {/* --- NEW: Sidebar + Product Grid Layout --- */}
+        <div className="flex flex-col lg:flex-row gap-8">
+            
+            {/* Left Column: Filtering Sidebar */}
+            <div className="lg:w-64 lg:flex-shrink-0">
+                <CategoryFilterSidebar
+                    currentCategory={`${brandName} Batteries`}
+                    allBrands={brands} // Will only show this brand
+                    allSizes={sizes}
+                    capacityFilters={allCapacityFilters}
+                />
             </div>
-        </div>
 
-        <Separator className="bg-border" />
-        
-        {/* ------------------------------------------- */}
-        {/* FILTER SECTION 2: QUICK FIND BY CODE/SIZE (The Critical Lookup) */}
-        {/* ------------------------------------------- */}
-        <div className="space-y-8">
-            <h2 className="text-3xl font-bold text-foreground text-center">2. Look Up Battery Code or Size (e.g., 619)</h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto text-center">
-                Know your battery code? Use this feature to instantly search all matching batteries across all brands we stock.
-            </p>
-            <CodeLookup /> {/* NEW COMPONENT INTEGRATION */}
-        </div>
-        
-        <Separator className="bg-border" />
-
-        {/* ------------------------------------------- */}
-        {/* FILTER SECTION 3: SHOP BY BRAND (Trust Factor) */}
-        {/* ------------------------------------------- */}
-        <div className="space-y-6">
-            <h2 className="text-3xl font-bold text-foreground text-center">3. Shop by Brand</h2>
-            <div className="flex flex-wrap justify-center gap-6">
-                {filterLinks.brand.map((item, index) => (
-                    <Card key={index} className="hover:border-battery transition-colors shadow-lg w-full max-w-[200px]">
-                        <Link href={item.href}>
-                            <CardContent className="flex flex-col items-center justify-center p-6 text-center h-full">
-                                <item.icon className="h-8 w-8 text-battery mb-3" />
-                                <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
-                            </CardContent>
-                        </Link>
-                    </Card>
-                ))}
+            {/* Right Column: Product List */}
+            <div className="lg:flex-grow">
+                <ProductListPage
+                    title={`${brandName} Catalog`}
+                    description={`Displaying all ${products.length} ${brandName} products in stock.`}
+                    products={products}
+                />
             </div>
+
         </div>
     </div>
   );

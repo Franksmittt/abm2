@@ -2,38 +2,34 @@
 "use client";
 import React, { useMemo } from 'react';
 import { ALL_PRODUCTS, ProductCardData } from "@/data/products";
-import ProductCard from "./ProductCard";
+import ProductCard from "./ProductCard"; // This path is correct for this file
 import { Button } from "@/components/ui/button";
 import { Zap, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 // ----------------------------------------------------
-// *** FIX: Stabilized Random Function for Hydration ***
-// Using a deterministic seed (Day of the week)
+// *** Deterministic "Alternating" Function ***
+// This uses the day of the week to create a stable,
+// "random"-looking list that changes automatically.
 // ----------------------------------------------------
 
 const generateDeterministicShuffledArray = (products: ProductCardData[], seed: number): ProductCardData[] => {
-  // Simple pseudo-random hash generator based on date and array length
-  const dateSeed = new Date().getDay() + seed; // 0 (Sun) to 6 (Sat)
+  // Use day of the week (0-6) as the seed
+  const dateSeed = new Date().getDay() + seed; 
   const array = [...products];
-
-  // Fisher-Yates shuffle algorithm using a seeded generator for predictability
+  // Fisher-Yates shuffle algorithm using a seeded generator
   for (let i = array.length - 1; i > 0; i--) {
-    // A simplified seeded random number generation (good enough for this purpose)
+    // A simplified seeded random number generation
     const j = Math.floor((Math.sin(dateSeed * i) + 1) * 1000) % (i + 1);
     [array[i], array[j]] = [array[j], array[i]];
   }
-
   return array;
 };
 
 // Function to get 'n' stable, random products
 const getStableRandomProducts = (products: ProductCardData[], count: number): ProductCardData[] => {
   if (products.length === 0) return [];
-  
-  // Use a constant seed (e.g., 0) for the shuffle order
   const shuffled = generateDeterministicShuffledArray(products, 0); 
-  
   return shuffled.slice(0, count);
 };
 
@@ -42,11 +38,11 @@ const getStableRandomProducts = (products: ProductCardData[], count: number): Pr
 // ----------------------------------------------------
 
 interface ProductSpotlightProps {
-  count?: number; // Number of products to display (default: 3)
+  count?: number; // Number of products to display
 }
 
 const ProductSpotlight: React.FC<ProductSpotlightProps> = ({ count = 3 }) => {
-  // Use the stable function in useMemo
+  // Use the stable "alternating" function in useMemo
   const featuredProducts = useMemo(() => getStableRandomProducts(ALL_PRODUCTS, count), [count]);
 
   if (featuredProducts.length === 0) return null;
@@ -62,12 +58,12 @@ const ProductSpotlight: React.FC<ProductSpotlightProps> = ({ count = 3 }) => {
             Weekly <span className="text-battery">Power Picks</span> & Hot Deals
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Check out our top-selling batteries and current promotions. Deals refresh every week!
+            Check out our top-selling batteries and current promotions. Deals refresh automatically!
           </p>
         </div>
 
-        {/* Product Grid */}
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Product Grid - (1 col on mobile, 2 on tablet, 3 on desktop) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredProducts.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
@@ -76,7 +72,7 @@ const ProductSpotlight: React.FC<ProductSpotlightProps> = ({ count = 3 }) => {
         {/* Footer CTA */}
         <div className="text-center">
             <Button asChild variant="secondary" size="lg" className="shadow-md">
-                <Link href="/products" className="flex items-center justify-center space-x-2">
+                <Link href="/products/all" className="flex items-center justify-center space-x-2">
                     <span>View Full Product Catalog</span>
                     <ArrowRight className="h-4 w-4" />
                 </Link>

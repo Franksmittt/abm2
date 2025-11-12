@@ -1,19 +1,8 @@
-// C:\Users\User1\abm2\.eslintrc.json
-
 {
-  // This configuration extends the standard Next.js rules, 
-  // ensuring proper linting for React, TypeScript, and Next.js-specific features.
   "extends": [
-    // Standard recommended rules for Next.js and React
-    "next", 
-    
-    // Core Web Vitals rules for ensuring performance best practices
-    "next/core-web-vitals", 
-    
-    // Explicitly adds TypeScript support to ESLint's core rules
-    "next/typescript" 
+    "next/core-web-vitals"
   ],
   "rules": {
-    // You can add project-specific overrides here, but the default is a clean start.
+    "react/no-unescaped-entities": "off"
   }
 }

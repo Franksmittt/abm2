@@ -1,5 +1,5 @@
 // src/components/layout/FaqPageContent.tsx
-import { Button } from "@/components/ui/button"; 
+import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Mail, Phone } from "lucide-react";
 import Link from "next/link";
@@ -10,7 +10,6 @@ const PRIMARY_PHONE = "0101096211";
 const EMAIL_ADDRESS = "admin@albaertonbatterymart.co.za";
 
 // Highly relevant, objection-handling questions (8 total)
-// This expanded set is rich in keywords like EFB, AGM, Alternator, etc.
 const faqItems = [
   {
     question: "1. Is the mobile callout service free?",
@@ -38,7 +37,7 @@ const faqItems = [
   },
   {
     question: "7. Do you sell batteries for solar and backup power?",
-    answer: "Yes. We stock a full range of deep cycle batteries, including high-end Lithium ($\text{LiFePO}_{4}$) and AGM models, designed specifically for home inverters, solar setups, and load shedding mitigation.",
+    answer: "Yes. We stock a full range of deep cycle batteries, including high-end Lithium (LiFePO₄) and AGM models, designed specifically for home inverters, solar setups, and load shedding mitigation.",
   },
   {
     question: "8. Where is your physical store located?",
@@ -46,21 +45,47 @@ const faqItems = [
   },
 ];
 
+// --- NEW: Generate FAQPage Schema from faqItems array ---
+const faqPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      // We must strip HTML tags for valid schema.
+      // This simple replace handles the **bold** tags.
+      "text": item.answer.replace(/<\/?strong>/g, '') 
+    }
+  }))
+};
+
+
 const FaqPageContent = () => {
   // Split the 8 questions into two arrays of 4 each for the desktop 2-column view
   const firstColumn = faqItems.slice(0, 4);
   const secondColumn = faqItems.slice(4, 8);
 
   return (
-    // Background is white (bg-white) for the clean visual break 
-    <section className="w-full bg-white py-16"> 
-      <div className="container px-4 md:px-6 lg:px-8">
+    // --- THEME FIX: Changed bg-white to bg-background ---
+    <section className="w-full bg-background py-16"> 
+
+      {/* --- NEW: Add FAQPage Schema to the page --- */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema) }}
+      />
+      
+       <div className="container px-4 md:px-6 lg:px-8">
         
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-extrabold tracking-tight text-black">
+          {/* --- THEME FIX: Changed text-black to text-foreground --- */}
+          <h1 className="text-5xl font-extrabold tracking-tight text-foreground">
             Frequently Asked Questions (FAQ)
           </h1>
-          <p className="text-xl text-gray-700 mt-3">
+          {/* --- THEME FIX: Changed text-gray-700 to text-muted-foreground --- */}
+          <p className="text-xl text-muted-foreground mt-3">
             Get instant answers from Alberton's battery experts.
           </p>
         </div>
@@ -72,42 +97,51 @@ const FaqPageContent = () => {
             {/* Column 1 */}
             <Accordion type="single" collapsible className="w-full">
               {firstColumn.map((item, index) => (
-                <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-300"> 
-                  <AccordionTrigger className="text-lg font-semibold text-black hover:text-battery">
+                // --- THEME FIX: Changed border-gray-300 to border-border ---
+                <AccordionItem key={index} value={`item-${index}`} className="border-b border-border"> 
+                  {/* --- THEME FIX: Changed text-black to text-foreground --- */}
+                   <AccordionTrigger className="text-lg font-semibold text-foreground hover:text-battery">
                     {item.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-gray-700 text-base leading-relaxed">
-                    {item.answer}
+                   {/* --- THEME FIX: Changed text-gray-700 to text-muted-foreground --- */}
+                   <AccordionContent className="text-muted-foreground text-base leading-relaxed">
+                     {item.answer}
                   </AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
-            
+             
             {/* Column 2 */}
             <Accordion type="single" collapsible className="w-full">
               {secondColumn.map((item, index) => (
-                <AccordionItem key={index} value={`item-${index + 4}`} className="border-b border-gray-300"> 
-                  <AccordionTrigger className="text-lg font-semibold text-black hover:text-battery">
+                // --- THEME FIX: Changed border-gray-300 to border-border ---
+                <AccordionItem key={index} value={`item-${index + 4}`} className="border-b border-border"> 
+                  {/* --- THEME FIX: Changed text-black to text-foreground --- */}
+                  <AccordionTrigger className="text-lg font-semibold text-foreground hover:text-battery">
                     {item.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-gray-700 text-base leading-relaxed">
+                  {/* --- THEME FIX: Changed text-gray-700 to text-muted-foreground --- */}
+                   <AccordionContent className="text-muted-foreground text-base leading-relaxed">
                     {item.answer}
                   </AccordionContent>
-                </AccordionItem>
+                 </AccordionItem>
               ))}
             </Accordion>
 
-          </div>
+           </div>
         </div>
         
-        <Separator className="bg-gray-300 mt-16 max-w-4xl mx-auto" />
+        {/* --- THEME FIX: Changed bg-gray-300 to bg-border --- */}
+        <Separator className="bg-border mt-16 max-w-4xl mx-auto" />
 
         {/* Lead Generation Hook: Final Contact CTA */}
-        <div className="text-center pt-10">
-          <h2 className="text-3xl font-extrabold text-black mb-4">
+         <div className="text-center pt-10">
+           {/* --- THEME FIX: Changed text-black to text-foreground --- */}
+           <h2 className="text-3xl font-extrabold text-foreground mb-4">
             Need Expert Advice or Immediate Service?
-          </h2>
-          <p className="text-lg text-gray-700 mb-6">
+           </h2>
+          {/* --- THEME FIX: Changed text-gray-700 to text-muted-foreground --- */}
+          <p className="text-lg text-muted-foreground mb-6">
             Call us now for a guaranteed quote and fast service booking.
           </p>
           <div className="flex justify-center space-x-4">
@@ -116,16 +150,17 @@ const FaqPageContent = () => {
                 <Phone className="h-5 w-5 mr-2" /> Call Now: {PRIMARY_PHONE}
               </a>
             </Button>
-            <Button asChild size="xl" variant="outline" className="text-black border-black hover:bg-gray-200">
+           {/* --- THEME FIX: Removed custom black border classes --- */}
+             <Button asChild size="xl" variant="outline">
               <a href={`mailto:${EMAIL_ADDRESS}`}>
                 <Mail className="h-5 w-5 mr-2" /> Email Inquiry
               </a>
             </Button>
-          </div>
+           </div>
         </div>
 
       </div>
-    </section>
+     </section>
   );
 };
 

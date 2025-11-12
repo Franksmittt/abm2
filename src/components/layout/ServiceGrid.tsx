@@ -1,21 +1,34 @@
 // C:\Users\User1\abm2\src\components\layout\ServiceGrid.tsx
 import { Card, CardContent } from "@/components/ui/card";
-// *** FIX APPLIED: Corrected import syntax for Link ***
-import Link from "next/link"; 
-import { Car, Zap, ShieldCheck, Clock } from "lucide-react";
+import Link from "next/link";
+// --- UPDATED: Added Bike and Truck for new categories ---
+import { Car, Zap, ShieldCheck, Clock, Truck, Bike } from "lucide-react"; 
 
+// --- UPDATED: New service features with SEO keywords and correct links ---
 const SERVICE_FEATURES = [
     {
         title: "Mobile Battery Callout",
-        description: "Fast, reliable on-site battery testing and fitment at your location across Alberton and surrounding suburbs.",
+        description: "Fast, reliable on-site battery testing and fitment at your location across Alberton, New Redruth, and Meyersdal.",
         icon: Zap,
         href: "/services",
     },
     {
-        title: "All Vehicle Batteries",
-        description: "Full range of batteries for Cars, Trucks, Motorcycles, including specialized AGM and EFB for Start/Stop systems.",
+        title: "Car Batteries (AGM/EFB)",
+        description: "Full range of batteries for all Cars, including specialized AGM and EFB batteries required for Start/Stop systems.",
         icon: Car,
-        href: "/products",
+        href: "/products/type/automotive",
+    },
+    {
+        title: "Truck & Commercial",
+        description: "Heavy-duty commercial batteries for trucks, lorries, and busses. High CCA for powerful engines.",
+        icon: Truck,
+        href: "/products/type/truck-commercial",
+    },
+    {
+        title: "Motorcycle & Powersport",
+        description: "Specialized, high-cranking AGM batteries for all Motorcycles, Scooters, ATVs, and powersport vehicles.",
+        icon: Bike,
+        href: "/products/type/motorcycle",
     },
     {
         title: "Deep Cycle & Solar Power",
@@ -25,7 +38,7 @@ const SERVICE_FEATURES = [
     },
     {
         title: "Guaranteed Warranty",
-        description: "All products are backed by a certified manufacturer warranty (24 to 36 months) and professional fitment assurance.",
+        description: "All products are backed by a certified manufacturer warranty (up to 36 months) and professional fitment assurance.",
         icon: ShieldCheck,
         href: "/faq",
     },
@@ -44,18 +57,18 @@ const ServiceGrid = () => {
                     </p>
                 </div>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {/* --- UPDATED: Grid now supports 6 items gracefully --- */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {SERVICE_FEATURES.map((feature, index) => (
-                        // Removed legacyBehavior since Link is imported correctly
                         <Link key={index} href={feature.href} passHref> 
                             <Card className="shadow-lg hover:shadow-battery/20 transition-shadow duration-300 h-full cursor-pointer">
                                 <CardContent className="p-6 space-y-4">
-                                    <feature.icon className="h-8 w-8 text-battery" />
+                                   <feature.icon className="h-8 w-8 text-battery" />
                                     <h3 className="text-xl font-bold text-foreground">
-                                        {feature.title}
+                                         {feature.title}
                                     </h3>
                                     <p className="text-sm text-muted-foreground">
-                                        {feature.description}
+                                         {feature.description}
                                     </p>
                                 </CardContent>
                             </Card>
@@ -63,7 +76,7 @@ const ServiceGrid = () => {
                     ))}
                 </div>
             </div>
-        </section>
+         </section>
     );
 };
 

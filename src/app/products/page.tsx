@@ -1,21 +1,27 @@
 // src/app/products/page.tsx
 import { Card, CardContent } from "@/components/ui/card";
-import { Battery, Zap, Truck, Sun, Car, LayoutGrid } from "lucide-react";
+import { Battery, Zap, Truck, Sun, Car, LayoutGrid, Bike } from "lucide-react";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
-import CodeLookup from "@/components/content/CodeLookup"; 
+import CodeLookup from "@/components/content/CodeLookup";
+import { Metadata } from "next";
 
-// Group all unique filtering paths
+// --- NEW: Page-Specific Metadata for SEO ---
+export const metadata: Metadata = {
+  title: "Batteries for Sale in Alberton | Car, Truck, Motorcycle, Solar",
+  description: "Browse all batteries at Alberton Battery Mart. We stock Willard, Exide, & Enertec for cars, trucks, motorcycles, and solar inverters. Free fitment & testing.",
+};
+
 const filterLinks = {
     category: [
         { title: "Standard Automotive", icon: Car, href: "/products/type/automotive" },
         { title: "Performance AGM/EFB", icon: Zap, href: "/products/type/performance" },
         { title: "Deep Cycle / Solar", icon: Sun, href: "/products/type/deep-cycle" },
-        { title: "Truck & Powersport", icon: Truck, href: "/products/type/truck-motorcycle" },
+        { title: "Truck & Commercial", icon: Truck, href: "/products/type/truck-commercial" },
+        { title: "Motorcycle / Powersport", icon: Bike, href: "/products/type/motorcycle" },
         { title: "Show All Products", icon: LayoutGrid, href: "/products/all" },
     ],
     brand: [
-        // *** FIX: Changed brand links to point to the new /products/results page with a '?brand=X' parameter ***
         { title: "Willard Batteries", icon: Battery, href: "/products/results?brand=Willard" }, 
         { title: "Enertec Batteries", icon: Battery, href: "/products/results?brand=Enertec" }, 
         { title: "Exide Batteries", icon: Battery, href: "/products/results?brand=Exide" },
@@ -41,7 +47,7 @@ export default function ProductsBasePage() {
         {/* ------------------------------------------- */}
         <div className="space-y-6">
             <h2 className="text-3xl font-bold text-foreground text-center">1. Shop by Vehicle or Power Type</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 max-w-7xl mx-auto">
                 {filterLinks.category.map((item, index) => (
                     <Card key={index} className="hover:border-battery transition-colors shadow-lg">
                         <Link href={item.href}>

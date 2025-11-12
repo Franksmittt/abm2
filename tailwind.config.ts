@@ -1,3 +1,4 @@
+// C:\Users\User1\abm2\tailwind.config.ts
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -8,15 +9,14 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    // THIS IS THE FIX: We are adding the container settings
     container: {
       center: true,
-      padding: "1rem", // You can change this to "2rem" for more padding
-      screens: {
+      padding: "1rem", 
+       screens: {
         "2xl": "1400px",
       },
     },
-  	extend: { // Your existing extend block is correct
+  	extend: { 
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
@@ -32,6 +32,10 @@ const config: Config = {
   				DEFAULT: 'hsl(var(--primary))',
   				foreground: 'hsl(var(--primary-foreground))'
   			},
+        battery: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))'
+        },
   			secondary: {
   				DEFAULT: 'hsl(var(--secondary))',
   				foreground: 'hsl(var(--secondary-foreground))'
@@ -53,7 +57,7 @@ const config: Config = {
   			ring: 'hsl(var(--ring))',
   			chart: {
   				'1': 'hsl(var(--chart-1))',
-  				'2': 'hsl(var(--chart-2))',
+  		  	'2': 'hsl(var(--chart-2))',
   				'3': 'hsl(var(--chart-3))',
   				'4A': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
@@ -66,6 +70,9 @@ const config: Config = {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/typography"), // <-- This line is now restored and should work.
+  ],
 };
 export default config;

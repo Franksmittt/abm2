@@ -1,45 +1,81 @@
 // src/app/quote/page.tsx
-
-import { Battery, Mail, Phone } from "lucide-react";
+import { Battery, Mail, Phone, Zap, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Metadata } from "next";
+import ContactForm from "@/components/content/ContactForm"; // <-- IMPORTED
+
+// --- NEW: Page-Specific Metadata for SEO ---
+export const metadata: Metadata = {
+  title: "Solar & Inverter Quote Alberton | Alberton Battery Mart",
+  description: "Request a free quote for solar, inverter, or bulk battery orders in Alberton. Our specialists will design a custom power solution for you.",
+};
 
 const EMERGENCY_PHONE = "0101096211";
 const EMAIL_ADDRESS = "admin@albaertonbatterymart.co.za";
 
 export default function QuotePage() {
   return (
-    <div className="container py-16 text-center space-y-10 max-w-2xl">
-      <Battery className="h-16 w-16 text-battery mx-auto" />
-      <h1 className="text-5xl font-extrabold text-foreground">Request a Solar, Inverter, or Bulk Order Quote</h1>
-      <p className="text-xl text-muted-foreground">
-        Use the form below for all non-emergency, large-scale, or specialized energy system inquiries. Our expert will contact you within 4 hours during business days.
-      </p>
-
-      {/* Future: Quote Form Component */}
-      <div className="bg-card p-8 rounded-lg border border-border shadow-xl">
-        <h3 className="text-2xl font-bold text-foreground mb-4">Your Quote Request Details</h3>
-        <div className="h-48 bg-secondary/20 flex items-center justify-center rounded-md text-muted-foreground">
-          [Placeholder for Detailed Quote Form Component]
+    <div className="container py-16 space-y-12 max-w-4xl">
+      
+      <div className="text-center space-y-4">
+        <Battery className="h-16 w-16 text-battery mx-auto" />
+        <h1 className="text-5xl font-extrabold text-foreground">Request a Quote</h1>
+        <p className="text-2xl text-muted-foreground font-medium">
+          For Solar, Inverter, or Bulk Commercial Orders in Alberton.
+        </p>
+      </div>
+      
+      {/* --- NEW: Authority & Trust Building Section --- */}
+      <div className="bg-card border border-border p-8 rounded-lg shadow-lg space-y-6">
+        <h2 className="text-3xl font-bold text-foreground">
+          Expert Solutions for Load Shedding & Commercial Needs
+        </h2>
+        <p className="text-lg text-muted-foreground">
+          Don't just buy a battery; invest in the right power solution. Our specialists will analyze your needs—whether for a home inverter, full solar setup, or a commercial fleet—and provide a detailed, no-obligation quote.
+        </p>
+        <div className="grid sm:grid-cols-2 gap-6 pt-4">
+          <div className="flex items-start space-x-3">
+            <Zap className="h-6 w-6 text-battery flex-shrink-0 mt-1" />
+            <div>
+              <h3 className="text-xl font-semibold text-foreground">AGM & Lithium Experts</h3>
+              <p className="text-muted-foreground">We specialize in Deep Cycle AGM and high-performance Lithium (LiFePO₄) batteries for maximum lifespan.</p>
+            </div>
+          </div>
+          <div className="flex items-start space-x-3">
+            <ShieldCheck className="h-6 w-6 text-battery flex-shrink-0 mt-1" />
+            <div>
+              <h3 className="text-xl font-semibold text-foreground">Multi-Brand Guarantee</h3>
+              <p className="text-muted-foreground">We source from Willard, Enertec, and Exide to build the most cost-effective solution for your budget.</p>
+            </div>
+          </div>
         </div>
       </div>
 
-      <p className="text-lg text-foreground">
-        For immediate assistance, please call us directly:
-      </p>
-      
-      <div className="flex justify-center space-x-4">
-        <Button asChild size="lg" variant="battery">
-          <a href={`tel:${EMERGENCY_PHONE}`} className="flex items-center space-x-2">
-            <Phone className="h-5 w-5" />
-            <span>Call Now</span>
-          </a>
-        </Button>
-        <Button asChild size="lg" variant="outline">
-          <a href={`mailto:${EMAIL_ADDRESS}`} className="flex items-center space-x-2">
-            <Mail className="h-5 w-5" />
-            <span>Email Inquiry</span>
-          </a>
-        </Button>
+      {/* --- NEW: Replaced placeholder with the actual form --- */}
+      <div>
+        <h3 className="text-3xl font-bold text-foreground text-center mb-6">Send Us Your Inquiry</h3>
+        <ContactForm />
+      </div>
+
+      {/* --- Fallback CTA --- */}
+      <div className="text-center space-y-4 pt-8">
+        <p className="text-lg text-foreground">
+          For immediate assistance, please call us directly:
+        </p>
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <Button asChild size="lg" variant="battery">
+            <a href={`tel:${EMERGENCY_PHONE}`} className="flex items-center space-x-2">
+              <Phone className="h-5 w-5" />
+              <span>Call Now</span>
+            </a>
+          </Button>
+          <Button asChild size="lg" variant="outline">
+            <a href={`mailto:${EMAIL_ADDRESS}`} className="flex items-center space-x-2">
+              <Mail className="h-5 w-5" />
+              <span>Email Inquiry</span>
+            </a>
+          </Button>
+        </div>
       </div>
     </div>
   );

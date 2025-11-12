@@ -36,7 +36,6 @@ const StarRating = ({ rating }: { rating: number }) => (
   </div>
 );
 
-
 const TestimonialSection = () => {
   return (
     <section className="w-full bg-card py-20">
@@ -47,7 +46,7 @@ const TestimonialSection = () => {
           <h2 className="text-4xl font-extrabold tracking-tight text-foreground">
             Trusted by Alberton Drivers and Businesses
           </h2>
-          <p className="text-xl text-muted-foreground mt-3">
+           <p className="text-xl text-muted-foreground mt-3">
             What our customers say about our products and service.
           </p>
         </div>
@@ -61,9 +60,9 @@ const TestimonialSection = () => {
               
               <CardContent className="flex-grow space-y-4 p-0">
                 <StarRating rating={testimonial.rating} />
-                {/* FIXED: Replaced unescaped quotes with &quot; */}
+                
                 <p className="text-lg italic text-foreground leading-relaxed">
-                  &quot;{testimonial.quote}&quot;
+                  "{testimonial.quote}"
                 </p>
               </CardContent>
               
@@ -71,7 +70,7 @@ const TestimonialSection = () => {
                 <p className="text-sm font-semibold text-battery">{testimonial.author}</p>
                 <p className="text-xs text-muted-foreground">{testimonial.source}</p>
               </div>
-            </Card>
+             </Card>
           ))}
         </div>
       </div>

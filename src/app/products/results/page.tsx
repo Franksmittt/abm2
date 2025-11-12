@@ -2,6 +2,9 @@
 import { ALL_PRODUCTS, ProductCardData } from "@/data/products";
 import ProductListPage from "@/components/layout/ProductListPage";
 import { notFound } from 'next/navigation';
+import CategoryFilterSidebar from "@/components/layout/CategoryFilterSidebar";
+import { Separator } from "@/components/ui/separator";
+import { Metadata } from 'next';
 
 interface ResultsPageProps {
   searchParams: {
@@ -10,6 +13,23 @@ interface ResultsPageProps {
     minAh?: string; // For Capacity Filter (e.g., ?minAh=50)
     maxAh?: string; // For Capacity Filter (e.g., &maxAh=75)
     category?: string; // Should be handled by the layout, but kept for clarity
+  };
+}
+
+// --- NEW: Dynamic Metadata for SEO ---
+export async function generateMetadata({ searchParams }: ResultsPageProps): Promise<Metadata> {
+  let title = "Search Results";
+  if (searchParams.q) {
+    title = `Search results for "${searchParams.q}"`;
+  } else if (searchParams.brand) {
+    title = `${searchParams.brand} Batteries`;
+  } else if (searchParams.minAh || searchParams.maxAh) {
+    title = `Batteries from ${searchParams.minAh || '0'}Ah to ${searchParams.maxAh || '...'}Ah`;
+  }
+  
+  return {
+    title: `${title} | Alberton Battery Mart`,
+    description: `Find ${title} at Alberton Battery Mart. We stock all car, truck, and solar batteries with free fitment.`,
   };
 }
 
@@ -40,30 +60,77 @@ const filterProducts = (params: ResultsPageProps['searchParams']): { products: P
     const max = parseFloat(params.maxAh || '9999');
     
     filtered = filtered.filter(p => p.ahCapacity >= min && p.ahCapacity <= max);
-    
     const minStr = params.minAh ? `${params.minAh} Ah` : '0 Ah';
     const maxStr = params.maxAh ? `${params.maxAh} Ah` : 'Max';
     title = `Capacity: ${minStr} to ${maxStr}`;
   }
   
-  // *** Return the results as a clean object ***
   return { products: filtered, title };
 };
 
+// --- NEW: Helper to get filters from results ---
+const getFilterOptions = (products: ProductCardData[]) => {
+    const brands = Array.from(new Set(products.map(p => p.brandName)));
+    const sizes = Array.from(new Set(products.map(p => p.sku)));
+    return { brands, sizes };
+};
+
+// --- NEW: Universal Capacity Filters ---
+const allCapacityFilters = [
+    { label: "Small (Under 20 Ah)", min: 0, max: 20 },
+    { label: "Medium (20-75 Ah)", min: 20, max: 75 },
+    { label: "Large (75-100 Ah)", min: 75, max: 100 },
+    { label: "Heavy Duty (100 Ah+)", min: 100, max: 9999 },
+];
+
 export default function SearchResultsPage({ searchParams }: ResultsPageProps) {
-  // *** FIX: Destructure the returned object to get products and title ***
   const { products: filteredProducts, title } = filterProducts(searchParams);
 
   if (filteredProducts.length === 0) {
-    notFound(); // Redirects to the 404 page if no products are found
+    // We don't use notFound() here, because we want to show the sidebar and a "no results" message
+    // notFound(); 
   }
+  
+  // --- NEW: Get filters based on the *results* ---
+  const { brands, sizes } = getFilterOptions(filteredProducts);
 
-  // *** FIX: Use the captured 'title' variable ***
   return (
-    <ProductListPage
-      title={title}
-      description={`Displaying ${filteredProducts.length} certified products matching your criteria.`}
-      products={filteredProducts}
-    />
+    <div className="container py-16 space-y-12">
+        
+        {/* --- NEW: Page Header --- */}
+        <div className="text-center space-y-3">
+            <h1 className="text-5xl md:text-6xl font-extrabold text-foreground">
+                <span className="text-battery">{title}</span>
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
+              {filteredProducts.length} products found. Use the filters to refine your search.
+            </p>
+            <Separator className="pt-4" />
+        </div>
+
+        {/* --- NEW: Sidebar + Product Grid Layout --- */}
+        <div className="flex flex-col lg:flex-row gap-8">
+            
+            {/* Left Column: Filtering Sidebar */}
+            <div className="lg:w-64 lg:flex-shrink-0">
+                <CategoryFilterSidebar
+                    currentCategory="Search Results"
+                    allBrands={brands}
+                    allSizes={sizes}
+                    capacityFilters={allCapacityFilters}
+                />
+            </div>
+
+            {/* Right Column: Product List */}
+            <div className="lg:flex-grow">
+                <ProductListPage
+                    title={title}
+                    description={`Displaying ${filteredProducts.length} certified products matching your criteria.`}
+                    products={filteredProducts}
+                />
+            </div>
+
+        </div>
+    </div>
   );
 }

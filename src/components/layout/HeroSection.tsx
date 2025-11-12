@@ -10,8 +10,9 @@ const EMERGENCY_PHONE = "010 109 6211"; // Formatted for display
 const WHATSAPP_NUMBER_LINK = "27823046926";
 const WEEKDAY_HOURS = "08:00 AM – 5:00 PM";
 const SATURDAY_HOURS = "08:00 AM – 12:00 PM";
+
 const HeroSection = () => {
-  // CLEANED HEADLINE: Removed "Free Testing" and asterisks
+  // H1 Headline
   const coreHeadline = (
     <>
       <span className="text-battery">Mobile</span> Battery Replacement:
@@ -19,12 +20,13 @@ const HeroSection = () => {
       <span className="text-battery"> Fitment</span> On-Site.
     </>
   );
-  // CLEANED WORDING: Removed "free"
-  const calloutWording = "Don't get stuck. Our dedicated mobile team brings the right battery to you fast. Get an immediate assessment and quote now.";
+
+  // --- SEO FIX: Injected local keywords directly into the sub-headline ---
+  const calloutWording = "Don't get stuck. Our dedicated mobile team brings the right battery to you fast in Alberton, New Redruth, and Meyersdal. Get an immediate assessment and quote now.";
+
   return (
     <section className="relative w-full overflow-hidden min-h-screen bg-background flex items-center justify-center">
       <div className="container px-4 md:px-6 lg:px-8 z-10 relative">
-        {/* FIX 1: Reduced vertical spacing from space-y-6 to space-y-4 in this column to save vertical room. */}
         <div className="grid lg:grid-cols-12 gap-12 items-center">
 
           {/* Left Column: Headline and Callout CTAs */}
@@ -36,7 +38,6 @@ const HeroSection = () => {
             </h1>
 
             {/* Secondary Assurance & Callout CTA */}
-            {/* FIX 2: Reduced font size from text-xl to text-lg to save vertical space. */}
             <p className="text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0">
               {calloutWording}
             </p>
@@ -55,7 +56,7 @@ const HeroSection = () => {
                 <a href={`tel:${EMERGENCY_PHONE.replace(/ /g, '')}`} className="flex items-center justify-center space-x-2">
                   <Phone className="h-5 w-5" />
                   <span className="text-lg font-bold">Call Us Now</span>
-                </a>
+                 </a>
               </Button>
 
               {/* WhatsApp Button */}
@@ -75,19 +76,19 @@ const HeroSection = () => {
 
           {/* Right Column: Key Trust & Service Card */}
           <div className="lg:col-span-5 flex justify-center">
-            <Card className="bg-card border-battery shadow-2xl shadow-battery/20 w-full max-w-sm">
+             <Card className="bg-card border-battery shadow-2xl shadow-battery/20 w-full max-w-sm">
               <CardContent className="p-6 space-y-6">
 
                 {/* Urgent Service Card Title */}
                 <div className="flex items-center space-x-3 text-2xl font-bold text-battery">
                   <Clock className="h-6 w-6" />
-                  <span>The Alberton Service Guarantee</span>
+                   <span>The Alberton Service Guarantee</span>
                 </div>
 
                 {/* Trust Factor List */}
                 <ul className="space-y-4 text-foreground">
                   <li className="flex items-start space-x-3">
-                    <Zap className="h-5 w-5 text-battery mt-1" />
+                     <Zap className="h-5 w-5 text-battery mt-1" />
                     <span className="text-lg">
                       Convenient Mobile Service available during trading hours.
                     </span>
@@ -95,13 +96,13 @@ const HeroSection = () => {
                   <li className="flex items-start space-x-3">
                     <MapPin className="h-5 w-5 text-battery mt-1" />
                     <span className="text-lg">
-                      Fast local service guaranteed in high-value suburbs: New Redruth, Meyersdal, & Alberton Central.
+                       Fast local service guaranteed in high-value suburbs: New Redruth, Meyersdal, & Alberton Central.
                     </span>
                   </li>
                   <li className="flex items-start space-x-3">
                     <ShieldCheck className="h-5 w-5 text-battery mt-1" />
                     <span className="text-lg">
-                      Professional Diagnostics: Alternator check done on-site after fitment.
+                       Professional Diagnostics: Alternator check done on-site after fitment.
                     </span>
                   </li>
                 </ul>
