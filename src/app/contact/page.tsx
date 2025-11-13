@@ -17,7 +17,7 @@ const CONTACT_DETAILS = {
   primaryPhone: "0101096211",
   whatsAppNumber: "082 304 6926", // Display number
   whatsAppLink: "27823046926", // Link format
-  email: "admin@albaertonbatterymart.co.za",
+  email: "admin@albertonbatterymart.co.za",
   address: "28 St Columb Rd, New Redruth, Alberton, 1450",
   hours: "Mon - Fri: 8:00am - 5:00pm | Sat: 8:00am - 1:00pm",
   // --- FIX: This is a REAL Google Maps embed link ---

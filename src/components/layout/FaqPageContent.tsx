@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator";
 
 // --- CONTACT DETAILS (Lead Gen) ---
 const PRIMARY_PHONE = "0101096211";
-const EMAIL_ADDRESS = "admin@albaertonbatterymart.co.za";
+const EMAIL_ADDRESS = "admin@albertonbatterymart.co.za";
 
 // Highly relevant, objection-handling questions (8 total)
 const faqItems = [

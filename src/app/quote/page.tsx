@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 const EMERGENCY_PHONE = "0101096211";
-const EMAIL_ADDRESS = "admin@albaertonbatterymart.co.za";
+const EMAIL_ADDRESS = "admin@albertonbatterymart.co.za";
 
 export default function QuotePage() {
   return (

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const PRIMARY_PHONE = "010 109 6211";
-  const EMAIL_ADDRESS = "admin@albaertonbatterymart.co.za";
+  const EMAIL_ADDRESS = "admin@albertonbatterymart.co.za";
   const ADDRESS = "28 St Columb Rd, New Redruth, Alberton, 1450";
   const WEEKDAY_HOURS = "08:00 AM – 5:00 PM";
   const SATURDAY_HOURS = "08:00 AM – 12:00 PM";
