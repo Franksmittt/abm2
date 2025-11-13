@@ -4,10 +4,26 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Metadata } from "next";
 
-// --- NEW: Page-Specific Metadata for SEO ---
+// --- NEW: Page-Specific Metadata for SEO with Open Graph ---
 export const metadata: Metadata = {
   title: "About Alberton Battery Mart | Your Local Battery Experts",
   description: "Learn about Alberton Battery Mart. We are your local, multi-brand battery specialists offering expert advice, free fitment, and mobile callouts in Alberton.",
+  keywords: [
+    'about Alberton Battery Mart',
+    'battery experts Alberton',
+    'multi-brand battery specialist',
+    'battery store Alberton',
+    'local battery shop'
+  ],
+  openGraph: {
+    title: "About Alberton Battery Mart | Your Local Battery Experts",
+    description: "Learn about Alberton Battery Mart. We are your local, multi-brand battery specialists offering expert advice, free fitment, and mobile callouts.",
+    url: 'https://www.albertonbatterymart.co.za/about',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://www.albertonbatterymart.co.za/about',
+  },
 };
 
 export default function AboutPage() {

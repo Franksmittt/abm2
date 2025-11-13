@@ -5,10 +5,28 @@ import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
 
-// --- NEW: Page-Specific Metadata for SEO ---
+// --- NEW: Page-Specific Metadata for SEO with Open Graph ---
 export const metadata: Metadata = {
   title: "Mobile Battery Replacement Service in Alberton | Alberton Battery Mart",
   description: "Fast mobile battery replacement and fitment in Alberton, New Redruth, & Meyersdal. We come to you. Free alternator testing with every callout.",
+  keywords: [
+    'mobile battery service Alberton',
+    'battery callout Alberton',
+    'mobile fitment service',
+    'battery replacement Alberton',
+    'on-site battery service',
+    'mobile battery New Redruth',
+    'battery service Meyersdal'
+  ],
+  openGraph: {
+    title: "Mobile Battery Replacement Service in Alberton | Alberton Battery Mart",
+    description: "Fast mobile battery replacement and fitment in Alberton, New Redruth, & Meyersdal. We come to you. Free alternator testing.",
+    url: 'https://www.albertonbatterymart.co.za/services',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://www.albertonbatterymart.co.za/services',
+  },
 };
 
 // --- FINAL VERIFIED CONTACT DETAILS & HOURS ---
@@ -19,8 +37,53 @@ const WEEKDAY_HOURS = "08:00 AM – 5:00 PM";
 const SATURDAY_HOURS = "08:00 AM – 12:00 PM";
 
 export default function ServicesPage() {
+  // --- Service Schema Markup ---
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Mobile Battery Replacement and Fitment",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Alberton Battery Mart",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "28 St Columb Rd",
+        "addressLocality": "New Redruth",
+        "addressRegion": "Alberton",
+        "postalCode": "1450",
+        "addressCountry": "ZA"
+      },
+      "telephone": "+27101096211",
+      "url": "https://www.albertonbatterymart.co.za"
+    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Alberton"
+      },
+      {
+        "@type": "City",
+        "name": "New Redruth"
+      },
+      {
+        "@type": "City",
+        "name": "Meyersdal"
+      }
+    ],
+    "description": "Fast mobile battery replacement and fitment service in Alberton, New Redruth, and Meyersdal. Free alternator testing with every callout.",
+    "offers": {
+      "@type": "Offer",
+      "description": "Mobile battery replacement service with free fitment and alternator testing"
+    }
+  };
+
   return (
     <div className="container py-16 space-y-16">
+      {/* --- Add Service Schema --- */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
       
       {/* SECTION 1: HERO & PRIMARY CTA (H1 Focus) */}
       <div className="text-center space-y-4 border-b border-border pb-10">

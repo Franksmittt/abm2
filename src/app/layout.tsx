@@ -10,11 +10,74 @@ import Script from 'next/script'; // --- NEW: Import next/script
 
 const inter = Inter({ subsets: ['latin'] });
 
-// --- SEO: Root Metadata ---
+// --- SEO: Root Metadata with Open Graph & Twitter Cards ---
 export const metadata: Metadata = {
-  title: 'Alberton Battery Mart | Mobile Battery Replacement & Fitment Service', 
+  title: {
+    default: 'Alberton Battery Mart | Mobile Battery Replacement & Fitment Service',
+    template: '%s | Alberton Battery Mart'
+  },
   description: 'Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal. We bring the Willard & Exide battery to you. Call for a quote!',
-  metadataBase: new URL('https://www.albertonbatterymart.co.za'), 
+  metadataBase: new URL('https://www.albertonbatterymart.co.za'),
+  keywords: [
+    'battery replacement Alberton',
+    'car battery Alberton',
+    'mobile battery service',
+    'Willard batteries',
+    'Exide batteries',
+    'battery fitment Alberton',
+    'car battery New Redruth',
+    'battery testing Alberton',
+    'AGM battery Alberton',
+    'EFB battery Alberton'
+  ],
+  authors: [{ name: 'Alberton Battery Mart' }],
+  creator: 'Alberton Battery Mart',
+  publisher: 'Alberton Battery Mart',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_ZA',
+    url: 'https://www.albertonbatterymart.co.za',
+    siteName: 'Alberton Battery Mart',
+    title: 'Alberton Battery Mart | Mobile Battery Replacement & Fitment Service',
+    description: 'Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal. We bring the Willard & Exide battery to you. Call for a quote!',
+    images: [
+      {
+        url: '/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Alberton Battery Mart - Mobile Battery Replacement Service',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Alberton Battery Mart | Mobile Battery Replacement & Fitment Service',
+    description: 'Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal.',
+    images: ['/images/og-image.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: 'https://www.albertonbatterymart.co.za',
+  },
+  verification: {
+    // Add Google Search Console verification when available
+    // google: 'your-verification-code',
+  },
 };
 
 // --- LocalBusiness Schema ---

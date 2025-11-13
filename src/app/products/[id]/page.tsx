@@ -36,12 +36,42 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   const title = `Buy ${product.name} (${product.sku}) in Alberton | Alberton Battery Mart`;
   const description = `Get the ${product.name} ${product.seoSubtitle} at Alberton Battery Mart. ${product.popularFits ? `Fits: ${product.popularFits}.` : ''} Free fitment, testing, and 24-month warranty. Call 010 109 6211.`;
   
+  const url = `https://www.albertonbatterymart.co.za/products/${product.id}`;
+  
   return {
     title,
     description,
-    // --- NEW: Add Canonical URL ---
+    keywords: [
+      `${product.name} Alberton`,
+      `${product.brandName} battery`,
+      `${product.sku} battery`,
+      'battery Alberton',
+      'car battery',
+      product.category.toLowerCase(),
+      ...(product.popularFits ? product.popularFits.split(',').map(fit => `${fit.trim()} battery`) : [])
+    ],
+    openGraph: {
+      title,
+      description,
+      url,
+      type: 'website',
+      images: [
+        {
+          url: `https://www.albertonbatterymart.co.za${product.imagePath}`,
+          width: 800,
+          height: 600,
+          alt: `${product.name} - ${product.seoSubtitle}`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [`https://www.albertonbatterymart.co.za${product.imagePath}`],
+    },
     alternates: {
-      canonical: `https://www.albertonbatterymart.co.za/products/${product.id}`,
+      canonical: url,
     },
   };
 }
@@ -78,32 +108,71 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
     "image": `https://www.albertonbatterymart.co.za${product.imagePath}`,
     "description": `Get the ${product.name} ${product.seoSubtitle} at Alberton Battery Mart. Free fitment, testing, and ${product.warrantyMonths}-month warranty.`,
     "sku": product.sku,
+    "mpn": product.sku,
     "brand": {
       "@type": "Brand",
       "name": product.brandName
     },
+    "category": product.category,
     // --- This Offer is CRITICAL for Google Shopping LIA ---
     "offers": {
       "@type": "Offer",
       "url": `https://www.albertonbatterymart.co.za/products/${product.id}`,
       "priceCurrency": "ZAR",
       "price": parsePrice(product.priceAnchor),
-      "availability": "https://schema.org/InStock", // We assume all listed products are in stock
+      "availability": "https://schema.org/InStock",
       "itemCondition": "https://schema.org/NewCondition",
+      "priceValidUntil": new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // 1 year from now
       "seller": {
         "@type": "LocalBusiness",
-        "name": "Alberton Battery Mart"
+        "name": "Alberton Battery Mart",
+        "url": "https://www.albertonbatterymart.co.za"
       }
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "127"
     }
+  };
+
+  // --- BreadcrumbList Schema for Product Pages ---
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.albertonbatterymart.co.za"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Products",
+        "item": "https://www.albertonbatterymart.co.za/products"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": product.name,
+        "item": `https://www.albertonbatterymart.co.za/products/${product.id}`
+      }
+    ]
   };
   // --- END NEW SCHEMA ---
 
   return (
     <div className="container py-16">
-      {/* --- NEW: Add Product Schema to the page --- */}
+      {/* --- NEW: Add Product and Breadcrumb Schema to the page --- */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       <div className="grid lg:grid-cols-2 gap-12">

@@ -6,10 +6,29 @@ import { Separator } from "@/components/ui/separator";
 import CodeLookup from "@/components/content/CodeLookup";
 import { Metadata } from "next";
 
-// --- NEW: Page-Specific Metadata for SEO ---
+// --- NEW: Page-Specific Metadata for SEO with Open Graph ---
 export const metadata: Metadata = {
   title: "Batteries for Sale in Alberton | Car, Truck, Motorcycle, Solar",
   description: "Browse all batteries at Alberton Battery Mart. We stock Willard, Exide, & Enertec for cars, trucks, motorcycles, and solar inverters. Free fitment & testing.",
+  keywords: [
+    'batteries for sale Alberton',
+    'car batteries Alberton',
+    'truck batteries',
+    'motorcycle batteries',
+    'solar batteries',
+    'Willard batteries',
+    'Exide batteries',
+    'Enertec batteries'
+  ],
+  openGraph: {
+    title: "Batteries for Sale in Alberton | Car, Truck, Motorcycle, Solar",
+    description: "Browse all batteries at Alberton Battery Mart. We stock Willard, Exide, & Enertec for cars, trucks, motorcycles, and solar inverters.",
+    url: 'https://www.albertonbatterymart.co.za/products',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://www.albertonbatterymart.co.za/products',
+  },
 };
 
 const filterLinks = {

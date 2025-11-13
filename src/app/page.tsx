@@ -1,5 +1,6 @@
 // src/app/page.tsx
 import dynamic from 'next/dynamic';
+import { Metadata } from 'next';
 import HeroSection from "@/components/layout/HeroSection"; // Keep this one static
 
 // Lazy-load all components below the fold
@@ -11,6 +12,51 @@ const TestimonialSection = dynamic(() => import('@/components/layout/Testimonial
 const FaqSection = dynamic(() => import('@/components/layout/FaqSection'));
 const ContactForm = dynamic(() => import('@/components/content/ContactForm'));
 const ThinCta = dynamic(() => import('@/components/layout/ThinCta'));
+
+// --- SEO: Homepage Metadata with Open Graph ---
+export const metadata: Metadata = {
+  title: 'Alberton Battery Mart | Mobile Battery Replacement & Fitment Service',
+  description: 'Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal. We bring the Willard & Exide battery to you. Free fitment, testing, and 24-month warranty. Call 010 109 6211.',
+  keywords: [
+    'battery replacement Alberton',
+    'car battery Alberton',
+    'mobile battery service',
+    'Willard batteries Alberton',
+    'Exide batteries Alberton',
+    'battery fitment Alberton',
+    'car battery New Redruth',
+    'battery testing Alberton',
+    'AGM battery Alberton',
+    'EFB battery Alberton',
+    'mobile callout Alberton',
+    'battery specialist Alberton'
+  ],
+  openGraph: {
+    title: 'Alberton Battery Mart | Mobile Battery Replacement & Fitment Service',
+    description: 'Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal. Free fitment, testing, and 24-month warranty.',
+    url: 'https://www.albertonbatterymart.co.za',
+    siteName: 'Alberton Battery Mart',
+    images: [
+      {
+        url: '/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Alberton Battery Mart - Mobile Battery Replacement Service',
+      },
+    ],
+    locale: 'en_ZA',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Alberton Battery Mart | Mobile Battery Replacement & Fitment Service',
+    description: 'Fast, certified mobile battery replacement service in Alberton. Free fitment, testing, and 24-month warranty.',
+    images: ['/images/og-image.jpg'],
+  },
+  alternates: {
+    canonical: 'https://www.albertonbatterymart.co.za',
+  },
+};
 
 export default function Home() {
   return (
