@@ -2,9 +2,9 @@
 import { ALL_PRODUCTS } from "@/data/products";
 import { NextRequest, NextResponse } from "next/server";
 
-// --- CRITICAL: REPLACE THIS ---
-// This code must be retrieved from your linked Google Business Profile [cite: 3390, 3474-3475]
-const STORE_CODE = 'YOUR_GMB_STORE_CODE_HERE';
+// --- CRITICAL: UPDATED WITH CLIENT CODE ---
+// This code links the inventory to your specific physical store location.
+const STORE_CODE = '08747384917160485179'; 
 // ---
 
 // Helper function to format the price

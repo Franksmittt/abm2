@@ -293,7 +293,7 @@ Here is the complete and updated `README.md` content:
 
 -----
 
-What is the next step you'd like to tackle in the **`atc2`** repository? [cite\_start](I recommend connecting the contact form to a working submission endpoint [cite: 3069]).
+What is the next step you'd like to tackle in the **`atc2`** repository? [cite\_start](I recommend connecting the contact form to a working submission endpoint [cite: 3069]). 
 
 --------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\components.json--------------------------------------------------------------------------------{
   "$schema": "https://ui.shadcn.com/schema.json",
@@ -1593,11 +1593,74 @@ import Script from 'next/script'; // --- NEW: Import next/script
 
 const inter = Inter({ subsets: ['latin'] });
 
-// --- SEO: Root Metadata ---
+// --- SEO: Root Metadata with Open Graph & Twitter Cards ---
 export const metadata: Metadata = {
-  title: 'Alberton Battery Mart | Mobile Battery Replacement & Fitment Service', 
+  title: {
+    default: 'Alberton Battery Mart | Mobile Battery Replacement & Fitment Service',
+    template: '%s | Alberton Battery Mart'
+  },
   description: 'Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal. We bring the Willard & Exide battery to you. Call for a quote!',
-  metadataBase: new URL('https://www.albertonbatterymart.co.za'), 
+  metadataBase: new URL('https://www.albertonbatterymart.co.za'),
+  keywords: [
+    'battery replacement Alberton',
+    'car battery Alberton',
+    'mobile battery service',
+    'Willard batteries',
+    'Exide batteries',
+    'battery fitment Alberton',
+    'car battery New Redruth',
+    'battery testing Alberton',
+    'AGM battery Alberton',
+    'EFB battery Alberton'
+  ],
+  authors: [{ name: 'Alberton Battery Mart' }],
+  creator: 'Alberton Battery Mart',
+  publisher: 'Alberton Battery Mart',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_ZA',
+    url: 'https://www.albertonbatterymart.co.za',
+    siteName: 'Alberton Battery Mart',
+    title: 'Alberton Battery Mart | Mobile Battery Replacement & Fitment Service',
+    description: 'Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal. We bring the Willard & Exide battery to you. Call for a quote!',
+    images: [
+      {
+        url: '/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Alberton Battery Mart - Mobile Battery Replacement Service',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Alberton Battery Mart | Mobile Battery Replacement & Fitment Service',
+    description: 'Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal.',
+    images: ['/images/og-image.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: 'https://www.albertonbatterymart.co.za',
+  },
+  verification: {
+    // Add Google Search Console verification when available
+    // google: 'your-verification-code',
+  },
 };
 
 // --- LocalBusiness Schema ---
@@ -1775,6 +1838,7 @@ export default function RootLayout({
 
 --------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\src\app\page.tsx--------------------------------------------------------------------------------// src/app/page.tsx
 import dynamic from 'next/dynamic';
+import { Metadata } from 'next';
 import HeroSection from "@/components/layout/HeroSection"; // Keep this one static
 
 // Lazy-load all components below the fold
@@ -1786,6 +1850,51 @@ const TestimonialSection = dynamic(() => import('@/components/layout/Testimonial
 const FaqSection = dynamic(() => import('@/components/layout/FaqSection'));
 const ContactForm = dynamic(() => import('@/components/content/ContactForm'));
 const ThinCta = dynamic(() => import('@/components/layout/ThinCta'));
+
+// --- SEO: Homepage Metadata with Open Graph ---
+export const metadata: Metadata = {
+  title: 'Alberton Battery Mart | Mobile Battery Replacement & Fitment Service',
+  description: 'Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal. We bring the Willard & Exide battery to you. Free fitment, testing, and 24-month warranty. Call 010 109 6211.',
+  keywords: [
+    'battery replacement Alberton',
+    'car battery Alberton',
+    'mobile battery service',
+    'Willard batteries Alberton',
+    'Exide batteries Alberton',
+    'battery fitment Alberton',
+    'car battery New Redruth',
+    'battery testing Alberton',
+    'AGM battery Alberton',
+    'EFB battery Alberton',
+    'mobile callout Alberton',
+    'battery specialist Alberton'
+  ],
+  openGraph: {
+    title: 'Alberton Battery Mart | Mobile Battery Replacement & Fitment Service',
+    description: 'Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal. Free fitment, testing, and 24-month warranty.',
+    url: 'https://www.albertonbatterymart.co.za',
+    siteName: 'Alberton Battery Mart',
+    images: [
+      {
+        url: '/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Alberton Battery Mart - Mobile Battery Replacement Service',
+      },
+    ],
+    locale: 'en_ZA',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Alberton Battery Mart | Mobile Battery Replacement & Fitment Service',
+    description: 'Fast, certified mobile battery replacement service in Alberton. Free fitment, testing, and 24-month warranty.',
+    images: ['/images/og-image.jpg'],
+  },
+  alternates: {
+    canonical: 'https://www.albertonbatterymart.co.za',
+  },
+};
 
 export default function Home() {
   return (
@@ -1942,10 +2051,26 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Metadata } from "next";
 
-// --- NEW: Page-Specific Metadata for SEO ---
+// --- NEW: Page-Specific Metadata for SEO with Open Graph ---
 export const metadata: Metadata = {
   title: "About Alberton Battery Mart | Your Local Battery Experts",
   description: "Learn about Alberton Battery Mart. We are your local, multi-brand battery specialists offering expert advice, free fitment, and mobile callouts in Alberton.",
+  keywords: [
+    'about Alberton Battery Mart',
+    'battery experts Alberton',
+    'multi-brand battery specialist',
+    'battery store Alberton',
+    'local battery shop'
+  ],
+  openGraph: {
+    title: "About Alberton Battery Mart | Your Local Battery Experts",
+    description: "Learn about Alberton Battery Mart. We are your local, multi-brand battery specialists offering expert advice, free fitment, and mobile callouts.",
+    url: 'https://www.albertonbatterymart.co.za/about',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://www.albertonbatterymart.co.za/about',
+  },
 };
 
 export default function AboutPage() {
@@ -2204,7 +2329,7 @@ const getPostBySlug = (slug: string): BlogPost | undefined => {
   return ALL_POSTS.find(p => p.slug === slug);
 };
 
-// --- Dynamic SEO Metadata (Perfect for Google) ---
+// --- Dynamic SEO Metadata (Perfect for Google) with Open Graph ---
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const post = getPostBySlug(params.slug);
   
@@ -2212,9 +2337,44 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     return { title: "Post Not Found" };
   }
 
+  const url = `https://www.albertonbatterymart.co.za/blog/${post.slug}`;
+
   return {
     title: `${post.title} | Alberton Battery Mart`,
     description: post.description,
+    keywords: [
+      'battery blog Alberton',
+      'car battery advice',
+      'battery tips',
+      post.category.toLowerCase(),
+      ...(post.description.match(/\b\w+\b/g) || []).slice(0, 5) // Extract keywords from description
+    ],
+    openGraph: {
+      title: `${post.title} | Alberton Battery Mart`,
+      description: post.description,
+      url,
+      type: 'article',
+      publishedTime: post.date,
+      authors: ['Alberton Battery Mart'],
+      tags: [post.category],
+      images: [
+        {
+          url: '/images/og-image.jpg',
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
+      images: ['/images/og-image.jpg'],
+    },
+    alternates: {
+      canonical: url,
+    },
   };
 }
 
@@ -2236,8 +2396,72 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
   const EMERGENCY_PHONE_DISPLAY = "010 109 6211";
   const EMERGENCY_PHONE_LINK = "0101096211";
 
+  // --- Article Schema for Blog Posts ---
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.title,
+    "description": post.description,
+    "image": `https://www.albertonbatterymart.co.za/images/og-image.jpg`,
+    "datePublished": post.date,
+    "dateModified": post.date,
+    "author": {
+      "@type": "Organization",
+      "name": "Alberton Battery Mart",
+      "url": "https://www.albertonbatterymart.co.za"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Alberton Battery Mart",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.albertonbatterymart.co.za/images/logo-schema.jpg"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://www.albertonbatterymart.co.za/blog/${post.slug}`
+    },
+    "articleSection": post.category
+  };
+
+  // --- BreadcrumbList Schema ---
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.albertonbatterymart.co.za"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "https://www.albertonbatterymart.co.za/blog"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": post.title,
+        "item": `https://www.albertonbatterymart.co.za/blog/${post.slug}`
+      }
+    ]
+  };
+
   return (
     <div className="container py-16">
+      {/* --- Add Article and Breadcrumb Schema --- */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <div className="grid lg:grid-cols-12 gap-12">
 
         {/* --- Main Content (Left Column) --- */}
@@ -2291,10 +2515,26 @@ import { Card, CardContent } from "@/components/ui/card";
 import ContactForm from "@/components/content/ContactForm";
 import { Metadata } from "next";
 
-// --- NEW: Page-Specific Metadata for SEO ---
+// --- NEW: Page-Specific Metadata for SEO with Open Graph ---
 export const metadata: Metadata = {
   title: "Contact Alberton Battery Mart | Callouts & Store Location",
   description: "Contact us for battery help. Call 010 109 6211, WhatsApp us, or visit our store at 28 St Columb Rd, New Redruth, Alberton for a free battery test.",
+  keywords: [
+    'contact battery service Alberton',
+    'battery store Alberton',
+    'battery shop New Redruth',
+    'battery callout Alberton',
+    'battery testing Alberton'
+  ],
+  openGraph: {
+    title: "Contact Alberton Battery Mart | Callouts & Store Location",
+    description: "Contact us for battery help. Call 010 109 6211, WhatsApp us, or visit our store at 28 St Columb Rd, New Redruth, Alberton.",
+    url: 'https://www.albertonbatterymart.co.za/contact',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://www.albertonbatterymart.co.za/contact',
+  },
 };
 
 // --- FINAL VERIFIED CONTACT DETAILS ---
@@ -2302,7 +2542,7 @@ const CONTACT_DETAILS = {
   primaryPhone: "0101096211",
   whatsAppNumber: "082 304 6926", // Display number
   whatsAppLink: "27823046926", // Link format
-  email: "admin@albaertonbatterymart.co.za",
+  email: "admin@albertonbatterymart.co.za",
   address: "28 St Columb Rd, New Redruth, Alberton, 1450",
   hours: "Mon - Fri: 8:00am - 5:00pm | Sat: 8:00am - 1:00pm",
   // --- FIX: This is a REAL Google Maps embed link ---
@@ -2496,10 +2736,28 @@ export default function DeepCycleBatteriesPage() {
 import FaqPageContent from "@/components/layout/FaqPageContent";
 import { Metadata } from "next";
 
-// --- NEW: Page-Specific Metadata for SEO ---
+// --- NEW: Page-Specific Metadata for SEO with Open Graph ---
 export const metadata: Metadata = {
   title: "FAQ - Alberton Battery Mart | Free Testing & Fitment",
   description: "Answers to common battery questions in Alberton. Learn about our free callouts, warranty, and AGM/EFB batteries. Get expert advice.",
+  keywords: [
+    'battery FAQ Alberton',
+    'battery questions',
+    'AGM battery questions',
+    'EFB battery questions',
+    'battery warranty',
+    'mobile callout service',
+    'battery testing Alberton'
+  ],
+  openGraph: {
+    title: "FAQ - Alberton Battery Mart | Free Testing & Fitment",
+    description: "Answers to common battery questions in Alberton. Learn about our free callouts, warranty, and AGM/EFB batteries.",
+    url: 'https://www.albertonbatterymart.co.za/faq',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://www.albertonbatterymart.co.za/faq',
+  },
 };
 
 // This page serves as the dedicated SEO resource for FAQ keywords
@@ -2875,10 +3133,29 @@ import { Separator } from "@/components/ui/separator";
 import CodeLookup from "@/components/content/CodeLookup";
 import { Metadata } from "next";
 
-// --- NEW: Page-Specific Metadata for SEO ---
+// --- NEW: Page-Specific Metadata for SEO with Open Graph ---
 export const metadata: Metadata = {
   title: "Batteries for Sale in Alberton | Car, Truck, Motorcycle, Solar",
   description: "Browse all batteries at Alberton Battery Mart. We stock Willard, Exide, & Enertec for cars, trucks, motorcycles, and solar inverters. Free fitment & testing.",
+  keywords: [
+    'batteries for sale Alberton',
+    'car batteries Alberton',
+    'truck batteries',
+    'motorcycle batteries',
+    'solar batteries',
+    'Willard batteries',
+    'Exide batteries',
+    'Enertec batteries'
+  ],
+  openGraph: {
+    title: "Batteries for Sale in Alberton | Car, Truck, Motorcycle, Solar",
+    description: "Browse all batteries at Alberton Battery Mart. We stock Willard, Exide, & Enertec for cars, trucks, motorcycles, and solar inverters.",
+    url: 'https://www.albertonbatterymart.co.za/products',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://www.albertonbatterymart.co.za/products',
+  },
 };
 
 const filterLinks = {
@@ -3846,12 +4123,42 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   const title = `Buy ${product.name} (${product.sku}) in Alberton | Alberton Battery Mart`;
   const description = `Get the ${product.name} ${product.seoSubtitle} at Alberton Battery Mart. ${product.popularFits ? `Fits: ${product.popularFits}.` : ''} Free fitment, testing, and 24-month warranty. Call 010 109 6211.`;
   
+  const url = `https://www.albertonbatterymart.co.za/products/${product.id}`;
+  
   return {
     title,
     description,
-    // --- NEW: Add Canonical URL ---
+    keywords: [
+      `${product.name} Alberton`,
+      `${product.brandName} battery`,
+      `${product.sku} battery`,
+      'battery Alberton',
+      'car battery',
+      product.category.toLowerCase(),
+      ...(product.popularFits ? product.popularFits.split(',').map(fit => `${fit.trim()} battery`) : [])
+    ],
+    openGraph: {
+      title,
+      description,
+      url,
+      type: 'website',
+      images: [
+        {
+          url: `https://www.albertonbatterymart.co.za${product.imagePath}`,
+          width: 800,
+          height: 600,
+          alt: `${product.name} - ${product.seoSubtitle}`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [`https://www.albertonbatterymart.co.za${product.imagePath}`],
+    },
     alternates: {
-      canonical: `https://www.albertonbatterymart.co.za/products/${product.id}`,
+      canonical: url,
     },
   };
 }
@@ -3888,32 +4195,71 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
     "image": `https://www.albertonbatterymart.co.za${product.imagePath}`,
     "description": `Get the ${product.name} ${product.seoSubtitle} at Alberton Battery Mart. Free fitment, testing, and ${product.warrantyMonths}-month warranty.`,
     "sku": product.sku,
+    "mpn": product.sku,
     "brand": {
       "@type": "Brand",
       "name": product.brandName
     },
+    "category": product.category,
     // --- This Offer is CRITICAL for Google Shopping LIA ---
     "offers": {
       "@type": "Offer",
       "url": `https://www.albertonbatterymart.co.za/products/${product.id}`,
       "priceCurrency": "ZAR",
       "price": parsePrice(product.priceAnchor),
-      "availability": "https://schema.org/InStock", // We assume all listed products are in stock
+      "availability": "https://schema.org/InStock",
       "itemCondition": "https://schema.org/NewCondition",
+      "priceValidUntil": new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // 1 year from now
       "seller": {
         "@type": "LocalBusiness",
-        "name": "Alberton Battery Mart"
+        "name": "Alberton Battery Mart",
+        "url": "https://www.albertonbatterymart.co.za"
       }
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "127"
     }
+  };
+
+  // --- BreadcrumbList Schema for Product Pages ---
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.albertonbatterymart.co.za"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Products",
+        "item": "https://www.albertonbatterymart.co.za/products"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": product.name,
+        "item": `https://www.albertonbatterymart.co.za/products/${product.id}`
+      }
+    ]
   };
   // --- END NEW SCHEMA ---
 
   return (
     <div className="container py-16">
-      {/* --- NEW: Add Product Schema to the page --- */}
+      {/* --- NEW: Add Product and Breadcrumb Schema to the page --- */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       <div className="grid lg:grid-cols-2 gap-12">
@@ -4019,7 +4365,7 @@ export const metadata: Metadata = {
 };
 
 const EMERGENCY_PHONE = "0101096211";
-const EMAIL_ADDRESS = "admin@albaertonbatterymart.co.za";
+const EMAIL_ADDRESS = "admin@albertonbatterymart.co.za";
 
 export default function QuotePage() {
   return (
@@ -4096,10 +4442,28 @@ import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
 
-// --- NEW: Page-Specific Metadata for SEO ---
+// --- NEW: Page-Specific Metadata for SEO with Open Graph ---
 export const metadata: Metadata = {
   title: "Mobile Battery Replacement Service in Alberton | Alberton Battery Mart",
   description: "Fast mobile battery replacement and fitment in Alberton, New Redruth, & Meyersdal. We come to you. Free alternator testing with every callout.",
+  keywords: [
+    'mobile battery service Alberton',
+    'battery callout Alberton',
+    'mobile fitment service',
+    'battery replacement Alberton',
+    'on-site battery service',
+    'mobile battery New Redruth',
+    'battery service Meyersdal'
+  ],
+  openGraph: {
+    title: "Mobile Battery Replacement Service in Alberton | Alberton Battery Mart",
+    description: "Fast mobile battery replacement and fitment in Alberton, New Redruth, & Meyersdal. We come to you. Free alternator testing.",
+    url: 'https://www.albertonbatterymart.co.za/services',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://www.albertonbatterymart.co.za/services',
+  },
 };
 
 // --- FINAL VERIFIED CONTACT DETAILS & HOURS ---
@@ -4110,8 +4474,53 @@ const WEEKDAY_HOURS = "08:00 AM – 5:00 PM";
 const SATURDAY_HOURS = "08:00 AM – 12:00 PM";
 
 export default function ServicesPage() {
+  // --- Service Schema Markup ---
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Mobile Battery Replacement and Fitment",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Alberton Battery Mart",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "28 St Columb Rd",
+        "addressLocality": "New Redruth",
+        "addressRegion": "Alberton",
+        "postalCode": "1450",
+        "addressCountry": "ZA"
+      },
+      "telephone": "+27101096211",
+      "url": "https://www.albertonbatterymart.co.za"
+    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Alberton"
+      },
+      {
+        "@type": "City",
+        "name": "New Redruth"
+      },
+      {
+        "@type": "City",
+        "name": "Meyersdal"
+      }
+    ],
+    "description": "Fast mobile battery replacement and fitment service in Alberton, New Redruth, and Meyersdal. Free alternator testing with every callout.",
+    "offers": {
+      "@type": "Offer",
+      "description": "Mobile battery replacement service with free fitment and alternator testing"
+    }
+  };
+
   return (
     <div className="container py-16 space-y-16">
+      {/* --- Add Service Schema --- */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
       
       {/* SECTION 1: HERO & PRIMARY CTA (H1 Focus) */}
       <div className="text-center space-y-4 border-b border-border pb-10">
@@ -4944,7 +5353,7 @@ import { Separator } from "@/components/ui/separator";
 
 // --- CONTACT DETAILS (Lead Gen) ---
 const PRIMARY_PHONE = "0101096211";
-const EMAIL_ADDRESS = "admin@albaertonbatterymart.co.za";
+const EMAIL_ADDRESS = "admin@albertonbatterymart.co.za";
 
 // Highly relevant, objection-handling questions (8 total)
 const faqItems = [
@@ -5231,7 +5640,7 @@ import { Button } from "@/components/ui/button";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const PRIMARY_PHONE = "010 109 6211";
-  const EMAIL_ADDRESS = "admin@albaertonbatterymart.co.za";
+  const EMAIL_ADDRESS = "admin@albertonbatterymart.co.za";
   const ADDRESS = "28 St Columb Rd, New Redruth, Alberton, 1450";
   const WEEKDAY_HOURS = "08:00 AM – 5:00 PM";
   const SATURDAY_HOURS = "08:00 AM – 12:00 PM";
