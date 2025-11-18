@@ -4,14 +4,34 @@ import { ALL_PRODUCTS, ProductCardData } from "@/data/products";
 import CategoryFilterSidebar from "@/components/layout/CategoryFilterSidebar";
 import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
-import { Building, ShieldCheck, Zap } from "lucide-react"; // --- NEW ICONS
-import { Button } from "@/components/ui/button"; // --- NEW
-import Link from "next/link"; // --- NEW
+import { Building, ShieldCheck, Zap } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { BASE_URL } from "@/lib/seo-constants";
 
-// --- NEW: Page-Specific Metadata for SEO ---
+const PAGE_TITLE = "Truck & Commercial Batteries in Alberton | Alberton Battery Mart";
+const PAGE_DESCRIPTION =
+  "High-CCA truck, bus, and fleet batteries with on-site fitment across Alberton and the East Rand.";
+
 export const metadata: Metadata = {
-  title: "Truck & Commercial Batteries in Alberton | Alberton Battery Mart",
-  description: "Shop heavy-duty truck batteries in Alberton. We stock high-CCA commercial batteries for lorries, buses, and heavy-duty vehicles.",
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
+  keywords: [
+    "truck battery Alberton",
+    "fleet battery replacement",
+    "Willard 658 price",
+    "heavy duty CCA battery",
+  ],
+  alternates: {
+    canonical: `${BASE_URL}/products/type/truck-commercial`,
+  },
+  openGraph: {
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+    url: `${BASE_URL}/products/type/truck-commercial`,
+    type: "website",
+  },
 };
 
 const TRUCK_PRODUCTS = ALL_PRODUCTS.filter((p: ProductCardData) => 
@@ -30,9 +50,53 @@ const getFilterOptions = (products: ProductCardData[]) => {
 };
 const { brands, sizes } = getFilterOptions(TRUCK_PRODUCTS);
 
+const SERVICE_LINKS = [
+  {
+    label: "Truck & Fleet Battery Fitment",
+    href: "/services/truck-battery-fitment/alrode",
+    description: "Dual-technician fitment, rotation plans, recycling.",
+  },
+  {
+    label: "Mobile Battery Replacement - Alberton",
+    href: "/services/mobile-battery-replacement/alberton",
+    description: "24/7 emergency callouts for stranding trucks.",
+  },
+  {
+    label: "Fleet Pricing & Account Setup",
+    href: "/quote",
+    description: "Centralized invoicing, consignment stock available.",
+  },
+];
+
+const VEHICLE_LINKS = [
+  { label: "VW Amarok BiTDI fleet fitment", slug: "volkswagen/amarok-btdi" },
+  { label: "Land Rover Discovery 4 heavy-duty battery", slug: "land-rover/discovery-4" },
+  { label: "Toyota Fortuner GD-6 touring setup", slug: "toyota/fortuner-2-8-gd6" },
+];
+
 export default function TruckBatteriesPage() {
+  const productCollectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "ProductCollection",
+    name: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+    url: `${BASE_URL}/products/type/truck-commercial`,
+    isRelatedTo: {
+      "@type": "Service",
+      name: "Truck & Fleet Battery Fitment",
+      url: `${BASE_URL}/services/truck-battery-fitment/alrode`,
+    },
+    hasPart: TRUCK_PRODUCTS.slice(0, 20).map((product) => ({
+      "@type": "Product",
+      name: product.name,
+      sku: product.id,
+      url: `${BASE_URL}/product/${product.id}`,
+    })),
+  };
+
   return (
     <div className="container py-16 space-y-12">
+      <JsonLd data={productCollectionSchema} id="truck-collection-schema" />
         
         <div className="text-center space-y-3">
             <h1 className="text-5xl md:text-6xl font-extrabold text-foreground">
@@ -71,7 +135,12 @@ export default function TruckBatteriesPage() {
             </div>
           </div>
           <div className="text-center pt-6">
-            <Button asChild size="lg" variant="battery">
+            <Button
+              asChild
+              size="lg"
+              variant="battery"
+              trackingId="type-truck-commercial-quote"
+            >
               <Link href="/quote">Request a Free Fleet/B2B Quote</Link>
             </Button>
           </div>
@@ -79,6 +148,45 @@ export default function TruckBatteriesPage() {
         {/* --- END NEW SECTION --- */}
 
         <Separator className="pt-4" />
+
+        <section className="grid md:grid-cols-3 gap-6">
+          {SERVICE_LINKS.map((service) => (
+            <div
+              key={service.href}
+              className="p-6 rounded-2xl bg-secondary/20 border border-border space-y-3"
+            >
+              <h3 className="text-xl font-semibold text-battery">
+                {service.label}
+              </h3>
+              <p className="text-muted-foreground">{service.description}</p>
+              <Link
+                href={service.href}
+                className="text-sm font-semibold text-foreground hover:text-battery"
+              >
+                Explore →
+              </Link>
+            </div>
+          ))}
+        </section>
+
+        {VEHICLE_LINKS.length > 0 && (
+          <section className="bg-card/50 border border-border rounded-2xl p-8 space-y-4">
+            <h2 className="text-3xl font-bold text-foreground">
+              Vehicles running these commercial batteries
+            </h2>
+            <div className="grid md:grid-cols-3 gap-4">
+              {VEHICLE_LINKS.map((vehicle) => (
+                <Link
+                  key={vehicle.slug}
+                  href={`/vehicles/${vehicle.slug}`}
+                  className="p-4 rounded-xl bg-background border border-border hover:border-battery transition-colors"
+                >
+                  {vehicle.label}
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
         <div className="flex flex-col lg:flex-row gap-8">
             

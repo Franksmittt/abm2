@@ -13,9 +13,9 @@ export const metadata: Metadata = {
   description: "Get the best batteries for load shedding in Alberton. We stock Deep Cycle, AGM, and Lithium (LiFePO₄) batteries for inverters and solar systems.",
 };
 
-// Filters for: Deep Cycle/Solar
+// Filters for: Deep Cycle
 const DEEP_CYCLE_PRODUCTS = ALL_PRODUCTS.filter((p: ProductCardData) => 
-  p.category === 'Deep Cycle/Solar'
+  p.category === 'Deep Cycle'
 );
 
 export default function DeepCycleBatteriesPage() {

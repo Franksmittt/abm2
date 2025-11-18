@@ -1,64 +1,83 @@
 // C:\Users\User1\abm2\src\app\layout.tsx
 import { Inter } from 'next/font/google';
-import './globals.css';
-import { ThemeProvider } from "@/components/theme-provider"; 
-import { GTM_ID } from '@/lib/gtm-constants'; 
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
-import { Metadata } from 'next';
-import Script from 'next/script'; // --- NEW: Import next/script
+import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
+import { GTM_ID } from "@/lib/gtm-constants";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import { Metadata } from "next";
+import Script from "next/script"; // --- NEW: Import next/script
+import { JsonLd } from "@/components/seo/JsonLd";
+import {
+  BASE_URL,
+  BUSINESS_ADDRESS,
+  BUSINESS_CONTACT,
+  DEFAULT_HERO_IMAGE,
+  DEFAULT_LOGO,
+  DEFAULT_OPENING_HOURS,
+  LOCAL_BUSINESS_ID,
+  ORG_ID,
+  SERVICE_AREAS,
+} from "@/lib/seo-constants";
 
 const inter = Inter({ subsets: ['latin'] });
+const ENVIRONMENT = process.env.NODE_ENV ?? "development";
 
 // --- SEO: Root Metadata with Open Graph & Twitter Cards ---
 export const metadata: Metadata = {
   title: {
-    default: 'Alberton Battery Mart | Mobile Battery Replacement & Fitment Service',
-    template: '%s | Alberton Battery Mart'
+    default:
+      "Alberton Battery Mart | Mobile Battery Replacement & Fitment Service",
+    template: "%s | Alberton Battery Mart",
   },
-  description: 'Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal. We bring the Willard & Exide battery to you. Call for a quote!',
-  metadataBase: new URL('https://www.albertonbatterymart.co.za'),
+  description:
+    "Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal. We bring the Willard & Exide battery to you. Call for a quote!",
+  metadataBase: new URL(BASE_URL),
   keywords: [
-    'battery replacement Alberton',
-    'car battery Alberton',
-    'mobile battery service',
-    'Willard batteries',
-    'Exide batteries',
-    'battery fitment Alberton',
-    'car battery New Redruth',
-    'battery testing Alberton',
-    'AGM battery Alberton',
-    'EFB battery Alberton'
+    "battery replacement Alberton",
+    "car battery Alberton",
+    "mobile battery service",
+    "Willard batteries",
+    "Exide batteries",
+    "battery fitment Alberton",
+    "car battery New Redruth",
+    "battery testing Alberton",
+    "AGM battery Alberton",
+    "EFB battery Alberton",
   ],
-  authors: [{ name: 'Alberton Battery Mart' }],
-  creator: 'Alberton Battery Mart',
-  publisher: 'Alberton Battery Mart',
+  authors: [{ name: "Alberton Battery Mart" }],
+  creator: "Alberton Battery Mart",
+  publisher: "Alberton Battery Mart",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
   openGraph: {
-    type: 'website',
-    locale: 'en_ZA',
-    url: 'https://www.albertonbatterymart.co.za',
-    siteName: 'Alberton Battery Mart',
-    title: 'Alberton Battery Mart | Mobile Battery Replacement & Fitment Service',
-    description: 'Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal. We bring the Willard & Exide battery to you. Call for a quote!',
+    type: "website",
+    locale: "en_ZA",
+    url: BASE_URL,
+    siteName: "Alberton Battery Mart",
+    title:
+      "Alberton Battery Mart | Mobile Battery Replacement & Fitment Service",
+    description:
+      "Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal. We bring the Willard & Exide battery to you. Call for a quote!",
     images: [
       {
-        url: '/images/og-image.jpg',
+        url: "/images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: 'Alberton Battery Mart - Mobile Battery Replacement Service',
+        alt: "Alberton Battery Mart - Mobile Battery Replacement Service",
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Alberton Battery Mart | Mobile Battery Replacement & Fitment Service',
-    description: 'Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal.',
-    images: ['/images/og-image.jpg'],
+    card: "summary_large_image",
+    title:
+      "Alberton Battery Mart | Mobile Battery Replacement & Fitment Service",
+    description:
+      "Fast, certified mobile battery replacement service in Alberton, New Redruth, and Meyersdal.",
+    images: ["/images/og-image.jpg"],
   },
   robots: {
     index: true,
@@ -72,7 +91,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://www.albertonbatterymart.co.za',
+    canonical: BASE_URL,
   },
   verification: {
     // Add Google Search Console verification when available
@@ -84,45 +103,43 @@ export const metadata: Metadata = {
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "name": "Alberton Battery Mart",
-  "image": "https://www.albertonbatterymart.co.za/images/logo-schema.jpg", 
-  "url": "https://www.albertonbatterymart.co.za",
-  "telephone": "+27101096211", 
-  "priceRange": "R R R", 
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "28 St Columb Rd",
-    "addressLocality": "New Redruth",
-    "addressRegion": "Alberton",
-    "postalCode": "1450",
-    "addressCountry": "ZA"
-  },
-  "geo": { 
+  "@id": LOCAL_BUSINESS_ID,
+  name: "Alberton Battery Mart",
+  image: DEFAULT_LOGO,
+  url: BASE_URL,
+  telephone: BUSINESS_CONTACT.telephone,
+  priceRange: "R R R",
+  address: { "@type": "PostalAddress", ...BUSINESS_ADDRESS },
+  geo: {
     "@type": "GeoCoordinates",
-    "latitude": -26.2735, 
-    "longitude": 28.1256  
+    latitude: -26.2735,
+    longitude: 28.1256,
   },
-  "openingHoursSpecification": [
+  openingHoursSpecification: DEFAULT_OPENING_HOURS.map((entry) => ({
+    "@type": "OpeningHoursSpecification",
+    ...entry,
+  })),
+  sameAs: [BUSINESS_CONTACT.whatsapp].filter(Boolean),
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": ORG_ID,
+  name: "Alberton Battery Mart",
+  url: BASE_URL,
+  logo: DEFAULT_LOGO,
+  image: DEFAULT_HERO_IMAGE,
+  address: { "@type": "PostalAddress", ...BUSINESS_ADDRESS },
+  contactPoint: [
     {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday"
-      ],
-      "opens": "08:00", 
-      "closes": "17:00" 
+      "@type": "ContactPoint",
+      telephone: BUSINESS_CONTACT.telephone,
+      contactType: "customer service",
+      areaServed: SERVICE_AREAS,
+      availableLanguage: ["English"],
     },
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": "Saturday",
-      "opens": "08:00", 
-      "closes": "12:00" 
-    }
   ],
-  "sameAs": []
 };
 
 export default function RootLayout({
@@ -134,26 +151,23 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         {/* --- MODIFIED: Removed the manual <script> tag for GTM --- */}
-        
+
         {/* --- Add LocalBusiness Schema to HEAD --- */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-        />
-        
+        <JsonLd data={localBusinessSchema} id="local-business-schema" />
+        <JsonLd data={organizationSchema} id="organization-schema" />
       </head>
 
       <body className={inter.className}>
         {/* --- NEW: Add GTM <noscript> tag --- */}
         <noscript>
-          <iframe 
+          <iframe
             src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-            height="0" 
-            width="0" 
-            style={{ display: 'none', visibility: 'hidden' }}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        
+
         {/* --- NEW: Add GTM <Script> tag --- */}
         <Script id="google-tag-manager" strategy="afterInteractive">
           {`
@@ -164,15 +178,20 @@ export default function RootLayout({
             })(window,document,'script','dataLayer','${GTM_ID}');
           `}
         </Script>
+        <Script id="abm-log-context" strategy="afterInteractive">
+          {`
+            window.__abmEnv = '${ENVIRONMENT}';
+          `}
+        </Script>
 
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
         >
-           <Header /> 
+          <Header />
           <div className="pt-20">
-            {children} 
+            {children}
           </div>
           <Footer />
         </ThemeProvider>

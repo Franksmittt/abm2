@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
       <g:link>${productUrl}</g:link>
       <g:image_link>${imageUrl}</g:image_link>
       <g:availability>in stock</g:availability>
-      <g:price>${formatPrice(product.priceAnchor)}</g:price>
+      <g:price>${formatPrice(product.sellingPrice_OUTPUT)}</g:price>
       <g:brand>${product.brandName}</g:brand>
       <g:condition>new</g:condition>
       ${/* GTIN is required by Google but not present in your products.ts.

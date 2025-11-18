@@ -6,11 +6,27 @@ import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
 import ProductSpotlight from '@/components/content/ProductSpotlight';
 import FaqSection from '@/components/layout/FaqSection';
+import { JsonLd } from '@/components/seo/JsonLd';
+import AtomicAnswers from '@/components/seo/AtomicAnswers';
+import { BASE_URL, BUSINESS_ADDRESS, BUSINESS_CONTACT } from '@/lib/seo-constants';
 
 // --- SEO: Hyper-Local Metadata ---
 export const metadata: Metadata = {
   title: 'Mobile Battery Replacement Meyersdal | Alberton Battery Mart',
   description: 'Fast, on-site mobile battery replacement for Meyersdal. We come to you with Willard & Exide batteries. Free fitment & alternator testing.',
+  keywords: [
+    'battery replacement Meyersdal',
+    'mobile battery service Meyersdal',
+    'car battery Meyersdal Eco Estate',
+    'battery callout Meyersdal',
+    'AGM battery fitment Meyersdal',
+  ],
+  openGraph: {
+    title: 'Mobile Battery Replacement Meyersdal | Alberton Battery Mart',
+    description: 'Fast, on-site mobile battery replacement for Meyersdal. We come to you. Free fitment & alternator testing.',
+    url: 'https://www.albertonbatterymart.co.za/local/meyersdal',
+    type: 'website',
+  },
   alternates: {
     canonical: 'https://www.albertonbatterymart.co.za/local/meyersdal',
   },
@@ -21,8 +37,33 @@ const EMERGENCY_PHONE_DISPLAY = "010 109 6211";
 const EMERGENCY_PHONE_LINK = "0101096211";
 
 export default function MeyersdalPage() {
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "Alberton Battery Mart - Meyersdal Service",
+    description: "Mobile battery replacement and premium AGM fitment service for Meyersdal, Meyersdal Eco Estate, and surrounding areas",
+    address: {
+      "@type": "PostalAddress",
+      ...BUSINESS_ADDRESS,
+    },
+    telephone: BUSINESS_CONTACT.telephone,
+    url: `${BASE_URL}/local/meyersdal`,
+    areaServed: [
+      {
+        "@type": "City",
+        name: "Meyersdal",
+      },
+      {
+        "@type": "City",
+        name: "Meyersdal Eco Estate",
+      },
+    ],
+    serviceType: "Mobile Battery Replacement & Premium AGM Fitment",
+  };
+
   return (
     <div className="space-y-16">
+      <JsonLd data={localBusinessSchema} id="meyersdal-schema" />
       
       {/* --- 1. HYPER-LOCAL HERO --- */}
       <section className="bg-card border-b border-border py-20">
@@ -36,7 +77,7 @@ export default function MeyersdalPage() {
           <p className="text-xl text-muted-foreground">
             Stuck at home in the Meyersdal Eco Estate or near the Virgin Active? Our mobile team brings the store to you. We provide fast, on-site battery testing and expert fitment.
           </p>
-          <Button asChild size="xl" variant="battery" className="shadow-lg">
+          <Button asChild size="xl" variant="battery" className="shadow-lg" trackingId="local-meyersdal-call">
             <a href={`tel:${EMERGENCY_PHONE_LINK}`} className="flex items-center space-x-3 mx-auto">
               <Phone className="h-6 w-6" />
               <span>Call for Immediate Help in Meyersdal</span>
@@ -88,6 +129,28 @@ export default function MeyersdalPage() {
             <p className="text-muted-foreground">Placeholder: Image of Meyersdal suburb or landmark</p>
           </div>
         </div>
+      </section>
+
+      <Separator />
+
+      {/* --- 2.5. ATOMIC ANSWERS FOR AI OVERVIEWS --- */}
+      <section className="container">
+        <AtomicAnswers
+          answers={[
+            {
+              question: "How fast is mobile battery service in Meyersdal?",
+              answer: "Our mobile unit typically reaches Meyersdal locations (Eco Estate, Virgin Active area) within 45-60 minutes. We stock premium AGM batteries for BMW, Mercedes, and Audi vehicles common in Meyersdal.",
+            },
+            {
+              question: "Do you offer BMS coding for premium vehicles in Meyersdal?",
+              answer: "Yes. We're one of the few specialists in Alberton with advanced diagnostic tools for BMW, Mercedes, and Audi BMS registration. This is essential for AGM batteries in modern Start/Stop vehicles.",
+            },
+            {
+              question: "Can I visit your store instead of mobile service?",
+              answer: "Absolutely. Our main store at 28 St Columb Rd, New Redruth is just a short drive from Meyersdal. Walk-ins welcome Mon-Fri 8am-5pm, Sat 8am-1pm.",
+            },
+          ]}
+        />
       </section>
 
       <Separator />

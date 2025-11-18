@@ -1,7 +1,8 @@
 // src/app/page.tsx
 import dynamic from 'next/dynamic';
 import { Metadata } from 'next';
-import HeroSection from "@/components/layout/HeroSection"; // Keep this one static
+import HeroSection from "@/components/layout/HeroSection";
+import { headers } from "next/headers";
 
 // Lazy-load all components below the fold
 const TrustAuthoritySection = dynamic(() => import('@/components/layout/TrustAuthoritySection'));
@@ -12,6 +13,7 @@ const TestimonialSection = dynamic(() => import('@/components/layout/Testimonial
 const FaqSection = dynamic(() => import('@/components/layout/FaqSection'));
 const ContactForm = dynamic(() => import('@/components/content/ContactForm'));
 const ThinCta = dynamic(() => import('@/components/layout/ThinCta'));
+const AtomicAnswers = dynamic(() => import('@/components/seo/AtomicAnswers'));
 
 // --- SEO: Homepage Metadata with Open Graph ---
 export const metadata: Metadata = {
@@ -59,17 +61,23 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  const bucketHeader = headers().get("x-ab-bucket");
+  const bucket: "control" | "variant" =
+    bucketHeader === "variant" ? "variant" : "control";
   return (
     <main>
       
       {/* 1. HERO: Grabs immediate attention & captures urgent leads. */}
-      <HeroSection />
+      <HeroSection variant={bucket} />
       
       {/* 2. TRUST & AUTHORITY: Instantly builds trust and authority. Answers "Why you?" */}
       <TrustAuthoritySection />
 
       {/* 3. CORE SERVICES: Shows what you do. (Car, Truck, Solar, etc.) */}
       <ServiceGrid /> 
+
+      {/* 3b. Atomic answers for AI + Helpful Content */}
+      <AtomicAnswers />
       
       {/* 4. PRODUCT SPOTLIGHT: Shows what you sell. (FIXED to 3 products) */}
       <ProductSpotlight count={3} /> 

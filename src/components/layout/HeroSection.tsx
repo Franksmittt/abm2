@@ -1,9 +1,10 @@
 // src/components/layout/HeroSection.tsx
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Zap, MapPin, Clock, ShieldCheck, Phone, MessageSquare } from "lucide-react";
+import { Zap, MapPin, Clock, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import { HeroCtaButtons } from "./HeroCtaButtons";
 
 // --- FINAL VERIFIED CONTACT DETAILS & FORMATTING ---
 const EMERGENCY_PHONE = "010 109 6211"; // Formatted for display
@@ -11,7 +12,11 @@ const WHATSAPP_NUMBER_LINK = "27823046926";
 const WEEKDAY_HOURS = "08:00 AM – 5:00 PM";
 const SATURDAY_HOURS = "08:00 AM – 12:00 PM";
 
-const HeroSection = () => {
+type HeroSectionProps = {
+  variant?: "control" | "variant";
+};
+
+const HeroSection = ({ variant = "control" }: HeroSectionProps) => {
   // H1 Headline
   const coreHeadline = (
     <>
@@ -22,7 +27,10 @@ const HeroSection = () => {
   );
 
   // --- SEO FIX: Injected local keywords directly into the sub-headline ---
-  const calloutWording = "Don't get stuck. Our dedicated mobile team brings the right battery to you fast in Alberton, New Redruth, and Meyersdal. Get an immediate assessment and quote now.";
+  const calloutWording =
+    variant === "variant"
+      ? "Free diagnostics first. We test your battery, alternator, and starter before swapping anything—at your driveway."
+      : "Don't get stuck. Our dedicated mobile team brings the right battery to you fast in Alberton, New Redruth, and Meyersdal. Get an immediate assessment and quote now.";
 
   return (
     <section className="relative w-full overflow-hidden min-h-screen bg-background flex items-center justify-center">
@@ -42,36 +50,7 @@ const HeroSection = () => {
               {calloutWording}
             </p>
 
-            {/* Primary CTAs: Immediate Contact */}
-            <div className="flex flex-col items-center md:flex-row md:justify-start space-y-4 md:space-y-0 md:space-x-4 pt-2">
-
-              {/* Call Us Button */}
-              <Button 
-                asChild 
-                size="xl" 
-                variant="battery" 
-                className="shadow-lg w-full max-w-xs" 
-              >
-                {/* NOTE: The tel: link uses the number without spaces for dialer compatibility */}
-                <a href={`tel:${EMERGENCY_PHONE.replace(/ /g, '')}`} className="flex items-center justify-center space-x-2">
-                  <Phone className="h-5 w-5" />
-                  <span className="text-lg font-bold">Call Us Now</span>
-                 </a>
-              </Button>
-
-              {/* WhatsApp Button */}
-              <Button 
-                asChild 
-                variant="secondary" 
-                size="xl" 
-                className="bg-green-600 hover:bg-green-700 text-white w-full max-w-xs" 
-              >
-                <a href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center space-x-2">
-                  <MessageSquare className="h-5 w-5" />
-                  <span className="text-lg font-bold">WhatsApp Us</span>
-                </a>
-              </Button>
-            </div>
+          <HeroCtaButtons variant={variant} />
           </div>
 
           {/* Right Column: Key Trust & Service Card */}

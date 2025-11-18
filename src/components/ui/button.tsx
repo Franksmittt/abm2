@@ -44,11 +44,28 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
+  trackingId?: string
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, trackingId, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
+    if (trackingId && typeof window !== "undefined") {
+      const log = () => {
+        if ((window as any).__abmEnv === "development") {
+          console.info("[button-click]", trackingId)
+        }
+      }
+      if (!props.onClick) {
+        props.onClick = log
+      } else {
+        const originalOnClick = props.onClick
+        props.onClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+          log()
+          originalOnClick(event)
+        }
+      }
+    }
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}

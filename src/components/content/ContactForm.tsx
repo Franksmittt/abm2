@@ -5,20 +5,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Send, AlertTriangle, CheckCircle } from "lucide-react"; // --- NEW: Added CheckCircle
-
-// --- NEW: Define a type for the dataLayer ---
-declare global {
-  interface Window {
-    dataLayer: any[];
-  }
-}
+import { pushDataLayerEvent } from "@/lib/analytics";
 
 const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false); // --- NEW: Success state
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+
+  useEffect(() => {
+    pushDataLayerEvent("contact_form_view");
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,19 +27,10 @@ const ContactForm = () => {
     setTimeout(() => {
       console.log("Form Submitted:", formData);
       
-      // --- NEW: FIRE THE GOOGLE "GENERATE_LEAD" EVENT ---
-      // This sends the conversion to your existing GTM script
-      try {
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          'event': 'generate_lead',
-          'value': 'contact_form_submission'
-        });
-        console.log("GA4 Event: generate_lead pushed to dataLayer.");
-      } catch (error) {
-        console.error("Error pushing to dataLayer:", error);
-      }
-      // --- END NEW EVENT ---
+      pushDataLayerEvent("generate_lead", {
+        value: "contact_form_submission",
+        subject: formData.subject,
+      });
 
       setIsSubmitting(false);
       setIsSuccess(true); // --- NEW: Set success

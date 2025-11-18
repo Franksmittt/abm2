@@ -4,6 +4,10 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { Calendar, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { JsonLd } from "@/components/seo/JsonLd";
+import AtomicAnswers from "@/components/seo/AtomicAnswers";
+import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
 
 // --- Helper to find the post ---
 const getPostBySlug = (slug: string): BlogPost | undefined => {
@@ -133,16 +137,11 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
   };
 
   return (
-    <div className="container py-16">
+    <div className="container py-16 space-y-12">
       {/* --- Add Article and Breadcrumb Schema --- */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
+      <JsonLd data={articleSchema} id="article-schema" />
+      <JsonLd data={breadcrumbSchema} id="breadcrumb-schema" />
+      
       <div className="grid lg:grid-cols-12 gap-12">
 
         {/* --- Main Content (Left Column) --- */}
@@ -163,6 +162,65 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           <div className="prose prose-invert prose-lg max-w-none prose-h2:text-battery prose-h2:font-bold prose-a:text-battery prose-strong:text-foreground">
             {post.content}
           </div>
+
+          <Separator />
+
+          {/* --- Atomic Answers for AI Overviews --- */}
+          <div className="mt-8">
+            <AtomicAnswers
+              answers={[
+                {
+                  question: "How do I know if my battery needs replacement?",
+                  answer: "Signs include slow engine cranking, dashboard warning lights, battery age over 3-4 years, or visible corrosion. We offer free battery testing at our store or during mobile callouts to diagnose the issue accurately.",
+                },
+                {
+                  question: "Do you offer mobile battery replacement in Alberton?",
+                  answer: "Yes. Our mobile unit reaches Alberton Central, Meyersdal, and New Redruth within 45-60 minutes. We carry Willard and Exide batteries in stock and perform full diagnostics on-site.",
+                },
+                {
+                  question: "What warranty do you offer on batteries?",
+                  answer: "All batteries include full manufacturer warranties (typically 24-36 months). Professional fitment is required for warranty coverage. We provide written documentation for all installations.",
+                },
+              ]}
+            />
+          </div>
+
+          <Separator />
+
+          {/* --- Related Services & Products --- */}
+          <div className="mt-8 space-y-6">
+            <h2 className="text-2xl font-bold text-foreground">Related Services & Products</h2>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="border border-border rounded-lg p-4 bg-card">
+                <h3 className="text-lg font-semibold text-battery mb-2">Mobile Battery Replacement</h3>
+                <p className="text-sm text-muted-foreground mb-3">Fast on-site service across Alberton</p>
+                <Link href="/services/mobile-battery-replacement/alberton" className="text-battery hover:underline text-sm font-medium">
+                  Learn more →
+                </Link>
+              </div>
+              <div className="border border-border rounded-lg p-4 bg-card">
+                <h3 className="text-lg font-semibold text-battery mb-2">Free Battery Testing</h3>
+                <p className="text-sm text-muted-foreground mb-3">Diagnose issues before replacing</p>
+                <Link href="/services/free-battery-testing/alberton" className="text-battery hover:underline text-sm font-medium">
+                  Book a test →
+                </Link>
+              </div>
+              <div className="border border-border rounded-lg p-4 bg-card">
+                <h3 className="text-lg font-semibold text-battery mb-2">Car Batteries</h3>
+                <p className="text-sm text-muted-foreground mb-3">Browse our full range of automotive batteries</p>
+                <Link href="/products/type/automotive" className="text-battery hover:underline text-sm font-medium">
+                  View products →
+                </Link>
+              </div>
+              <div className="border border-border rounded-lg p-4 bg-card">
+                <h3 className="text-lg font-semibold text-battery mb-2">Contact Us</h3>
+                <p className="text-sm text-muted-foreground mb-3">Get expert advice or book a callout</p>
+                <Link href="/contact" className="text-battery hover:underline text-sm font-medium">
+                  Get in touch →
+                </Link>
+              </div>
+            </div>
+          </div>
         </article>
 
         {/* --- Sidebar (Right Column) --- */}
@@ -174,7 +232,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             <p className="text-muted-foreground">
               Get an instant quote or book a mobile callout.
             </p>
-            <Button asChild size="lg" variant="battery" className="w-full text-lg">
+            <Button asChild size="lg" variant="battery" className="w-full text-lg" trackingId={`blog-${post.slug}-call`}>
               <a href={`tel:${EMERGENCY_PHONE_LINK}`} className="flex items-center space-x-3">
                 <Phone className="h-6 w-6" />
                 <span>Call: {EMERGENCY_PHONE_DISPLAY}</span>

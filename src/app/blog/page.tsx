@@ -4,19 +4,60 @@ import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/componen
 import Link from "next/link";
 import { Metadata } from "next";
 import { ArrowRight, Calendar } from "lucide-react";
+import { JsonLd } from "@/components/seo/JsonLd";
+import AtomicAnswers from "@/components/seo/AtomicAnswers";
+import { Separator } from "@/components/ui/separator";
 
 // --- SEO Metadata for the main blog page ---
 export const metadata: Metadata = {
   title: "Battery Blog & Expert Guides | Alberton Battery Mart",
   description: "Read expert guides from Alberton Battery Mart on car battery maintenance, AGM vs. EFB technology, mobile fitment, and load shedding solutions.",
+  keywords: [
+    'battery blog Alberton',
+    'car battery guides',
+    'battery maintenance tips',
+    'AGM battery advice',
+    'mobile battery service guides',
+  ],
+  openGraph: {
+    title: "Battery Blog & Expert Guides | Alberton Battery Mart",
+    description: "Read expert guides from Alberton Battery Mart on car battery maintenance, AGM vs. EFB technology, mobile fitment, and load shedding solutions.",
+    url: 'https://www.albertonbatterymart.co.za/blog',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://www.albertonbatterymart.co.za/blog',
+  },
 };
 
 export default function BlogHubPage() {
   // Sort posts by date, newest first
   const sortedPosts = ALL_POSTS.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Battery Blog & Expert Guides",
+    "description": "Expert guides from Alberton Battery Mart on car battery maintenance, AGM vs. EFB technology, mobile fitment, and load shedding solutions",
+    "url": "https://www.albertonbatterymart.co.za/blog",
+    "mainEntity": {
+      "@type": "ItemList",
+      "numberOfItems": sortedPosts.length,
+      "itemListElement": sortedPosts.map((post, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": {
+          "@type": "Article",
+          "headline": post.title,
+          "url": `https://www.albertonbatterymart.co.za/blog/${post.slug}`,
+        },
+      })),
+    },
+  };
+
   return (
-    <div className="container py-16">
+    <div className="container py-16 space-y-12">
+      <JsonLd data={collectionSchema} id="blog-collection-schema" />
       {/* Page Header */}
       <div className="text-center space-y-4 mb-12">
         <h1 className="text-5xl md:text-6xl font-extrabold text-foreground">
@@ -58,6 +99,47 @@ export default function BlogHubPage() {
             </Link>
           </Card>
         ))}
+      </div>
+
+      <Separator />
+
+      {/* --- Atomic Answers for AI Overviews --- */}
+      <AtomicAnswers
+        answers={[
+          {
+            question: "What topics does the blog cover?",
+            answer: "Our blog covers car battery maintenance, AGM vs. EFB technology, mobile fitment services, load shedding solutions, vehicle-specific guides, and troubleshooting tips for Alberton drivers.",
+          },
+          {
+            question: "How often do you publish new articles?",
+            answer: "We regularly publish expert guides and local service explainers. Check back monthly for new content on battery technology, maintenance, and service updates.",
+          },
+          {
+            question: "Can I request a specific topic?",
+            answer: "Yes! Contact us at 010 109 6211 or visit our store to suggest topics. We prioritize questions from our local Alberton customers.",
+          },
+        ]}
+      />
+
+      <Separator />
+
+      {/* --- Quick Links to Services --- */}
+      <div className="space-y-4">
+        <h2 className="text-3xl font-bold text-foreground text-center">Ready to Take Action?</h2>
+        <div className="grid md:grid-cols-3 gap-4">
+          <Link href="/services/mobile-battery-replacement/alberton" className="border border-border rounded-lg p-6 bg-card hover:border-battery transition-colors text-center">
+            <h3 className="text-lg font-semibold text-battery mb-2">Mobile Service</h3>
+            <p className="text-sm text-muted-foreground">Fast on-site battery replacement</p>
+          </Link>
+          <Link href="/products/type/automotive" className="border border-border rounded-lg p-6 bg-card hover:border-battery transition-colors text-center">
+            <h3 className="text-lg font-semibold text-battery mb-2">Browse Products</h3>
+            <p className="text-sm text-muted-foreground">View our full battery range</p>
+          </Link>
+          <Link href="/contact" className="border border-border rounded-lg p-6 bg-card hover:border-battery transition-colors text-center">
+            <h3 className="text-lg font-semibold text-battery mb-2">Get Expert Advice</h3>
+            <p className="text-sm text-muted-foreground">Contact our specialists</p>
+          </Link>
+        </div>
       </div>
     </div>
   );

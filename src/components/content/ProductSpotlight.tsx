@@ -2,7 +2,7 @@
 "use client";
 import React, { useMemo } from 'react';
 import { ALL_PRODUCTS, ProductCardData } from "@/data/products";
-import ProductCard from "./ProductCard"; // This path is correct for this file
+import { ProductCard } from "./ProductCard"; // This path is correct for this file
 import { Button } from "@/components/ui/button";
 import { Zap, ArrowRight } from "lucide-react";
 import Link from "next/link";

@@ -37,14 +37,14 @@ export const TrackViewItem: React.FC<TrackViewItemProps> = ({ product }) => {
         event: 'view_item',
         ecommerce: {
           currency: 'ZAR', // --- Set to South African Rand
-          value: parsePrice(product.priceAnchor),
+          value: parsePrice(product.sellingPrice_OUTPUT),
           items: [
             {
               item_id: product.id.toString(), // Use ID as it's the unique identifier
               item_name: product.name,
               item_brand: product.brandName,
               item_category: product.category,
-              price: parsePrice(product.priceAnchor),
+              price: parsePrice(product.sellingPrice_OUTPUT),
               quantity: 1
             }
           ]

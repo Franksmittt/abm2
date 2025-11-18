@@ -1,50 +1,60 @@
-// C:\Users\User1\abm2\src\components\layout\ServiceGrid.tsx
+"use client";
+
+import { useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
-// --- UPDATED: Added Bike and Truck for new categories ---
 import { Car, Zap, ShieldCheck, Clock, Truck, Bike } from "lucide-react"; 
+import { pushDataLayerEvent } from "@/lib/analytics";
 
 // --- UPDATED: New service features with SEO keywords and correct links ---
 const SERVICE_FEATURES = [
     {
         title: "Mobile Battery Callout",
-        description: "Fast, reliable on-site battery testing and fitment at your location across Alberton, New Redruth, and Meyersdal.",
+        description: "See the full Alberton callout workflow, including Hilux & Ranger fitment examples.",
         icon: Zap,
-        href: "/services",
+        href: "/services/mobile-battery-replacement/alberton",
     },
     {
         title: "Car Batteries (AGM/EFB)",
-        description: "Full range of batteries for all Cars, including specialized AGM and EFB batteries required for Start/Stop systems.",
+        description: "Compare Willard 652 vs. Exide 668P for Hilux, Ranger, and BMW Start/Stop vehicles.",
         icon: Car,
-        href: "/products/type/automotive",
+        href: "/products/willard-652",
     },
     {
         title: "Truck & Commercial",
-        description: "Heavy-duty commercial batteries for trucks, lorries, and busses. High CCA for powerful engines.",
+        description: "Book on-site truck battery fitment for Alrode fleets and see our Willard 658/689 range.",
         icon: Truck,
-        href: "/products/type/truck-commercial",
+        href: "/services/truck-battery-fitment/alrode",
     },
     {
         title: "Motorcycle & Powersport",
-        description: "Specialized, high-cranking AGM batteries for all Motorcycles, Scooters, ATVs, and powersport vehicles.",
+        description: "Browse our motorcycle catalog and book a fitment slot for Suzuki Swift or superbike batteries.",
         icon: Bike,
         href: "/products/type/motorcycle",
     },
     {
         title: "Deep Cycle & Solar Power",
-        description: "Solutions for inverters, solar backup, camping, and marine applications. Reliable power during load shedding.",
+        description: "Explore our deep-cycle lineup for inverters and dual-battery setups before visiting the Fortuner guide.",
         icon: Clock,
         href: "/products/type/deep-cycle",
     },
     {
         title: "Guaranteed Warranty",
-        description: "All products are backed by a certified manufacturer warranty (up to 36 months) and professional fitment assurance.",
+        description: "Understand our 36‑month warranty process and how diagnostics protect your Ranger/Hilux warranties.",
         icon: ShieldCheck,
-        href: "/faq",
+        href: "/services/free-battery-testing/alberton",
     },
 ];
 
 const ServiceGrid = () => {
+    useEffect(() => {
+        pushDataLayerEvent("service_grid_view");
+    }, []);
+
+    const handleClick = (title: string, href: string) => {
+        pushDataLayerEvent("service_grid_click", { title, href });
+    };
+
     return (
         <section className="py-16 bg-white/50 dark:bg-muted/10">
             <div className="container space-y-10">
@@ -62,7 +72,7 @@ const ServiceGrid = () => {
                     {SERVICE_FEATURES.map((feature, index) => (
                         <Link key={index} href={feature.href} passHref> 
                             <Card className="shadow-lg hover:shadow-battery/20 transition-shadow duration-300 h-full cursor-pointer">
-                                <CardContent className="p-6 space-y-4">
+                                <CardContent className="p-6 space-y-4" onClick={() => handleClick(feature.title, feature.href)}>
                                    <feature.icon className="h-8 w-8 text-battery" />
                                     <h3 className="text-xl font-bold text-foreground">
                                          {feature.title}

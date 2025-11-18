@@ -6,11 +6,27 @@ import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
 import ProductSpotlight from '@/components/content/ProductSpotlight';
 import FaqSection from '@/components/layout/FaqSection';
+import { JsonLd } from '@/components/seo/JsonLd';
+import AtomicAnswers from '@/components/seo/AtomicAnswers';
+import { BASE_URL, BUSINESS_ADDRESS, BUSINESS_CONTACT } from '@/lib/seo-constants';
 
 // --- SEO: Hyper-Local Metadata ---
 export const metadata: Metadata = {
   title: 'Mobile Battery Replacement New Redruth | Alberton Battery Mart',
   description: 'Fast, on-site mobile battery replacement for New Redruth. We come to you with Willard & Exide batteries. Free fitment & alternator testing.',
+  keywords: [
+    'battery replacement New Redruth',
+    'mobile battery service New Redruth',
+    'car battery St Columb Rd',
+    'battery callout New Redruth',
+    'battery shop New Redruth',
+  ],
+  openGraph: {
+    title: 'Mobile Battery Replacement New Redruth | Alberton Battery Mart',
+    description: 'Fast, on-site mobile battery replacement for New Redruth. We come to you. Free fitment & alternator testing.',
+    url: 'https://www.albertonbatterymart.co.za/local/new-redruth',
+    type: 'website',
+  },
   alternates: {
     canonical: 'https://www.albertonbatterymart.co.za/local/new-redruth',
   },
@@ -21,8 +37,29 @@ const EMERGENCY_PHONE_DISPLAY = "010 109 6211";
 const EMERGENCY_PHONE_LINK = "0101096211";
 
 export default function NewRedruthPage() {
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "Alberton Battery Mart - New Redruth Service",
+    description: "Mobile battery replacement and store-based service for New Redruth, St Columb Rd, and surrounding areas",
+    address: {
+      "@type": "PostalAddress",
+      ...BUSINESS_ADDRESS,
+    },
+    telephone: BUSINESS_CONTACT.telephone,
+    url: `${BASE_URL}/local/new-redruth`,
+    areaServed: [
+      {
+        "@type": "City",
+        name: "New Redruth",
+      },
+    ],
+    serviceType: "Mobile Battery Replacement & Store-Based Service",
+  };
+
   return (
     <div className="space-y-16">
+      <JsonLd data={localBusinessSchema} id="new-redruth-schema" />
       
       {/* --- 1. HYPER-LOCAL HERO --- */}
       <section className="bg-card border-b border-border py-20">
@@ -36,7 +73,7 @@ export default function NewRedruthPage() {
           <p className="text-xl text-muted-foreground">
             Stuck at home or the office in New Redruth? Our mobile team brings the store to you. We provide fast, on-site battery testing and expert fitment for your car, truck, or bike.
           </p>
-          <Button asChild size="xl" variant="battery" className="shadow-lg">
+          <Button asChild size="xl" variant="battery" className="shadow-lg" trackingId="local-new-redruth-call">
             <a href={`tel:${EMERGENCY_PHONE_LINK}`} className="flex items-center space-x-3 mx-auto">
               <Phone className="h-6 w-6" />
               <span>Call for Immediate Help in New Redruth</span>
@@ -88,6 +125,28 @@ export default function NewRedruthPage() {
             <p className="text-muted-foreground">Placeholder: Image of New Redruth suburb or local landmark</p>
           </div>
         </div>
+      </section>
+
+      <Separator />
+
+      {/* --- 2.5. ATOMIC ANSWERS FOR AI OVERVIEWS --- */}
+      <section className="container">
+        <AtomicAnswers
+          answers={[
+            {
+              question: "How fast is mobile battery service in New Redruth?",
+              answer: "Our mobile unit typically reaches New Redruth addresses (St Columb Rd, Penzance St, etc.) within 30-45 minutes since we're based here. We carry Willard and Exide batteries in stock for immediate fitment.",
+            },
+            {
+              question: "Can I visit your store in New Redruth instead?",
+              answer: "Yes! Our main store is at 28 St Columb Rd, New Redruth. Walk-ins welcome Mon-Fri 8am-5pm, Sat 8am-1pm. We also offer free battery testing and diagnostics at the store.",
+            },
+            {
+              question: "Do you test alternators during mobile callouts in New Redruth?",
+              answer: "Yes. Every mobile battery replacement includes a free Midtronics digital alternator test. This prevents repeat failures and ensures your charging system is healthy before we leave.",
+            },
+          ]}
+        />
       </section>
 
       <Separator />

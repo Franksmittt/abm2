@@ -3,14 +3,35 @@ import ProductListPage from "@/components/layout/ProductListPage";
 import { ALL_PRODUCTS, ProductCardData } from "@/data/products";
 import CategoryFilterSidebar from "@/components/layout/CategoryFilterSidebar";
 import { Separator } from "@/components/ui/separator";
-import { Button } from "@/components/ui/button"; 
-import { Phone, Zap, ShieldCheck, Gauge } from "lucide-react"; // --- NEW ICONS
+import { Button } from "@/components/ui/button";
+import { Phone, Zap, ShieldCheck, Gauge, Car } from "lucide-react";
 import { Metadata } from "next";
+import Link from "next/link";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { BASE_URL } from "@/lib/seo-constants";
 
-// --- NEW: Page-Specific Metadata for SEO ---
+const PAGE_TITLE = "Car Batteries in Alberton | Standard & AGM | Alberton Battery Mart";
+const PAGE_DESCRIPTION =
+  "Willard, Exide, Enertec, and AGM/EFB Start-Stop batteries with mobile fitment across Alberton.";
+
 export const metadata: Metadata = {
-  title: "Car Batteries in Alberton | Standard & AGM | Alberton Battery Mart",
-  description: "Shop car batteries in Alberton. We stock Willard, Exide, & Enertec, including AGM/EFB batteries for Start/Stop vehicles. Free fitment & testing.",
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
+  keywords: [
+    "car battery Alberton",
+    "start-stop battery Alberton",
+    "AGM battery fitment",
+    "mobile battery replacement",
+  ],
+  alternates: {
+    canonical: `${BASE_URL}/products/type/automotive`,
+  },
+  openGraph: {
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+    url: `${BASE_URL}/products/type/automotive`,
+    type: "website",
+  },
 };
 
 const EMERGENCY_PHONE_DISPLAY = "010 109 6211";
@@ -28,9 +49,54 @@ const getFilterOptions = (products: ProductCardData[]) => {
 };
 const { brands, sizes } = getFilterOptions(AUTOMOTIVE_PRODUCTS);
 
+const SERVICE_LINKS = [
+  {
+    label: "Mobile Battery Replacement - Alberton",
+    href: "/services/mobile-battery-replacement/alberton",
+    description: "On-site diagnostics, BMS coding, Start/Stop calibration.",
+  },
+  {
+    label: "Free Battery Testing - Alberton",
+    href: "/services/free-battery-testing/alberton",
+    description: "Alternator ripple, starter draw, and parasitic drain checks.",
+  },
+  {
+    label: "Premium Fitment - Meyersdal",
+    href: "/services/battery-fitment/meyersdal",
+    description: "Boot battery projects for Audi, BMW, Mercedes.",
+  },
+];
+
+const VEHICLE_LINKS = [
+  { label: "Toyota Hilux 3.0 D-4D battery guide", slug: "toyota/hilux-3-0-d4d" },
+  { label: "Ford Ranger 2.2 TDCi coding workflow", slug: "ford/ranger-2-2-tdci" },
+  { label: "BMW 3-Series F30 AGM replacement", slug: "bmw/3-series-f30" },
+  { label: "Mercedes C-Class W205 Start/Stop battery", slug: "mercedes/c-class-w205" },
+];
+
 export default function StandardAutomotiveBatteriesPage() {
+  const productCollectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "ProductCollection",
+    name: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+    url: `${BASE_URL}/products/type/automotive`,
+    isRelatedTo: {
+      "@type": "Service",
+      name: "Mobile Battery Replacement",
+      url: `${BASE_URL}/services/mobile-battery-replacement/alberton`,
+    },
+    hasPart: AUTOMOTIVE_PRODUCTS.slice(0, 20).map((product) => ({
+      "@type": "Product",
+      name: product.name,
+      sku: product.id,
+      url: `${BASE_URL}/product/${product.id}`,
+    })),
+  };
+
   return (
     <div className="container py-16 space-y-12">
+      <JsonLd data={productCollectionSchema} id="automotive-collection-schema" />
         
         <div className="text-center space-y-3">
             <h1 className="text-5xl md:text-6xl font-extrabold text-foreground">
@@ -75,16 +141,78 @@ export default function StandardAutomotiveBatteriesPage() {
         {/* --- END NEW SECTION --- */}
 
         {/* Primary CTA Button on this page (Fixed number display) */}
-        <div className="text-center">
-             <Button asChild size="xl" variant="battery" className="shadow-lg">
+        <div className="text-center space-y-4">
+             <Button
+               asChild
+               size="xl"
+               variant="battery"
+               className="shadow-lg"
+               trackingId="type-automotive-call"
+             >
                 <a href={`tel:${EMERGENCY_PHONE_LINK}`} className="flex items-center space-x-3 mx-auto">
                     <Phone className="h-6 w-6" />
                     <span>Call Our Mobile Service Now: {EMERGENCY_PHONE_DISPLAY}</span>
                 </a>
              </Button>
+             <Button
+               asChild
+               size="lg"
+               variant="secondary"
+               className="bg-green-600 hover:bg-green-700 text-white"
+               trackingId="type-automotive-whatsapp"
+             >
+               <a
+                 href="https://wa.me/27823046926?text=Battery%20quote"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 className="flex items-center gap-2 mx-auto"
+               >
+                 <Car className="h-5 w-5" />
+                 WhatsApp the workshop
+               </a>
+             </Button>
         </div>
 
         <Separator className="pt-4" />
+
+        <section className="grid md:grid-cols-3 gap-6">
+          {SERVICE_LINKS.map((service) => (
+            <div
+              key={service.href}
+              className="p-6 rounded-2xl bg-secondary/20 border border-border space-y-3"
+            >
+              <h3 className="text-xl font-semibold text-battery">
+                {service.label}
+              </h3>
+              <p className="text-muted-foreground">{service.description}</p>
+              <Link
+                href={service.href}
+                className="text-sm font-semibold text-foreground hover:text-battery"
+              >
+                Explore →
+              </Link>
+            </div>
+          ))}
+        </section>
+
+        {VEHICLE_LINKS.length > 0 && (
+          <section className="bg-card/50 border border-border rounded-2xl p-8 space-y-4">
+            <h2 className="text-3xl font-bold text-foreground">
+              Vehicles we service daily
+            </h2>
+            <div className="grid md:grid-cols-4 gap-4">
+              {VEHICLE_LINKS.map((vehicle) => (
+                <Link
+                  key={vehicle.slug}
+                  href={`/vehicles/${vehicle.slug}`}
+                  className="p-4 rounded-xl bg-background border border-border hover:border-battery transition-colors"
+                >
+                  {vehicle.label}
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* --- MAIN LAYOUT: SIDEBAR + PRODUCT GRID --- */}
         <div className="flex flex-col lg:flex-row gap-8">

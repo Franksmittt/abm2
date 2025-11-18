@@ -2,7 +2,8 @@
 import { MetadataRoute } from 'next'
 import { ALL_PRODUCTS } from '@/data/products'
 import { ALL_POSTS } from '@/data/blog-posts'
-import { navItems } from '@/lib/nav-constants' // Using navItems for static pages
+import { getAllProductSlugs } from '@/data/product-detail'
+import { getAllVehicleSlugs } from '@/data/vehicle-fitment'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   
@@ -52,7 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       let slug = '';
       if (category === 'Standard Automotive') slug = 'automotive';
       if (category === 'Performance AGM/EFB') slug = 'performance';
-      if (category === 'Deep Cycle/Solar') slug = 'deep-cycle';
+      if (category === 'Deep Cycle') slug = 'deep-cycle';
       if (category === 'Truck & Commercial') slug = 'truck-commercial';
       if (category === 'Motorcycle') slug = 'motorcycle';
       
@@ -77,11 +78,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     }));
 
+  const productDetailPages = getAllProductSlugs().map((slug) => ({
+    url: `${baseUrl}/products/${slug}`,
+    lastModified: new Date().toISOString(),
+    changeFrequency: 'monthly' as 'monthly',
+    priority: 0.8,
+  }));
+
+  const vehiclePages = getAllVehicleSlugs().map((slug) => ({
+    url: `${baseUrl}/vehicles/${slug}`,
+    lastModified: new Date().toISOString(),
+    changeFrequency: 'monthly' as 'monthly',
+    priority: 0.8,
+  }));
+
   return [
     ...staticPages,
     ...productPages,
     ...blogPages,
     ...productTypePages,
-    ...productBrandPages
+    ...productBrandPages,
+    ...productDetailPages,
+    ...vehiclePages,
   ];
 }

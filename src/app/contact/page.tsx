@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import ContactForm from "@/components/content/ContactForm";
 import { Metadata } from "next";
+import QuoteTrackingWrapper from "@/components/layout/QuoteTrackingWrapper";
+import { headers } from "next/headers";
 
 // --- NEW: Page-Specific Metadata for SEO with Open Graph ---
 export const metadata: Metadata = {
@@ -42,7 +44,16 @@ const CONTACT_DETAILS = {
 };
 
 export default function ContactPage() {
+  const bucketHeader = headers().get("x-ab-bucket");
+  const bucket = bucketHeader === "variant" ? "variant" : "control";
+
   return (
+    <QuoteTrackingWrapper
+      bucket={bucket}
+      viewEventName="contact_page_view"
+      ctaEventName="contact_page_cta_click"
+    >
+      {({ trackCta }) => (
     <div className="container py-16 space-y-12">
       {/* --- NEW: SEO-Optimized H1 & Subtitle --- */}
       <h1 className="text-5xl font-extrabold text-foreground text-center">
@@ -69,7 +80,7 @@ export default function ContactPage() {
               </div>
               <p className="text-2xl font-extrabold text-foreground">{CONTACT_DETAILS.primaryPhone}</p>
               <Button asChild variant="battery" className="w-full mt-2">
-                <a href={`tel:${CONTACT_DETAILS.primaryPhone}`}>Call Us Now</a>
+                <a href={`tel:${CONTACT_DETAILS.primaryPhone}`} onClick={() => trackCta("call")}>Call Us Now</a>
               </Button>
             </CardContent>
           </Card>
@@ -83,7 +94,7 @@ export default function ContactPage() {
               </div>
               <p className="text-lg text-muted-foreground">**Please note: This number is for messaging only. No calls.**</p>
               <Button asChild variant="secondary" className="w-full mt-2 bg-green-600 hover:bg-green-700 text-white">
-                <a href={`https://wa.me/${CONTACT_DETAILS.whatsAppLink}`} target="_blank" rel="noopener noreferrer">
+                <a href={`https://wa.me/${CONTACT_DETAILS.whatsAppLink}`} target="_blank" rel="noopener noreferrer" onClick={() => trackCta("whatsapp")}>
                   Message {CONTACT_DETAILS.whatsAppNumber}
                 </a>
               </Button>
@@ -97,7 +108,7 @@ export default function ContactPage() {
             <div className="flex items-start space-x-4">
               <MapPin className="h-6 w-6 text-battery flex-shrink-0" />
               <p className="text-lg text-foreground">
-                <a href={CONTACT_DETAILS.mapsLink} target="_blank" rel="noopener noreferrer" className="hover:text-battery">
+                <a href={CONTACT_DETAILS.mapsLink} target="_blank" rel="noopener noreferrer" className="hover:text-battery" onClick={() => trackCta("maps")}>
                   {CONTACT_DETAILS.address} (Click for Directions)
                 </a>
               </p>
@@ -110,7 +121,7 @@ export default function ContactPage() {
             
             <div className="flex items-center space-x-4">
               <Mail className="h-6 w-6 text-battery" />
-              <Link href={`mailto:${CONTACT_DETAILS.email}`} className="text-lg text-foreground hover:text-battery">
+              <Link href={`mailto:${CONTACT_DETAILS.email}`} className="text-lg text-foreground hover:text-battery" onClick={() => trackCta("email")}>
                 {CONTACT_DETAILS.email}
               </Link>
             </div>
@@ -142,5 +153,7 @@ export default function ContactPage() {
         </div>
       </div>
     </div>
+      )}
+    </QuoteTrackingWrapper>
   );
 }

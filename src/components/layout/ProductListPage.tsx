@@ -1,6 +1,6 @@
 // src/components/layout/ProductListPage.tsx
 import { ALL_PRODUCTS, ProductCardData } from "@/data/products"; 
-import ProductCard from "@/components/content/ProductCard";
+import { ProductCard } from "@/components/content/ProductCard";
 import { Button } from "@/components/ui/button";
 import { Phone } from "lucide-react";
 

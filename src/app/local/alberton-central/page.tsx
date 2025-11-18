@@ -6,11 +6,27 @@ import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
 import ProductSpotlight from '@/components/content/ProductSpotlight';
 import FaqSection from '@/components/layout/FaqSection';
+import { JsonLd } from '@/components/seo/JsonLd';
+import AtomicAnswers from '@/components/seo/AtomicAnswers';
+import { BASE_URL, BUSINESS_ADDRESS, BUSINESS_CONTACT } from '@/lib/seo-constants';
 
 // --- SEO: Hyper-Local Metadata ---
 export const metadata: Metadata = {
   title: 'Mobile Battery Replacement Alberton Central | Alberton Battery Mart',
   description: 'Fast, on-site mobile battery replacement for Alberton Central. Stuck at Alberton City? We come to you. Free fitment & alternator testing.',
+  keywords: [
+    'battery replacement Alberton Central',
+    'mobile battery service Alberton City',
+    'car battery Alberton CBD',
+    'battery callout Voortrekker Road',
+    'on-site battery fitment Alberton',
+  ],
+  openGraph: {
+    title: 'Mobile Battery Replacement Alberton Central | Alberton Battery Mart',
+    description: 'Fast, on-site mobile battery replacement for Alberton Central. We come to you. Free fitment & alternator testing.',
+    url: 'https://www.albertonbatterymart.co.za/local/alberton-central',
+    type: 'website',
+  },
   alternates: {
     canonical: 'https://www.albertonbatterymart.co.za/local/alberton-central',
   },
@@ -21,8 +37,33 @@ const EMERGENCY_PHONE_DISPLAY = "010 109 6211";
 const EMERGENCY_PHONE_LINK = "0101096211";
 
 export default function AlbertonCentralPage() {
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "Alberton Battery Mart - Alberton Central Service",
+    description: "Mobile battery replacement service for Alberton Central, Alberton City, and Voortrekker Road area",
+    address: {
+      "@type": "PostalAddress",
+      ...BUSINESS_ADDRESS,
+    },
+    telephone: BUSINESS_CONTACT.telephone,
+    url: `${BASE_URL}/local/alberton-central`,
+    areaServed: [
+      {
+        "@type": "City",
+        name: "Alberton Central",
+      },
+      {
+        "@type": "City",
+        name: "Alberton City",
+      },
+    ],
+    serviceType: "Mobile Battery Replacement",
+  };
+
   return (
     <div className="space-y-16">
+      <JsonLd data={localBusinessSchema} id="alberton-central-schema" />
       
       {/* --- 1. HYPER-LOCAL HERO --- */}
       <section className="bg-card border-b border-border py-20">
@@ -36,7 +77,7 @@ export default function AlbertonCentralPage() {
           <p className="text-xl text-muted-foreground">
             Stuck at Alberton City Mall, at your office, or on Voortrekker Road? Our mobile team is minutes away. We provide fast, on-site battery testing and expert fitment for your vehicle.
           </p>
-          <Button asChild size="xl" variant="battery" className="shadow-lg">
+          <Button asChild size="xl" variant="battery" className="shadow-lg" trackingId="local-alberton-central-call">
             <a href={`tel:${EMERGENCY_PHONE_LINK}`} className="flex items-center space-x-3 mx-auto">
               <Phone className="h-6 w-6" />
               <span>Call for Immediate Help in Alberton Central</span>
@@ -88,6 +129,28 @@ export default function AlbertonCentralPage() {
             <p className="text-muted-foreground">Placeholder: Image of Alberton City Mall or local landmark</p>
           </div>
         </div>
+      </section>
+
+      <Separator />
+
+      {/* --- 2.5. ATOMIC ANSWERS FOR AI OVERVIEWS --- */}
+      <section className="container">
+        <AtomicAnswers
+          answers={[
+            {
+              question: "How fast is mobile battery service in Alberton Central?",
+              answer: "Our mobile unit typically reaches Alberton Central locations (Alberton City Mall, Voortrekker Road) within 60 minutes of your call. We carry Willard and Exide batteries in stock, so most swaps happen on-site.",
+            },
+            {
+              question: "Do you test alternators during mobile callouts?",
+              answer: "Yes. Every mobile battery replacement includes a free Midtronics digital alternator test. This prevents repeat failures and ensures your charging system is healthy before we leave.",
+            },
+            {
+              question: "Can I visit your store instead of mobile service?",
+              answer: "Absolutely. Our main store at 28 St Columb Rd, New Redruth is just minutes from Alberton Central. Walk-ins welcome Mon-Fri 8am-5pm, Sat 8am-1pm.",
+            },
+          ]}
+        />
       </section>
 
       <Separator />

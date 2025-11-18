@@ -6,21 +6,118 @@ import Link from "next/link";
 import { Sun, Zap, ShieldCheck } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { BASE_URL } from "@/lib/seo-constants";
 
-// --- NEW: Page-Specific Metadata for SEO ---
+const PAGE_TITLE = "Solar, Inverter & Deep Cycle Batteries in Alberton";
+const PAGE_DESCRIPTION =
+  "Get load-shedding ready with AGM and LiFePO₄ deep-cycle batteries plus expert inverter advice in Alberton.";
+
 export const metadata: Metadata = {
-  title: "Solar, Inverter & Deep Cycle Batteries in Alberton",
-  description: "Get the best batteries for load shedding in Alberton. We stock Deep Cycle, AGM, and Lithium (LiFePO₄) batteries for inverters and solar systems.",
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
+  keywords: [
+    "deep cycle batteries Alberton",
+    "LiFePO4 inverter battery",
+    "solar battery Alberton",
+    "load shedding backup",
+  ],
+  alternates: {
+    canonical: `${BASE_URL}/products/type/deep-cycle`,
+  },
+  openGraph: {
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+    url: `${BASE_URL}/products/type/deep-cycle`,
+    type: "website",
+  },
 };
 
-// Filters for: Deep Cycle/Solar
+// Filters for: Deep Cycle
 const DEEP_CYCLE_PRODUCTS = ALL_PRODUCTS.filter((p: ProductCardData) => 
-  p.category === 'Deep Cycle/Solar'
+  p.category === 'Deep Cycle'
 );
 
+const SERVICE_LINKS = [
+  {
+    label: "Request a Solar/Inverter Quote",
+    href: "/quote",
+    description:
+      "Sizing calculator, load profile analysis, and equipment sourcing.",
+  },
+  {
+    label: "Deep Cycle & Solar Knowledge Hub",
+    href: "/deep-cycle",
+    description: "AGM vs LiFePO₄ guides, charging recommendations, maintenance.",
+  },
+  {
+    label: "Free Battery Testing - Alberton",
+    href: "/services/free-battery-testing/alberton",
+    description: "Check alternator + charger health before you upgrade batteries.",
+  },
+];
+
+const VEHICLE_LINKS = [
+  { label: "Land Cruiser 200 dual battery setup", slug: "toyota/land-cruiser-200" },
+  { label: "Range Rover Sport auxiliary upgrade", slug: "land-rover/range-rover-sport" },
+  { label: "Discovery 4 load-shedding build", slug: "land-rover/discovery-4" },
+];
+
 export default function DeepCycleBatteriesPage() {
+  const productCollectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "ProductCollection",
+    name: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+    url: `${BASE_URL}/products/type/deep-cycle`,
+    isRelatedTo: {
+      "@type": "Service",
+      name: "Inverter and Solar Deployment",
+      url: `${BASE_URL}/quote`,
+    },
+    hasPart: DEEP_CYCLE_PRODUCTS.slice(0, 20).map((product) => ({
+      "@type": "Product",
+      name: product.name,
+      sku: product.id,
+      url: `${BASE_URL}/product/${product.id}`,
+    })),
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Should I use AGM or Lithium for my inverter?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "AGM batteries are affordable and work for moderate load shedding, while LiFePO₄ handles higher cycles and deeper discharge for heavy usage.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Can I mix old and new deep-cycle batteries?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "No. Mixing old and new batteries causes imbalance and voids warranties. Replace the entire bank together or isolate banks.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Do you install and commission inverter batteries?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. We perform installs via our solar partners, validate charger settings, and commission the battery bank to ensure warranty compliance.",
+        },
+      },
+    ],
+  };
+
   return (
     <div className="container py-16 space-y-16">
+      <JsonLd data={productCollectionSchema} id="deep-cycle-collection" />
+      <JsonLd data={faqSchema} id="deep-cycle-faq" />
       
       {/* --- NEW: Full Landing Page Content --- */}
       <div className="text-center space-y-4">
@@ -57,7 +154,12 @@ export default function DeepCycleBatteriesPage() {
           </div>
         </div>
         <div className="text-center pt-6">
-          <Button asChild size="lg" variant="battery">
+          <Button
+            asChild
+            size="lg"
+            variant="battery"
+            trackingId="type-deep-cycle-quote"
+          >
             <Link href="/quote">Request a Free Solar/Inverter Quote</Link>
           </Button>
         </div>
@@ -65,6 +167,45 @@ export default function DeepCycleBatteriesPage() {
 
       <Separator />
       {/* --- END NEW CONTENT --- */}
+
+      <section className="grid md:grid-cols-2 gap-6">
+        {SERVICE_LINKS.map((service) => (
+          <div
+            key={service.href}
+            className="p-6 rounded-2xl bg-secondary/20 border border-border space-y-3"
+          >
+            <h3 className="text-xl font-semibold text-battery">
+              {service.label}
+            </h3>
+            <p className="text-muted-foreground">{service.description}</p>
+            <Link
+              href={service.href}
+              className="text-sm font-semibold text-foreground hover:text-battery"
+            >
+              Explore →
+            </Link>
+          </div>
+        ))}
+      </section>
+
+      {VEHICLE_LINKS.length > 0 && (
+        <section className="bg-card/50 border border-border rounded-2xl p-8 space-y-4">
+          <h2 className="text-3xl font-bold text-foreground">
+            Vehicles we upgrade with dual/deep-cycle banks
+          </h2>
+          <div className="grid md:grid-cols-3 gap-4">
+            {VEHICLE_LINKS.map((vehicle) => (
+              <Link
+                key={vehicle.slug}
+                href={`/vehicles/${vehicle.slug}`}
+                className="p-4 rounded-xl bg-background border border-border hover:border-battery transition-colors"
+              >
+                {vehicle.label}
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       <ProductListPage
         title="Deep Cycle Product Catalog"

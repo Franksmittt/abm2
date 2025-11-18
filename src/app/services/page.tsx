@@ -1,9 +1,11 @@
 // src/app/services/page.tsx
-import { Phone, MapPin, Zap, ShieldCheck, Clock, Gauge, BrainCircuit } from "lucide-react"; // --- NEW: Added BrainCircuit
+import { Phone, MapPin, Zap, ShieldCheck, Clock, Gauge, BrainCircuit } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import AtomicAnswers from "@/components/seo/AtomicAnswers";
 
 // --- NEW: Page-Specific Metadata for SEO with Open Graph ---
 export const metadata: Metadata = {
@@ -80,10 +82,7 @@ export default function ServicesPage() {
   return (
     <div className="container py-16 space-y-16">
       {/* --- Add Service Schema --- */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-      />
+      <JsonLd data={serviceSchema} id="services-landing-schema" />
       
       {/* SECTION 1: HERO & PRIMARY CTA (H1 Focus) */}
       <div className="text-center space-y-4 border-b border-border pb-10">
@@ -162,6 +161,8 @@ export default function ServicesPage() {
       </div>
 
       <Separator className="bg-border" />
+
+      <AtomicAnswers variant="services" />
 
       {/* SECTION 3: DIAGNOSTICS & WARRANTY (Authority) */}
       <div className="grid lg:grid-cols-12 gap-10">

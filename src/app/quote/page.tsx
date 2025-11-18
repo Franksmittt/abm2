@@ -3,6 +3,8 @@ import { Battery, Mail, Phone, Zap, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Metadata } from "next";
 import ContactForm from "@/components/content/ContactForm"; // <-- IMPORTED
+import QuoteTrackingWrapper from "@/components/layout/QuoteTrackingWrapper";
+import { headers } from "next/headers";
 
 // --- NEW: Page-Specific Metadata for SEO ---
 export const metadata: Metadata = {
@@ -14,8 +16,13 @@ const EMERGENCY_PHONE = "0101096211";
 const EMAIL_ADDRESS = "admin@albertonbatterymart.co.za";
 
 export default function QuotePage() {
+  const bucketHeader = headers().get("x-ab-bucket");
+  const bucket = bucketHeader === "variant" ? "variant" : "control";
+
   return (
-    <div className="container py-16 space-y-12 max-w-4xl">
+    <QuoteTrackingWrapper bucket={bucket} viewEventName="quote_page_view" ctaEventName="quote_page_cta_click">
+      {({ trackCta }) => (
+        <div className="container py-16 space-y-12 max-w-4xl">
       
       <div className="text-center space-y-4">
         <Battery className="h-16 w-16 text-battery mx-auto" />
@@ -64,13 +71,13 @@ export default function QuotePage() {
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Button asChild size="lg" variant="battery">
-            <a href={`tel:${EMERGENCY_PHONE}`} className="flex items-center space-x-2">
+            <a href={`tel:${EMERGENCY_PHONE}`} className="flex items-center space-x-2" onClick={() => trackCta("call")}>
               <Phone className="h-5 w-5" />
               <span>Call Now</span>
             </a>
           </Button>
           <Button asChild size="lg" variant="outline">
-            <a href={`mailto:${EMAIL_ADDRESS}`} className="flex items-center space-x-2">
+            <a href={`mailto:${EMAIL_ADDRESS}`} className="flex items-center space-x-2" onClick={() => trackCta("email")}>
               <Mail className="h-5 w-5" />
               <span>Email Inquiry</span>
             </a>
@@ -78,5 +85,7 @@ export default function QuotePage() {
         </div>
       </div>
     </div>
+      )}
+  </QuoteTrackingWrapper>
   );
 }
