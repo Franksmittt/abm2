@@ -26,30 +26,32 @@ export function HeroCtaButtons({ variant }: HeroCtaButtonsProps) {
   };
 
   return (
-    <div className="flex flex-col items-center md:flex-row md:justify-start space-y-4 md:space-y-0 md:space-x-4 pt-2">
+    <div className="flex flex-col sm:flex-row items-center sm:items-stretch gap-2.5 sm:gap-3">
+      {/* Primary CTA: Call - Battery Red, High Contrast, Maximum Urgency */}
       <Button
         asChild
-        size="xl"
+        size="default"
         variant="battery"
-        className="shadow-lg w-full max-w-xs"
+        className="shadow-2xl shadow-battery/50 hover:shadow-battery/70 w-full sm:w-auto sm:min-w-[200px] font-black text-sm md:text-base transition-all hover:scale-105 h-11 md:h-12"
       >
         <a
           href={`tel:${EMERGENCY_PHONE_LINK}`}
           className="flex items-center justify-center space-x-2"
           onClick={() => handleClick("call")}
         >
-          <Phone className="h-5 w-5" />
-          <span className="text-lg font-bold">
-            {variant === "variant" ? "Book Diagnostic" : "Call Us Now"}
+          <Phone className="h-4 w-4 md:h-5 md:w-5" />
+          <span>
+            {variant === "variant" ? "CALL: Book Diagnostic" : "CALL NOW: Immediate Service"}
           </span>
         </a>
       </Button>
 
+      {/* Secondary CTA: WhatsApp - Brand Green, Platform Association */}
       <Button
         asChild
+        size="default"
         variant="secondary"
-        size="xl"
-        className="bg-green-600 hover:bg-green-700 text-white w-full max-w-xs"
+        className="bg-[#25D366] hover:bg-[#20BA5A] text-white w-full sm:w-auto sm:min-w-[200px] shadow-2xl shadow-[#25D366]/30 hover:shadow-[#25D366]/50 font-black text-sm md:text-base transition-all hover:scale-105 h-11 md:h-12"
       >
         <a
           href={`https://wa.me/${WHATSAPP_NUMBER_LINK}`}
@@ -58,8 +60,8 @@ export function HeroCtaButtons({ variant }: HeroCtaButtonsProps) {
           className="flex items-center justify-center space-x-2"
           onClick={() => handleClick("whatsapp")}
         >
-          <MessageSquare className="h-5 w-5" />
-          <span className="text-lg font-bold">WhatsApp Us</span>
+          <MessageSquare className="h-4 w-4 md:h-5 md:w-5" />
+          <span>WhatsApp Expert: Get Quote</span>
         </a>
       </Button>
     </div>

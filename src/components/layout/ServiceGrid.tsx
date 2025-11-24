@@ -56,37 +56,53 @@ const ServiceGrid = () => {
     };
 
     return (
-        <section className="py-16 bg-white/50 dark:bg-muted/10">
-            <div className="container space-y-10">
-                <div className="text-center space-y-3">
-                    <h2 className="text-4xl font-extrabold text-foreground">
+        <section className="electric-section relative py-20">
+            <div className="electric-grid-overlay"></div>
+            <div className="electric-lightning lightning-one"></div>
+            <div className="electric-lightning lightning-two"></div>
+            <div className="electric-lightning lightning-three"></div>
+
+            <div className="container relative z-10 space-y-12">
+                <div className="text-center space-y-4">
+                    <span className="inline-flex items-center justify-center px-4 py-1 text-xs font-semibold tracking-[0.2em] uppercase bg-white/5 text-white/70 rounded-full border border-white/10">
+                        Energy Field Verified
+                    </span>
+                    <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight">
                         Your Trusted <span className="text-battery">Mobile Power</span> Specialists
                     </h2>
-                    <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                        We don't just sell batteries; we provide certified mobile fitment, testing, and expert advice for every vehicle and power requirement.
+                    <p className="text-lg text-white/70 max-w-3xl mx-auto">
+                        We don't just sell batteries; we engineer mobile power systems with certified fitment, diagnostics, and technical mastery for every vehicle and energy requirement.
                     </p>
                 </div>
 
                 {/* --- UPDATED: Grid now supports 6 items gracefully --- */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {SERVICE_FEATURES.map((feature, index) => (
-                        <Link key={index} href={feature.href} passHref> 
-                            <Card className="shadow-lg hover:shadow-battery/20 transition-shadow duration-300 h-full cursor-pointer">
-                                <CardContent className="p-6 space-y-4" onClick={() => handleClick(feature.title, feature.href)}>
-                                   <feature.icon className="h-8 w-8 text-battery" />
-                                    <h3 className="text-xl font-bold text-foreground">
+                        <Link key={index} href={feature.href} passHref className="group block h-full">
+                            <Card className="electric-card h-full cursor-pointer border border-white/10 bg-[rgba(12,12,12,0.85)] backdrop-blur">
+                                <CardContent className="p-6 space-y-4 relative z-10" onClick={() => handleClick(feature.title, feature.href)}>
+                                    <div className="flex items-center justify-between">
+                                        <feature.icon className="electric-icon h-8 w-8 text-battery transition-all duration-300" />
+                                        <div className="w-2 h-2 rounded-full bg-battery shadow-[0_0_20px_rgba(192,0,0,0.8)] animate-pulse"></div>
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-white transition-all duration-300">
                                          {feature.title}
                                     </h3>
-                                    <p className="text-sm text-muted-foreground">
+                                    <p className="text-sm text-white/70 leading-relaxed">
                                          {feature.description}
                                     </p>
+
+                                    {/* Electric bolts */}
+                                    <span className="electric-bolt"></span>
+                                    <span className="electric-bolt"></span>
+                                    <span className="electric-bolt"></span>
                                 </CardContent>
                             </Card>
                         </Link>
                     ))}
                 </div>
             </div>
-         </section>
+        </section>
     );
 };
 

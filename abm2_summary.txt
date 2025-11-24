@@ -24,6 +24,8 @@
 ├── 📄 tsconfig.json
 │   ├── 📁 .vscode
 │   │   ├── 📄 settings.json
+│   ├── 📁 content
+│   │   ├── 📄 gbp-posts.md
 │   ├── 📁 Keywords
 │   │   ├── 📄 Alberton Car Battery Keyword Domination Strategy.txt
 │   │   ├── 📄 Automotive Battery Market Research.txt
@@ -5464,6 +5466,35 @@ export default config;
 --------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\.vscode\settings.json--------------------------------------------------------------------------------{
   "css.lint.unknownAtRules": "ignore"
 }
+
+--------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\content\gbp-posts.md--------------------------------------------------------------------------------# Google Business Profile Post Snippets – Alberton Battery Mart
+
+## Mobile Battery Callout – Alberton CBD
+- **Post:** “Stranded in Alberton CBD? Our mobile techs arrive in ±60 min with the exact Willard/Exide spec and run full diagnostics before fitting. Call 010 109 6211 for a guaranteed, warrantied swap.”
+- **CTA:** “Book a mobile callout”
+- **Link:** https://www.albertonbatterymart.co.za/services/mobile-battery-replacement/alberton
+
+## Free Battery Testing – New Redruth Store
+- **Post:** “Lights dimming or car battling to start? Swing past 28 St Columb Rd for FREE Midtronics testing on battery, alternator, and starter. No purchase until we prove the fault.”
+- **CTA:** “Book a diagnostic slot”
+- **Link:** https://www.albertonbatterymart.co.za/services/free-battery-testing/alberton
+
+## Meyersdal Premium Fitment (AGM/Start-Stop)
+- **Post:** “Driving a BMW, Audi, or Mercedes with Start/Stop? We stock OEM-spec AGM batteries and code the new unit to your BMS from our Meyersdal crew. Stop warning lights before they start.”
+- **CTA:** “Schedule premium fitment”
+- **Link:** https://www.albertonbatterymart.co.za/services/battery-fitment/meyersdal
+
+## Fleet & Truck Battery Rotation – Alrode
+- **Post:** “Keep your Alrode fleet moving. We rotate, test, and replace Willard 658/689 truck batteries on-site, recycle the old units, and keep warranties intact.”
+- **CTA:** “Request a fleet quote”
+- **Link:** https://www.albertonbatterymart.co.za/services/truck-battery-fitment/alrode
+
+## Emergency Jump-Start / Estate Access
+- **Post:** “Estate access? No problem. Our jump-start van clears security quickly, tests the battery, and fits a new unit if needed—Meyersdal, Brackenhurst, Randhart covered daily.”
+- **CTA:** “WhatsApp 24/7 help”
+- **Link:** https://wa.me/27823046926
+
+
 
 --------------------------------------------------------------------------------📄 FILE PATH: C:\Users\User1\abm2\Keywords\Alberton Car Battery Keyword Domination Strategy.txt--------------------------------------------------------------------------------﻿Strategic Intelligence Report & Market Dominance Plan: Alberton Automotive Battery Market
 
@@ -19873,19 +19904,60 @@ import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/componen
 import Link from "next/link";
 import { Metadata } from "next";
 import { ArrowRight, Calendar } from "lucide-react";
+import { JsonLd } from "@/components/seo/JsonLd";
+import AtomicAnswers from "@/components/seo/AtomicAnswers";
+import { Separator } from "@/components/ui/separator";
 
 // --- SEO Metadata for the main blog page ---
 export const metadata: Metadata = {
   title: "Battery Blog & Expert Guides | Alberton Battery Mart",
   description: "Read expert guides from Alberton Battery Mart on car battery maintenance, AGM vs. EFB technology, mobile fitment, and load shedding solutions.",
+  keywords: [
+    'battery blog Alberton',
+    'car battery guides',
+    'battery maintenance tips',
+    'AGM battery advice',
+    'mobile battery service guides',
+  ],
+  openGraph: {
+    title: "Battery Blog & Expert Guides | Alberton Battery Mart",
+    description: "Read expert guides from Alberton Battery Mart on car battery maintenance, AGM vs. EFB technology, mobile fitment, and load shedding solutions.",
+    url: 'https://www.albertonbatterymart.co.za/blog',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://www.albertonbatterymart.co.za/blog',
+  },
 };
 
 export default function BlogHubPage() {
   // Sort posts by date, newest first
   const sortedPosts = ALL_POSTS.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Battery Blog & Expert Guides",
+    "description": "Expert guides from Alberton Battery Mart on car battery maintenance, AGM vs. EFB technology, mobile fitment, and load shedding solutions",
+    "url": "https://www.albertonbatterymart.co.za/blog",
+    "mainEntity": {
+      "@type": "ItemList",
+      "numberOfItems": sortedPosts.length,
+      "itemListElement": sortedPosts.map((post, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": {
+          "@type": "Article",
+          "headline": post.title,
+          "url": `https://www.albertonbatterymart.co.za/blog/${post.slug}`,
+        },
+      })),
+    },
+  };
+
   return (
-    <div className="container py-16">
+    <div className="container py-16 space-y-12">
+      <JsonLd data={collectionSchema} id="blog-collection-schema" />
       {/* Page Header */}
       <div className="text-center space-y-4 mb-12">
         <h1 className="text-5xl md:text-6xl font-extrabold text-foreground">
@@ -19928,6 +20000,47 @@ export default function BlogHubPage() {
           </Card>
         ))}
       </div>
+
+      <Separator />
+
+      {/* --- Atomic Answers for AI Overviews --- */}
+      <AtomicAnswers
+        answers={[
+          {
+            question: "What topics does the blog cover?",
+            answer: "Our blog covers car battery maintenance, AGM vs. EFB technology, mobile fitment services, load shedding solutions, vehicle-specific guides, and troubleshooting tips for Alberton drivers.",
+          },
+          {
+            question: "How often do you publish new articles?",
+            answer: "We regularly publish expert guides and local service explainers. Check back monthly for new content on battery technology, maintenance, and service updates.",
+          },
+          {
+            question: "Can I request a specific topic?",
+            answer: "Yes! Contact us at 010 109 6211 or visit our store to suggest topics. We prioritize questions from our local Alberton customers.",
+          },
+        ]}
+      />
+
+      <Separator />
+
+      {/* --- Quick Links to Services --- */}
+      <div className="space-y-4">
+        <h2 className="text-3xl font-bold text-foreground text-center">Ready to Take Action?</h2>
+        <div className="grid md:grid-cols-3 gap-4">
+          <Link href="/services/mobile-battery-replacement/alberton" className="border border-border rounded-lg p-6 bg-card hover:border-battery transition-colors text-center">
+            <h3 className="text-lg font-semibold text-battery mb-2">Mobile Service</h3>
+            <p className="text-sm text-muted-foreground">Fast on-site battery replacement</p>
+          </Link>
+          <Link href="/products/type/automotive" className="border border-border rounded-lg p-6 bg-card hover:border-battery transition-colors text-center">
+            <h3 className="text-lg font-semibold text-battery mb-2">Browse Products</h3>
+            <p className="text-sm text-muted-foreground">View our full battery range</p>
+          </Link>
+          <Link href="/contact" className="border border-border rounded-lg p-6 bg-card hover:border-battery transition-colors text-center">
+            <h3 className="text-lg font-semibold text-battery mb-2">Get Expert Advice</h3>
+            <p className="text-sm text-muted-foreground">Contact our specialists</p>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
@@ -19938,6 +20051,10 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { Calendar, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { JsonLd } from "@/components/seo/JsonLd";
+import AtomicAnswers from "@/components/seo/AtomicAnswers";
+import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
 
 // --- Helper to find the post ---
 const getPostBySlug = (slug: string): BlogPost | undefined => {
@@ -20067,16 +20184,11 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
   };
 
   return (
-    <div className="container py-16">
+    <div className="container py-16 space-y-12">
       {/* --- Add Article and Breadcrumb Schema --- */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
+      <JsonLd data={articleSchema} id="article-schema" />
+      <JsonLd data={breadcrumbSchema} id="breadcrumb-schema" />
+      
       <div className="grid lg:grid-cols-12 gap-12">
 
         {/* --- Main Content (Left Column) --- */}
@@ -20097,6 +20209,65 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           <div className="prose prose-invert prose-lg max-w-none prose-h2:text-battery prose-h2:font-bold prose-a:text-battery prose-strong:text-foreground">
             {post.content}
           </div>
+
+          <Separator />
+
+          {/* --- Atomic Answers for AI Overviews --- */}
+          <div className="mt-8">
+            <AtomicAnswers
+              answers={[
+                {
+                  question: "How do I know if my battery needs replacement?",
+                  answer: "Signs include slow engine cranking, dashboard warning lights, battery age over 3-4 years, or visible corrosion. We offer free battery testing at our store or during mobile callouts to diagnose the issue accurately.",
+                },
+                {
+                  question: "Do you offer mobile battery replacement in Alberton?",
+                  answer: "Yes. Our mobile unit reaches Alberton Central, Meyersdal, and New Redruth within 45-60 minutes. We carry Willard and Exide batteries in stock and perform full diagnostics on-site.",
+                },
+                {
+                  question: "What warranty do you offer on batteries?",
+                  answer: "All batteries include full manufacturer warranties (typically 24-36 months). Professional fitment is required for warranty coverage. We provide written documentation for all installations.",
+                },
+              ]}
+            />
+          </div>
+
+          <Separator />
+
+          {/* --- Related Services & Products --- */}
+          <div className="mt-8 space-y-6">
+            <h2 className="text-2xl font-bold text-foreground">Related Services & Products</h2>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="border border-border rounded-lg p-4 bg-card">
+                <h3 className="text-lg font-semibold text-battery mb-2">Mobile Battery Replacement</h3>
+                <p className="text-sm text-muted-foreground mb-3">Fast on-site service across Alberton</p>
+                <Link href="/services/mobile-battery-replacement/alberton" className="text-battery hover:underline text-sm font-medium">
+                  Learn more →
+                </Link>
+              </div>
+              <div className="border border-border rounded-lg p-4 bg-card">
+                <h3 className="text-lg font-semibold text-battery mb-2">Free Battery Testing</h3>
+                <p className="text-sm text-muted-foreground mb-3">Diagnose issues before replacing</p>
+                <Link href="/services/free-battery-testing/alberton" className="text-battery hover:underline text-sm font-medium">
+                  Book a test →
+                </Link>
+              </div>
+              <div className="border border-border rounded-lg p-4 bg-card">
+                <h3 className="text-lg font-semibold text-battery mb-2">Car Batteries</h3>
+                <p className="text-sm text-muted-foreground mb-3">Browse our full range of automotive batteries</p>
+                <Link href="/products/type/automotive" className="text-battery hover:underline text-sm font-medium">
+                  View products →
+                </Link>
+              </div>
+              <div className="border border-border rounded-lg p-4 bg-card">
+                <h3 className="text-lg font-semibold text-battery mb-2">Contact Us</h3>
+                <p className="text-sm text-muted-foreground mb-3">Get expert advice or book a callout</p>
+                <Link href="/contact" className="text-battery hover:underline text-sm font-medium">
+                  Get in touch →
+                </Link>
+              </div>
+            </div>
+          </div>
         </article>
 
         {/* --- Sidebar (Right Column) --- */}
@@ -20108,7 +20279,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             <p className="text-muted-foreground">
               Get an instant quote or book a mobile callout.
             </p>
-            <Button asChild size="lg" variant="battery" className="w-full text-lg">
+            <Button asChild size="lg" variant="battery" className="w-full text-lg" trackingId={`blog-${post.slug}-call`}>
               <a href={`tel:${EMERGENCY_PHONE_LINK}`} className="flex items-center space-x-3">
                 <Phone className="h-6 w-6" />
                 <span>Call: {EMERGENCY_PHONE_DISPLAY}</span>
@@ -20449,11 +20620,27 @@ import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
 import ProductSpotlight from '@/components/content/ProductSpotlight';
 import FaqSection from '@/components/layout/FaqSection';
+import { JsonLd } from '@/components/seo/JsonLd';
+import AtomicAnswers from '@/components/seo/AtomicAnswers';
+import { BASE_URL, BUSINESS_ADDRESS, BUSINESS_CONTACT } from '@/lib/seo-constants';
 
 // --- SEO: Hyper-Local Metadata ---
 export const metadata: Metadata = {
   title: 'Mobile Battery Replacement Alberton Central | Alberton Battery Mart',
   description: 'Fast, on-site mobile battery replacement for Alberton Central. Stuck at Alberton City? We come to you. Free fitment & alternator testing.',
+  keywords: [
+    'battery replacement Alberton Central',
+    'mobile battery service Alberton City',
+    'car battery Alberton CBD',
+    'battery callout Voortrekker Road',
+    'on-site battery fitment Alberton',
+  ],
+  openGraph: {
+    title: 'Mobile Battery Replacement Alberton Central | Alberton Battery Mart',
+    description: 'Fast, on-site mobile battery replacement for Alberton Central. We come to you. Free fitment & alternator testing.',
+    url: 'https://www.albertonbatterymart.co.za/local/alberton-central',
+    type: 'website',
+  },
   alternates: {
     canonical: 'https://www.albertonbatterymart.co.za/local/alberton-central',
   },
@@ -20464,8 +20651,33 @@ const EMERGENCY_PHONE_DISPLAY = "010 109 6211";
 const EMERGENCY_PHONE_LINK = "0101096211";
 
 export default function AlbertonCentralPage() {
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "Alberton Battery Mart - Alberton Central Service",
+    description: "Mobile battery replacement service for Alberton Central, Alberton City, and Voortrekker Road area",
+    address: {
+      "@type": "PostalAddress",
+      ...BUSINESS_ADDRESS,
+    },
+    telephone: BUSINESS_CONTACT.telephone,
+    url: `${BASE_URL}/local/alberton-central`,
+    areaServed: [
+      {
+        "@type": "City",
+        name: "Alberton Central",
+      },
+      {
+        "@type": "City",
+        name: "Alberton City",
+      },
+    ],
+    serviceType: "Mobile Battery Replacement",
+  };
+
   return (
     <div className="space-y-16">
+      <JsonLd data={localBusinessSchema} id="alberton-central-schema" />
       
       {/* --- 1. HYPER-LOCAL HERO --- */}
       <section className="bg-card border-b border-border py-20">
@@ -20479,7 +20691,7 @@ export default function AlbertonCentralPage() {
           <p className="text-xl text-muted-foreground">
             Stuck at Alberton City Mall, at your office, or on Voortrekker Road? Our mobile team is minutes away. We provide fast, on-site battery testing and expert fitment for your vehicle.
           </p>
-          <Button asChild size="xl" variant="battery" className="shadow-lg">
+          <Button asChild size="xl" variant="battery" className="shadow-lg" trackingId="local-alberton-central-call">
             <a href={`tel:${EMERGENCY_PHONE_LINK}`} className="flex items-center space-x-3 mx-auto">
               <Phone className="h-6 w-6" />
               <span>Call for Immediate Help in Alberton Central</span>
@@ -20535,6 +20747,28 @@ export default function AlbertonCentralPage() {
 
       <Separator />
 
+      {/* --- 2.5. ATOMIC ANSWERS FOR AI OVERVIEWS --- */}
+      <section className="container">
+        <AtomicAnswers
+          answers={[
+            {
+              question: "How fast is mobile battery service in Alberton Central?",
+              answer: "Our mobile unit typically reaches Alberton Central locations (Alberton City Mall, Voortrekker Road) within 60 minutes of your call. We carry Willard and Exide batteries in stock, so most swaps happen on-site.",
+            },
+            {
+              question: "Do you test alternators during mobile callouts?",
+              answer: "Yes. Every mobile battery replacement includes a free Midtronics digital alternator test. This prevents repeat failures and ensures your charging system is healthy before we leave.",
+            },
+            {
+              question: "Can I visit your store instead of mobile service?",
+              answer: "Absolutely. Our main store at 28 St Columb Rd, New Redruth is just minutes from Alberton Central. Walk-ins welcome Mon-Fri 8am-5pm, Sat 8am-1pm.",
+            },
+          ]}
+        />
+      </section>
+
+      <Separator />
+
       {/* --- 3. RE-USED PRODUCT SPOTLIGHT --- */}
       <ProductSpotlight count={3} />
 
@@ -20553,11 +20787,27 @@ import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
 import ProductSpotlight from '@/components/content/ProductSpotlight';
 import FaqSection from '@/components/layout/FaqSection';
+import { JsonLd } from '@/components/seo/JsonLd';
+import AtomicAnswers from '@/components/seo/AtomicAnswers';
+import { BASE_URL, BUSINESS_ADDRESS, BUSINESS_CONTACT } from '@/lib/seo-constants';
 
 // --- SEO: Hyper-Local Metadata ---
 export const metadata: Metadata = {
   title: 'Mobile Battery Replacement Meyersdal | Alberton Battery Mart',
   description: 'Fast, on-site mobile battery replacement for Meyersdal. We come to you with Willard & Exide batteries. Free fitment & alternator testing.',
+  keywords: [
+    'battery replacement Meyersdal',
+    'mobile battery service Meyersdal',
+    'car battery Meyersdal Eco Estate',
+    'battery callout Meyersdal',
+    'AGM battery fitment Meyersdal',
+  ],
+  openGraph: {
+    title: 'Mobile Battery Replacement Meyersdal | Alberton Battery Mart',
+    description: 'Fast, on-site mobile battery replacement for Meyersdal. We come to you. Free fitment & alternator testing.',
+    url: 'https://www.albertonbatterymart.co.za/local/meyersdal',
+    type: 'website',
+  },
   alternates: {
     canonical: 'https://www.albertonbatterymart.co.za/local/meyersdal',
   },
@@ -20568,8 +20818,33 @@ const EMERGENCY_PHONE_DISPLAY = "010 109 6211";
 const EMERGENCY_PHONE_LINK = "0101096211";
 
 export default function MeyersdalPage() {
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "Alberton Battery Mart - Meyersdal Service",
+    description: "Mobile battery replacement and premium AGM fitment service for Meyersdal, Meyersdal Eco Estate, and surrounding areas",
+    address: {
+      "@type": "PostalAddress",
+      ...BUSINESS_ADDRESS,
+    },
+    telephone: BUSINESS_CONTACT.telephone,
+    url: `${BASE_URL}/local/meyersdal`,
+    areaServed: [
+      {
+        "@type": "City",
+        name: "Meyersdal",
+      },
+      {
+        "@type": "City",
+        name: "Meyersdal Eco Estate",
+      },
+    ],
+    serviceType: "Mobile Battery Replacement & Premium AGM Fitment",
+  };
+
   return (
     <div className="space-y-16">
+      <JsonLd data={localBusinessSchema} id="meyersdal-schema" />
       
       {/* --- 1. HYPER-LOCAL HERO --- */}
       <section className="bg-card border-b border-border py-20">
@@ -20583,7 +20858,7 @@ export default function MeyersdalPage() {
           <p className="text-xl text-muted-foreground">
             Stuck at home in the Meyersdal Eco Estate or near the Virgin Active? Our mobile team brings the store to you. We provide fast, on-site battery testing and expert fitment.
           </p>
-          <Button asChild size="xl" variant="battery" className="shadow-lg">
+          <Button asChild size="xl" variant="battery" className="shadow-lg" trackingId="local-meyersdal-call">
             <a href={`tel:${EMERGENCY_PHONE_LINK}`} className="flex items-center space-x-3 mx-auto">
               <Phone className="h-6 w-6" />
               <span>Call for Immediate Help in Meyersdal</span>
@@ -20639,6 +20914,28 @@ export default function MeyersdalPage() {
 
       <Separator />
 
+      {/* --- 2.5. ATOMIC ANSWERS FOR AI OVERVIEWS --- */}
+      <section className="container">
+        <AtomicAnswers
+          answers={[
+            {
+              question: "How fast is mobile battery service in Meyersdal?",
+              answer: "Our mobile unit typically reaches Meyersdal locations (Eco Estate, Virgin Active area) within 45-60 minutes. We stock premium AGM batteries for BMW, Mercedes, and Audi vehicles common in Meyersdal.",
+            },
+            {
+              question: "Do you offer BMS coding for premium vehicles in Meyersdal?",
+              answer: "Yes. We're one of the few specialists in Alberton with advanced diagnostic tools for BMW, Mercedes, and Audi BMS registration. This is essential for AGM batteries in modern Start/Stop vehicles.",
+            },
+            {
+              question: "Can I visit your store instead of mobile service?",
+              answer: "Absolutely. Our main store at 28 St Columb Rd, New Redruth is just a short drive from Meyersdal. Walk-ins welcome Mon-Fri 8am-5pm, Sat 8am-1pm.",
+            },
+          ]}
+        />
+      </section>
+
+      <Separator />
+
       {/* --- 3. RE-USED PRODUCT SPOTLIGHT --- */}
       <ProductSpotlight count={3} />
 
@@ -20657,11 +20954,27 @@ import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
 import ProductSpotlight from '@/components/content/ProductSpotlight';
 import FaqSection from '@/components/layout/FaqSection';
+import { JsonLd } from '@/components/seo/JsonLd';
+import AtomicAnswers from '@/components/seo/AtomicAnswers';
+import { BASE_URL, BUSINESS_ADDRESS, BUSINESS_CONTACT } from '@/lib/seo-constants';
 
 // --- SEO: Hyper-Local Metadata ---
 export const metadata: Metadata = {
   title: 'Mobile Battery Replacement New Redruth | Alberton Battery Mart',
   description: 'Fast, on-site mobile battery replacement for New Redruth. We come to you with Willard & Exide batteries. Free fitment & alternator testing.',
+  keywords: [
+    'battery replacement New Redruth',
+    'mobile battery service New Redruth',
+    'car battery St Columb Rd',
+    'battery callout New Redruth',
+    'battery shop New Redruth',
+  ],
+  openGraph: {
+    title: 'Mobile Battery Replacement New Redruth | Alberton Battery Mart',
+    description: 'Fast, on-site mobile battery replacement for New Redruth. We come to you. Free fitment & alternator testing.',
+    url: 'https://www.albertonbatterymart.co.za/local/new-redruth',
+    type: 'website',
+  },
   alternates: {
     canonical: 'https://www.albertonbatterymart.co.za/local/new-redruth',
   },
@@ -20672,8 +20985,29 @@ const EMERGENCY_PHONE_DISPLAY = "010 109 6211";
 const EMERGENCY_PHONE_LINK = "0101096211";
 
 export default function NewRedruthPage() {
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "Alberton Battery Mart - New Redruth Service",
+    description: "Mobile battery replacement and store-based service for New Redruth, St Columb Rd, and surrounding areas",
+    address: {
+      "@type": "PostalAddress",
+      ...BUSINESS_ADDRESS,
+    },
+    telephone: BUSINESS_CONTACT.telephone,
+    url: `${BASE_URL}/local/new-redruth`,
+    areaServed: [
+      {
+        "@type": "City",
+        name: "New Redruth",
+      },
+    ],
+    serviceType: "Mobile Battery Replacement & Store-Based Service",
+  };
+
   return (
     <div className="space-y-16">
+      <JsonLd data={localBusinessSchema} id="new-redruth-schema" />
       
       {/* --- 1. HYPER-LOCAL HERO --- */}
       <section className="bg-card border-b border-border py-20">
@@ -20687,7 +21021,7 @@ export default function NewRedruthPage() {
           <p className="text-xl text-muted-foreground">
             Stuck at home or the office in New Redruth? Our mobile team brings the store to you. We provide fast, on-site battery testing and expert fitment for your car, truck, or bike.
           </p>
-          <Button asChild size="xl" variant="battery" className="shadow-lg">
+          <Button asChild size="xl" variant="battery" className="shadow-lg" trackingId="local-new-redruth-call">
             <a href={`tel:${EMERGENCY_PHONE_LINK}`} className="flex items-center space-x-3 mx-auto">
               <Phone className="h-6 w-6" />
               <span>Call for Immediate Help in New Redruth</span>
@@ -20739,6 +21073,28 @@ export default function NewRedruthPage() {
             <p className="text-muted-foreground">Placeholder: Image of New Redruth suburb or local landmark</p>
           </div>
         </div>
+      </section>
+
+      <Separator />
+
+      {/* --- 2.5. ATOMIC ANSWERS FOR AI OVERVIEWS --- */}
+      <section className="container">
+        <AtomicAnswers
+          answers={[
+            {
+              question: "How fast is mobile battery service in New Redruth?",
+              answer: "Our mobile unit typically reaches New Redruth addresses (St Columb Rd, Penzance St, etc.) within 30-45 minutes since we're based here. We carry Willard and Exide batteries in stock for immediate fitment.",
+            },
+            {
+              question: "Can I visit your store in New Redruth instead?",
+              answer: "Yes! Our main store is at 28 St Columb Rd, New Redruth. Walk-ins welcome Mon-Fri 8am-5pm, Sat 8am-1pm. We also offer free battery testing and diagnostics at the store.",
+            },
+            {
+              question: "Do you test alternators during mobile callouts in New Redruth?",
+              answer: "Yes. Every mobile battery replacement includes a free Midtronics digital alternator test. This prevents repeat failures and ensures your charging system is healthy before we leave.",
+            },
+          ]}
+        />
       </section>
 
       <Separator />
@@ -23046,6 +23402,7 @@ import { Separator } from "@/components/ui/separator";
 import { getProductDetail, getAllProductSlugs } from "@/data/product-detail";
 import { BASE_URL, ORG_ID, DEFAULT_HERO_IMAGE } from "@/lib/seo-constants";
 import { ShieldCheck } from "lucide-react";
+import AtomicAnswers from "@/components/seo/AtomicAnswers";
 
 type Params = {
   slug: string;
@@ -23161,10 +23518,10 @@ export default function ProductDetailPage({ params }: { params: Params }) {
             <span className="text-3xl font-bold text-foreground">
               {product.price}
             </span>
-            <Button asChild size="lg" variant="battery">
+            <Button asChild size="lg" variant="battery" trackingId={`product-${product.slug}-call`}>
               <a href="tel:0101096211">Book installation</a>
             </Button>
-            <Button asChild size="lg" variant="secondary">
+            <Button asChild size="lg" variant="secondary" trackingId={`product-${product.slug}-whatsapp`}>
               <a
                 href="https://wa.me/27823046926?text=Battery%20quote"
                 target="_blank"
@@ -23268,6 +23625,27 @@ export default function ProductDetailPage({ params }: { params: Params }) {
           ))}
         </div>
       </section>
+
+      <AtomicAnswers
+        variant="custom"
+        answers={[
+          {
+            question: "How long does installation take?",
+            answer:
+              "Most in-store installs take ±30 minutes, callouts ±60 minutes. We code the battery if your vehicle requires BMS registration.",
+          },
+          {
+            question: "Do you test before replacing?",
+            answer:
+              "Yes. Every job includes Midtronics load testing plus alternator/starter checks so we only replace once we’ve proved failure.",
+          },
+          {
+            question: "What warranties apply?",
+            answer:
+              `This battery carries a ${product.warrantyMonths}-month manufacturer warranty. We register it on-site so your proof of purchase and fitment is locked in.`,
+          },
+        ]}
+      />
 
       <Separator className="bg-border" />
 
@@ -23760,6 +24138,7 @@ import {
 } from "@/data/service-pages";
 import { BASE_URL, BUSINESS_ADDRESS, BUSINESS_CONTACT } from "@/lib/seo-constants";
 import { Phone, MapPin, Zap, ShieldCheck } from "lucide-react";
+import AtomicAnswers from "@/components/seo/AtomicAnswers";
 
 type Params = {
   service: string;
@@ -23854,6 +24233,24 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
           })),
         }
       : null;
+
+  const atomicAnswers = [
+    {
+      question: "How fast can you reach me?",
+      answer:
+        "Most callouts inside Alberton, New Redruth, Meyersdal, and Alrode arrive within an hour. We dispatch with the exact battery spec matching your VIN and alternator output.",
+    },
+    {
+      question: "What diagnostics are included?",
+      answer:
+        "Every visit includes Midtronics load testing, alternator ripple checks, starter draw, and BMS scans where needed. We replace the battery only after proving the failure.",
+    },
+    {
+      question: "Do you handle payment and warranties on-site?",
+      answer:
+        "Yes. We accept card payments via mobile terminals and register the manufacturer warranty immediately, so you leave with documentation in hand.",
+    },
+  ];
 
   return (
     <div className="container py-16 space-y-16">
@@ -23961,6 +24358,8 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
           ))}
         </div>
       </section>
+
+      <AtomicAnswers variant="custom" answers={atomicAnswers} />
 
       <Separator className="bg-border" />
 
