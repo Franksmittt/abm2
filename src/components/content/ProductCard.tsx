@@ -105,9 +105,8 @@ export function ProductCard({ product }: { product: ProductCardData }) {
         <CardFooter className="relative z-10 px-6 pb-6 pt-0 flex items-center justify-between text-sm text-white/70">
           <div>
             <p className="text-[11px] uppercase tracking-[0.3em] text-white/40">
-              View Full Spec
+              Price includes Scrap Exchange
             </p>
-            <p className="text-base font-semibold">Fitment, diagnostics & BMS coding</p>
           </div>
 
           <div className="flex items-center gap-2 text-battery font-semibold">

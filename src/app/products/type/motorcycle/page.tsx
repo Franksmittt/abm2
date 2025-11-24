@@ -104,31 +104,31 @@ export default function MotorcycleBatteriesPage() {
             <Separator className="pt-4" />
         </div>
 
-        <div className="text-center space-y-4">
+        <div className="flex flex-col items-center gap-4 text-center max-w-md mx-auto">
           <Button
             asChild
-            size="lg"
+            size="xl"
             variant="battery"
             trackingId="type-motorcycle-call"
-            className="shadow-lg"
+            className="w-full shadow-lg"
           >
-            <a href="tel:0101096211" className="flex items-center gap-2 mx-auto">
+            <a href="tel:0101096211" className="flex w-full items-center justify-center gap-2">
               <Phone className="h-5 w-5" />
               Call our motorcycle fitment line
             </a>
           </Button>
           <Button
             asChild
-            size="lg"
+            size="xl"
             variant="secondary"
-            className="bg-green-600 hover:bg-green-700 text-white"
+            className="w-full bg-green-600 hover:bg-green-700 text-white"
             trackingId="type-motorcycle-whatsapp"
           >
             <a
               href="https://wa.me/27823046926?text=Motorcycle%20battery%20quote"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 mx-auto"
+              className="flex w-full items-center justify-center gap-2"
             >
               <MessageSquare className="h-5 w-5" />
               WhatsApp the workshop

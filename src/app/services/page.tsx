@@ -97,7 +97,7 @@ export default function ServicesPage() {
         <Button asChild size="xl" variant="battery" className="mt-6 shadow-lg">
           <a href={`tel:${EMERGENCY_PHONE_LINK}`} className="flex items-center space-x-3 mx-auto">
              <Phone className="h-6 w-6" />
-            <span>Call Our Mobile Service Now: {EMERGENCY_PHONE_DISPLAY}</span> 
+            <span>Call Us: {EMERGENCY_PHONE_DISPLAY}</span> 
           </a>
         </Button>
       </div>

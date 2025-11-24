@@ -141,31 +141,31 @@ export default function StandardAutomotiveBatteriesPage() {
         {/* --- END NEW SECTION --- */}
 
         {/* Primary CTA Button on this page (Fixed number display) */}
-        <div className="text-center space-y-4">
+        <div className="flex flex-col items-center gap-4 text-center max-w-md mx-auto">
              <Button
                asChild
                size="xl"
                variant="battery"
-               className="shadow-lg"
+               className="w-full shadow-lg"
                trackingId="type-automotive-call"
              >
-                <a href={`tel:${EMERGENCY_PHONE_LINK}`} className="flex items-center space-x-3 mx-auto">
+               <a href={`tel:${EMERGENCY_PHONE_LINK}`} className="flex w-full items-center justify-center gap-3">
                     <Phone className="h-6 w-6" />
-                    <span>Call Our Mobile Service Now: {EMERGENCY_PHONE_DISPLAY}</span>
+                    <span>Call Us: {EMERGENCY_PHONE_DISPLAY}</span>
                 </a>
              </Button>
              <Button
                asChild
-               size="lg"
+               size="xl"
                variant="secondary"
-               className="bg-green-600 hover:bg-green-700 text-white"
+               className="w-full bg-green-600 hover:bg-green-700 text-white"
                trackingId="type-automotive-whatsapp"
              >
                <a
                  href="https://wa.me/27823046926?text=Battery%20quote"
                  target="_blank"
                  rel="noopener noreferrer"
-                 className="flex items-center gap-2 mx-auto"
+                 className="flex w-full items-center justify-center gap-2"
                >
                  <Car className="h-5 w-5" />
                  WhatsApp the workshop
