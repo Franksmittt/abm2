@@ -20,6 +20,14 @@ export const metadata: Metadata = {
     description: "Learn about Alberton Battery Mart. We are your local, multi-brand battery specialists offering expert advice, free fitment, and mobile callouts.",
     url: 'https://www.albertonbatterymart.co.za/about',
     type: 'website',
+    images: [
+      {
+        url: '/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Alberton Battery Mart - About Us',
+      },
+    ],
   },
   alternates: {
     canonical: 'https://www.albertonbatterymart.co.za/about',

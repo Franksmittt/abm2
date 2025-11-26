@@ -50,6 +50,14 @@ export async function generateMetadata({
       description,
       url,
       type: "website",
+      images: [
+        {
+          url: '/images/og-image.jpg',
+          width: 1200,
+          height: 630,
+          alt: `${brandName} Batteries - Alberton Battery Mart`,
+        },
+      ],
     },
     alternates: {
       canonical: url,

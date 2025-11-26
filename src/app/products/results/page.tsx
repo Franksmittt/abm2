@@ -5,6 +5,10 @@ import { notFound } from 'next/navigation';
 import CategoryFilterSidebar from "@/components/layout/CategoryFilterSidebar";
 import { Separator } from "@/components/ui/separator";
 import { Metadata } from 'next';
+import { BASE_URL } from "@/lib/seo-constants";
+
+// Mark route as dynamic since it uses searchParams
+export const dynamic = 'force-dynamic';
 
 interface ResultsPageProps {
   searchParams: {
@@ -27,9 +31,35 @@ export async function generateMetadata({ searchParams }: ResultsPageProps): Prom
     title = `Batteries from ${searchParams.minAh || '0'}Ah to ${searchParams.maxAh || '...'}Ah`;
   }
   
+  const url = `${BASE_URL}/products/results${searchParams.q ? `?q=${encodeURIComponent(searchParams.q)}` : ''}${searchParams.brand ? `?brand=${encodeURIComponent(searchParams.brand)}` : ''}`;
+  
   return {
     title: `${title} | Alberton Battery Mart`,
     description: `Find ${title} at Alberton Battery Mart. We stock all car, truck, and solar batteries with free fitment.`,
+    keywords: [
+      'battery search',
+      'find battery',
+      'battery catalog',
+      searchParams.q || '',
+      searchParams.brand || '',
+    ].filter(Boolean),
+    openGraph: {
+      title: `${title} | Alberton Battery Mart`,
+      description: `Find ${title} at Alberton Battery Mart. We stock all car, truck, and solar batteries with free fitment.`,
+      url,
+      type: 'website',
+      images: [
+        {
+          url: '/images/og-image.jpg',
+          width: 1200,
+          height: 630,
+          alt: 'Battery Search Results - Alberton Battery Mart',
+        },
+      ],
+    },
+    alternates: {
+      canonical: url,
+    },
   };
 }
 

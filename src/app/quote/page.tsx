@@ -5,11 +5,39 @@ import { Metadata } from "next";
 import ContactForm from "@/components/content/ContactForm"; // <-- IMPORTED
 import QuoteTrackingWrapper from "@/components/layout/QuoteTrackingWrapper";
 import { headers } from "next/headers";
+import { BASE_URL } from "@/lib/seo-constants";
+
+// Mark route as dynamic since we're using headers()
+export const dynamic = 'force-dynamic';
 
 // --- NEW: Page-Specific Metadata for SEO ---
 export const metadata: Metadata = {
   title: "Solar & Inverter Quote Alberton | Alberton Battery Mart",
   description: "Request a free quote for solar, inverter, or bulk battery orders in Alberton. Our specialists will design a custom power solution for you.",
+  keywords: [
+    'solar battery quote Alberton',
+    'inverter battery quote',
+    'bulk battery order',
+    'deep cycle battery quote',
+    'solar power solution Alberton'
+  ],
+  openGraph: {
+    title: "Solar & Inverter Quote Alberton | Alberton Battery Mart",
+    description: "Request a free quote for solar, inverter, or bulk battery orders in Alberton. Our specialists will design a custom power solution for you.",
+    url: `${BASE_URL}/quote`,
+    type: 'website',
+    images: [
+      {
+        url: '/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Alberton Battery Mart - Solar & Inverter Quote',
+      },
+    ],
+  },
+  alternates: {
+    canonical: `${BASE_URL}/quote`,
+  },
 };
 
 const EMERGENCY_PHONE = "0101096211";

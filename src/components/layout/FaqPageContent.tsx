@@ -74,7 +74,7 @@ const FaqPageContent = () => {
       {/* --- NEW: Add FAQPage Schema to the page --- */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema).replace(/</g, '\\u003c') }}
       />
       
        <div className="container px-4 md:px-6 lg:px-8">

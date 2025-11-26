@@ -6,11 +6,37 @@ import Link from "next/link";
 import { Sun, Zap, ShieldCheck } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
+import { BASE_URL } from "@/lib/seo-constants";
 
 // --- NEW: Page-Specific Metadata for SEO ---
 export const metadata: Metadata = {
   title: "Solar, Inverter & Deep Cycle Batteries in Alberton",
   description: "Get the best batteries for load shedding in Alberton. We stock Deep Cycle, AGM, and Lithium (LiFePO₄) batteries for inverters and solar systems.",
+  keywords: [
+    'deep cycle batteries Alberton',
+    'solar batteries',
+    'inverter batteries',
+    'load shedding batteries',
+    'LiFePO4 batteries',
+    'AGM deep cycle'
+  ],
+  openGraph: {
+    title: "Solar, Inverter & Deep Cycle Batteries in Alberton",
+    description: "Get the best batteries for load shedding in Alberton. We stock Deep Cycle, AGM, and Lithium (LiFePO₄) batteries for inverters and solar systems.",
+    url: `${BASE_URL}/deep-cycle`,
+    type: 'website',
+    images: [
+      {
+        url: '/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Deep Cycle & Solar Batteries - Alberton Battery Mart',
+      },
+    ],
+  },
+  alternates: {
+    canonical: `${BASE_URL}/deep-cycle`,
+  },
 };
 
 // Filters for: Deep Cycle

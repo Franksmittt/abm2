@@ -30,6 +30,14 @@ export const metadata: Metadata = {
     description: PAGE_DESCRIPTION,
     url: `${BASE_URL}/products/type/deep-cycle`,
     type: "website",
+    images: [
+      {
+        url: '/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Deep Cycle & Solar Batteries - Alberton Battery Mart',
+      },
+    ],
   },
 };
 

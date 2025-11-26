@@ -3,11 +3,36 @@ import { Zap, ShieldCheck, Phone, MapPin, Gauge } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Metadata } from "next";
+import { BASE_URL } from "@/lib/seo-constants";
 
 // --- NEW: Page-Specific Metadata for SEO ---
 export const metadata: Metadata = {
   title: "Free Battery Fitment & Testing Service in Alberton",
   description: "We offer free, professional battery fitment and alternator testing in Alberton. We ensure your warranty is validated and your car's BMS is correctly calibrated.",
+  keywords: [
+    'free battery fitment Alberton',
+    'battery installation',
+    'BMS coding',
+    'battery warranty',
+    'professional fitment'
+  ],
+  openGraph: {
+    title: "Free Battery Fitment & Testing Service in Alberton",
+    description: "We offer free, professional battery fitment and alternator testing in Alberton. We ensure your warranty is validated and your car's BMS is correctly calibrated.",
+    url: `${BASE_URL}/fitment`,
+    type: 'website',
+    images: [
+      {
+        url: '/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Free Battery Fitment - Alberton Battery Mart',
+      },
+    ],
+  },
+  alternates: {
+    canonical: `${BASE_URL}/fitment`,
+  },
 };
 
 const EMERGENCY_PHONE = "0101096211";

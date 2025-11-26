@@ -20,6 +20,14 @@ export const metadata: Metadata = {
     description: "Answers to common battery questions in Alberton. Learn about our free callouts, warranty, and AGM/EFB batteries.",
     url: 'https://www.albertonbatterymart.co.za/faq',
     type: 'website',
+    images: [
+      {
+        url: '/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'FAQ - Alberton Battery Mart',
+      },
+    ],
   },
   alternates: {
     canonical: 'https://www.albertonbatterymart.co.za/faq',

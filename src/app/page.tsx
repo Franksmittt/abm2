@@ -1,19 +1,22 @@
 // src/app/page.tsx
-import dynamic from 'next/dynamic';
+import dynamicImport from 'next/dynamic';
 import { Metadata } from 'next';
 import HeroSection from "@/components/layout/HeroSection";
 import { headers } from "next/headers";
 
+// Mark route as dynamic since we're using headers()
+export const dynamic = 'force-dynamic';
+
 // Lazy-load all components below the fold
-const TrustAuthoritySection = dynamic(() => import('@/components/layout/TrustAuthoritySection'));
-const ServiceGrid = dynamic(() => import('@/components/layout/ServiceGrid'));
-const ProductSpotlight = dynamic(() => import('@/components/content/ProductSpotlight'));
-const StorefrontCTA = dynamic(() => import('@/components/layout/StorefrontCTA'));
-const TestimonialSection = dynamic(() => import('@/components/layout/TestimonialSection'));
-const FaqSection = dynamic(() => import('@/components/layout/FaqSection'));
-const ContactForm = dynamic(() => import('@/components/content/ContactForm'));
-const ThinCta = dynamic(() => import('@/components/layout/ThinCta'));
-const AtomicAnswers = dynamic(() => import('@/components/seo/AtomicAnswers'));
+const TrustAuthoritySection = dynamicImport(() => import('@/components/layout/TrustAuthoritySection'));
+const ServiceGrid = dynamicImport(() => import('@/components/layout/ServiceGrid'));
+const ProductSpotlight = dynamicImport(() => import('@/components/content/ProductSpotlight'));
+const StorefrontCTA = dynamicImport(() => import('@/components/layout/StorefrontCTA'));
+const TestimonialSection = dynamicImport(() => import('@/components/layout/TestimonialSection'));
+const FaqSection = dynamicImport(() => import('@/components/layout/FaqSection'));
+const ContactForm = dynamicImport(() => import('@/components/content/ContactForm'));
+const ThinCta = dynamicImport(() => import('@/components/layout/ThinCta'));
+const AtomicAnswers = dynamicImport(() => import('@/components/seo/AtomicAnswers'));
 
 // --- SEO: Homepage Metadata with Open Graph ---
 export const metadata: Metadata = {

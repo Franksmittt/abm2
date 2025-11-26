@@ -4,6 +4,7 @@ import { ALL_PRODUCTS } from '@/data/products'
 import { ALL_POSTS } from '@/data/blog-posts'
 import { getAllProductSlugs } from '@/data/product-detail'
 import { getAllVehicleSlugs } from '@/data/vehicle-fitment'
+import { getAllServicePages } from '@/data/service-pages'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   
@@ -22,7 +23,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/quote',
     '/testing',
     '/fitment',
-    '/deep-cycle' // This is the old deep-cycle page, let's keep it
+    '/deep-cycle', // This is the old deep-cycle page, let's keep it
+    '/local/alberton-central',
+    '/local/meyersdal',
+    '/local/new-redruth',
+    '/blog',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date().toISOString(),
@@ -92,6 +97,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  // 7. Create entries for all service pages
+  const servicePages = getAllServicePages().map((service) => ({
+    url: `${baseUrl}/services/${service.serviceSlug}/${service.areaSlug}`,
+    lastModified: new Date().toISOString(),
+    changeFrequency: 'monthly' as 'monthly',
+    priority: 0.8,
+  }));
+
   return [
     ...staticPages,
     ...productPages,
@@ -100,5 +113,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...productBrandPages,
     ...productDetailPages,
     ...vehiclePages,
+    ...servicePages,
   ];
 }

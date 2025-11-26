@@ -10,6 +10,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Truck, Users, Clock, Zap, SunMoon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ALL_PRODUCTS, ProductCardData } from '@/data/products';
+import { BASE_URL } from '@/lib/seo-constants';
 // The import below was removed because the function formatAhCapacity is no longer used,
 // and the source file was empty, causing error TS2306.
 
@@ -31,19 +32,34 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const title = `${product.name} | ${product.seoSubtitle} Price`;
   const description = product.seoDescription || `Buy ${product.name} ${product.category} battery with ${product.warrantyMonths}-month warranty, available in Alberton.`;
+  const url = `${BASE_URL}/product/${product.id}`;
 
   return {
     title: title,
     description: description,
+    keywords: [
+      `${product.name} Alberton`,
+      `${product.brandName} battery`,
+      `${product.sku} battery`,
+      'battery Alberton',
+      product.category.toLowerCase(),
+    ],
     openGraph: {
       title: title,
       description: description,
+      url,
+      type: 'website',
       images: [
         {
-          url: product.imagePath,
+          url: `${BASE_URL}${product.imagePath}`,
+          width: 800,
+          height: 600,
           alt: product.name,
         },
       ],
+    },
+    alternates: {
+      canonical: url,
     },
   };
 }

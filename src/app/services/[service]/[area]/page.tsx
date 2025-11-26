@@ -46,7 +46,14 @@ export async function generateMetadata({
       description: entry.description,
       url,
       type: "article",
-      images: entry.ogImage ? [entry.ogImage] : undefined,
+      images: [
+        {
+          url: entry.ogImage || `${BASE_URL}/images/og-image.jpg`,
+          width: 1200,
+          height: 630,
+          alt: entry.title,
+        },
+      ],
     },
     alternates: {
       canonical: url,

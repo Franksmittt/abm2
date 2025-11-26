@@ -3,10 +3,36 @@ import { Gauge, Phone, ShieldCheck, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Metadata } from "next";
 
+import { BASE_URL } from "@/lib/seo-constants";
+
 // --- NEW: Page-Specific Metadata for SEO ---
 export const metadata: Metadata = {
   title: "Free Battery, Starter & Alternator Test in Alberton | Alberton Battery Mart",
   description: "Get a 100% free, no-obligation battery, starter, and alternator test at our Alberton store. We only sell you a battery if you actually need one.",
+  keywords: [
+    'free battery test Alberton',
+    'alternator test',
+    'starter test',
+    'battery diagnostics',
+    'battery health check'
+  ],
+  openGraph: {
+    title: "Free Battery, Starter & Alternator Test in Alberton | Alberton Battery Mart",
+    description: "Get a 100% free, no-obligation battery, starter, and alternator test at our Alberton store. We only sell you a battery if you actually need one.",
+    url: `${BASE_URL}/testing`,
+    type: 'website',
+    images: [
+      {
+        url: '/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Free Battery Testing - Alberton Battery Mart',
+      },
+    ],
+  },
+  alternates: {
+    canonical: `${BASE_URL}/testing`,
+  },
 };
 
 const EMERGENCY_PHONE = "0101096211";

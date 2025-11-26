@@ -25,6 +25,14 @@ export const metadata: Metadata = {
     description: "Browse all batteries at Alberton Battery Mart. We stock Willard, Exide, & Enertec for cars, trucks, motorcycles, and solar inverters.",
     url: 'https://www.albertonbatterymart.co.za/products',
     type: 'website',
+    images: [
+      {
+        url: '/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Batteries for Sale - Alberton Battery Mart',
+      },
+    ],
   },
   alternates: {
     canonical: 'https://www.albertonbatterymart.co.za/products',

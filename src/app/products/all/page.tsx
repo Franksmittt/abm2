@@ -4,11 +4,36 @@ import { ALL_PRODUCTS, ProductCardData } from "@/data/products";
 import CategoryFilterSidebar from "@/components/layout/CategoryFilterSidebar";
 import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
+import { BASE_URL } from "@/lib/seo-constants";
 
 // --- NEW: Page-Specific Metadata for SEO ---
 export const metadata: Metadata = {
   title: "All Batteries for Sale in Alberton | Alberton Battery Mart",
   description: "Browse our complete inventory. We stock car, truck, motorcycle, solar, and inverter batteries from Willard, Exide, and Enertec. Free fitment in Alberton.",
+  keywords: [
+    'all batteries Alberton',
+    'battery catalog',
+    'complete battery range',
+    'Willard Exide Enertec',
+    'battery inventory'
+  ],
+  openGraph: {
+    title: "All Batteries for Sale in Alberton | Alberton Battery Mart",
+    description: "Browse our complete inventory. We stock car, truck, motorcycle, solar, and inverter batteries from Willard, Exide, and Enertec. Free fitment in Alberton.",
+    url: `${BASE_URL}/products/all`,
+    type: 'website',
+    images: [
+      {
+        url: '/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'All Batteries - Alberton Battery Mart',
+      },
+    ],
+  },
+  alternates: {
+    canonical: `${BASE_URL}/products/all`,
+  },
 };
 
 // --- NEW: Helper to get ALL filters for the sidebar ---

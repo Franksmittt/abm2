@@ -41,7 +41,10 @@ export async function generateMetadata({
       type: "article",
       images: [
         {
-          url: product.heroImage || `${BASE_URL}/images/og-image.jpg`,
+          url: product.heroImage ? `${BASE_URL}${product.heroImage}` : `${BASE_URL}/images/og-image.jpg`,
+          width: 1200,
+          height: 630,
+          alt: product.title,
         },
       ],
     },
