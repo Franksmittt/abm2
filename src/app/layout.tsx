@@ -152,6 +152,22 @@ export default function RootLayout({
       <head>
         {/* --- MODIFIED: Removed the manual <script> tag for GTM --- */}
 
+        {/* --- Google tag (gtag.js) for Google Ads conversion tracking --- */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-969671559"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-969671559');
+            `,
+          }}
+        />
+
         {/* --- Add LocalBusiness Schema to HEAD --- */}
         <JsonLd data={localBusinessSchema} id="local-business-schema" />
         <JsonLd data={organizationSchema} id="organization-schema" />
