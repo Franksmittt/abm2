@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: title,
       description: description,
       url,
-      type: 'product',
+      type: 'website',
       siteName: 'Alberton Battery Mart',
       locale: 'en_ZA',
       images: [
