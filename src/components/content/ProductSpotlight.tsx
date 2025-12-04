@@ -1,7 +1,7 @@
 // src/components/content/ProductSpotlight.tsx
 "use client";
-import React, { useMemo } from 'react';
-import { ALL_PRODUCTS, ProductCardData } from "@/data/products";
+import React, { useMemo, useEffect, useState } from 'react';
+import { ProductCardData } from "@/data/products";
 import { ProductCard } from "./ProductCard"; // This path is correct for this file
 import { Button } from "@/components/ui/button";
 import { Zap, ArrowRight } from "lucide-react";
@@ -42,8 +42,27 @@ interface ProductSpotlightProps {
 }
 
 const ProductSpotlight: React.FC<ProductSpotlightProps> = ({ count = 3 }) => {
+  const [products, setProducts] = useState<ProductCardData[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Fetch products from API (reads from JSON if available)
+    fetch('/api/products')
+      .then(res => res.json())
+      .then(data => {
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  }, []);
+
   // Use the stable "alternating" function in useMemo
-  const featuredProducts = useMemo(() => getStableRandomProducts(ALL_PRODUCTS, count), [count]);
+  const featuredProducts = useMemo(() => {
+    if (products.length === 0) return [];
+    return getStableRandomProducts(products, count);
+  }, [products, count]);
 
   if (featuredProducts.length === 0) return null;
 

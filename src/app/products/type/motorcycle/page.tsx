@@ -1,14 +1,17 @@
 // src/app/products/type/motorcycle/page.tsx
 import ProductListPage from "@/components/layout/ProductListPage";
-import { ALL_PRODUCTS, ProductCardData } from "@/data/products";
+import { getAllProducts, ProductCardData } from "@/data/products";
 import CategoryFilterSidebar from "@/components/layout/CategoryFilterSidebar";
 import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
-import { Bike, Phone, MessageSquare, Zap } from "lucide-react";
+import { Bike, Phone, MessageSquare, Zap, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BASE_URL } from "@/lib/seo-constants";
+
+// Make this page dynamic so it can read updated prices from JSON
+export const dynamic = 'force-dynamic';
 
 const PAGE_TITLE =
   "Motorcycle & Powersport Batteries in Alberton | Alberton Battery Mart";
@@ -43,10 +46,6 @@ export const metadata: Metadata = {
   },
 };
 
-const MOTORCYCLE_PRODUCTS = ALL_PRODUCTS.filter((p: ProductCardData) => 
-  p.category === 'Motorcycle'
-);
-
 const motorcycleCapacityFilters = [
     { label: "Small (Under 10 Ah)", min: 0, max: 10 },
     { label: "Medium (10-20 Ah)", min: 10, max: 20 },
@@ -58,8 +57,6 @@ const getFilterOptions = (products: ProductCardData[]) => {
     const sizes = Array.from(new Set(products.map(p => p.sku)));
     return { brands, sizes };
 };
-const { brands, sizes } = getFilterOptions(MOTORCYCLE_PRODUCTS);
-
 const SERVICE_LINKS = [
   {
     label: "Mobile Battery Replacement",
@@ -78,7 +75,13 @@ const VEHICLE_LINKS = [
   { label: "Suzuki Swift parasitic draw test", slug: "suzuki/swift-1-2" },
 ];
 
-export default function MotorcycleBatteriesPage() {
+export default async function MotorcycleBatteriesPage() {
+  const allProducts = await getAllProducts();
+  const MOTORCYCLE_PRODUCTS = allProducts.filter((p: ProductCardData) => 
+    p.category === 'Motorcycle'
+  );
+  const { brands, sizes } = getFilterOptions(MOTORCYCLE_PRODUCTS);
+
   const productCollectionSchema = {
     "@context": "https://schema.org",
     "@type": "ProductCollection",
@@ -109,8 +112,95 @@ export default function MotorcycleBatteriesPage() {
             <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
                 Dedicated AGM batteries for motorcycles, scooters, ATVs, and all powersport vehicles.
             </p>
-            <Separator className="pt-4" />
         </div>
+
+        {/* --- EDUCATIONAL SECTION: Understanding Motorcycle Batteries --- */}
+        <div className="max-w-5xl mx-auto space-y-8">
+          {/* What Makes Motorcycle Batteries Different */}
+          <div className="bg-gradient-to-br from-[#060606] via-[#0b0b10] to-[#151821] border border-white/10 rounded-2xl p-8 space-y-6">
+            <div className="flex items-center gap-3">
+              <Bike className="h-8 w-8 text-battery" />
+              <h2 className="text-3xl font-black text-white">
+                Understanding Motorcycle & Powersport Batteries
+              </h2>
+            </div>
+            <p className="text-lg text-white/80 leading-relaxed">
+              Motorcycle and powersport batteries face unique challenges: compact size requirements, high vibration, extreme temperature variations, and the need for reliable starting power in a small package. Unlike car batteries, these must be lightweight, maintenance-free, and able to handle deep cycling from accessories.
+            </p>
+            <div className="grid md:grid-cols-2 gap-6 pt-4">
+              <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+                <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                  <Zap className="h-5 w-5 text-battery" />
+                  AGM Technology
+                </h3>
+                <p className="text-white/80">
+                  Most modern motorcycles use AGM (Absorbent Glass Mat) batteries. They're sealed, maintenance-free, and can be mounted in any orientation—perfect for tight engine compartments and custom builds.
+                </p>
+              </div>
+              <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+                <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                  <ShieldCheck className="h-5 w-5 text-battery" />
+                  Vibration Resistance
+                </h3>
+                <p className="text-white/80">
+                  Motorcycle batteries must withstand constant vibration from the engine and road. AGM construction prevents internal damage and extends battery life significantly compared to traditional flooded batteries.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Types of Powersport Batteries */}
+          <div className="bg-gradient-to-br from-[#060606] via-[#0b0b10] to-[#151821] border border-white/10 rounded-2xl p-8 space-y-4">
+            <h3 className="text-2xl font-black text-white flex items-center gap-3">
+              <Bike className="h-6 w-6 text-battery" />
+              Powersport Applications
+            </h3>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <p className="font-semibold text-white mb-3">Motorcycles & Scooters</p>
+                <ul className="text-white/80 space-y-1 list-disc list-inside text-sm">
+                  <li>Street bikes and cruisers</li>
+                  <li>Scooters and mopeds</li>
+                  <li>Adventure and touring bikes</li>
+                  <li>Sport bikes and superbikes</li>
+                </ul>
+              </div>
+              <div>
+                <p className="font-semibold text-white mb-3">Off-Road & Specialty</p>
+                <ul className="text-white/80 space-y-1 list-disc list-inside text-sm">
+                  <li>ATVs and quad bikes</li>
+                  <li>Dirt bikes and motocross</li>
+                  <li>Jet skis and watercraft</li>
+                  <li>Golf carts and utility vehicles</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Important Considerations */}
+          <div className="bg-gradient-to-br from-[#060606] via-[#0b0b10] to-[#151821] border-2 border-battery/30 rounded-2xl p-8 space-y-4">
+            <h3 className="text-2xl font-black text-white flex items-center gap-3">
+              <ShieldCheck className="h-6 w-6 text-battery" />
+              Important Considerations
+            </h3>
+            <div className="space-y-4">
+              <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+                <p className="font-bold text-white mb-2">⚠️ Size & Terminal Configuration</p>
+                <p className="text-white/80 text-sm">
+                  Motorcycle batteries come in specific sizes and terminal configurations. Using the wrong size can cause fitment issues, while incorrect terminal polarity can damage your bike's electrical system. We verify compatibility before fitment.
+                </p>
+              </div>
+              <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+                <p className="font-bold text-white mb-2">🔋 Charging & Maintenance</p>
+                <p className="text-white/80 text-sm">
+                  AGM batteries require specific charging profiles. Overcharging or using the wrong charger can damage the battery. We provide expert advice on proper charging and maintenance to maximize battery life.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <Separator className="pt-4" />
 
         <div className="flex flex-col items-center gap-4 text-center max-w-md mx-auto">
           <Button

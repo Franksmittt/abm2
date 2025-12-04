@@ -1,14 +1,17 @@
 // src/app/products/type/truck-commercial/page.tsx
 import ProductListPage from "@/components/layout/ProductListPage";
-import { ALL_PRODUCTS, ProductCardData } from "@/data/products";
+import { getAllProducts, ProductCardData } from "@/data/products";
 import CategoryFilterSidebar from "@/components/layout/CategoryFilterSidebar";
 import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
-import { Building, ShieldCheck, Zap } from "lucide-react";
+import { Building, ShieldCheck, Zap, Truck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BASE_URL } from "@/lib/seo-constants";
+
+// Make this page dynamic so it can read updated prices from JSON
+export const dynamic = 'force-dynamic';
 
 const PAGE_TITLE = "Truck & Commercial Batteries in Alberton | Alberton Battery Mart";
 const PAGE_DESCRIPTION =
@@ -42,10 +45,6 @@ export const metadata: Metadata = {
   },
 };
 
-const TRUCK_PRODUCTS = ALL_PRODUCTS.filter((p: ProductCardData) => 
-  p.category === 'Truck & Commercial'
-);
-
 const truckCapacityFilters = [
     { label: "Heavy Duty (90-115 Ah)", min: 90, max: 115 },
     { label: "Super Heavy Duty (115Ah+)", min: 115, max: 9999 },
@@ -56,7 +55,6 @@ const getFilterOptions = (products: ProductCardData[]) => {
     const sizes = Array.from(new Set(products.map(p => p.sku)));
     return { brands, sizes };
 };
-const { brands, sizes } = getFilterOptions(TRUCK_PRODUCTS);
 
 const SERVICE_LINKS = [
   {
@@ -82,7 +80,13 @@ const VEHICLE_LINKS = [
   { label: "Toyota Fortuner GD-6 touring setup", slug: "toyota/fortuner-2-8-gd6" },
 ];
 
-export default function TruckBatteriesPage() {
+export default async function TruckBatteriesPage() {
+  const allProducts = await getAllProducts();
+  const TRUCK_PRODUCTS = allProducts.filter((p: ProductCardData) => 
+    p.category === 'Truck & Commercial'
+  );
+  const { brands, sizes } = getFilterOptions(TRUCK_PRODUCTS);
+
   const productCollectionSchema = {
     "@context": "https://schema.org",
     "@type": "ProductCollection",
@@ -115,45 +119,108 @@ export default function TruckBatteriesPage() {
             </p>
         </div>
 
-        {/* --- NEW SECTION: B2B/Fleet Pillar Content --- */}
-        <div className="max-w-5xl mx-auto space-y-8 bg-card border-2 border-battery shadow-battery/20 p-8 rounded-lg shadow-xl">
-          <div className="flex items-center space-x-3">
-            <Building className="h-10 w-10 text-battery flex-shrink-0" />
-            <h2 className="text-3xl font-bold text-foreground">
-              Fleet & B2B Solutions for Alberton Businesses
-            </h2>
-          </div>
-          <p className="text-lg text-muted-foreground">
-            We understand that for a commercial fleet, downtime is not an option. We are a dedicated B2B partner for Alberton's logistics, construction, and transport companies. We provide not just batteries, but reliable power solutions that protect your bottom line.
-          </p>
-          <div className="grid md:grid-cols-2 gap-6 pt-4">
-            <div className="flex items-start space-x-3">
-              <Zap className="h-6 w-6 text-battery flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="text-xl font-semibold text-foreground">High-CCA & Vibration Resistance</h3>
-                <p className="text-muted-foreground">Our commercial range (from brands like Exide) is built for the demands of heavy-duty diesel engines, offering high Cold Cranking Amps (CCA) and superior vibration resistance for tough South African roads.</p>
+        {/* --- EDUCATIONAL SECTION: Understanding Commercial Batteries --- */}
+        <div className="max-w-5xl mx-auto space-y-8">
+          {/* What Makes Commercial Batteries Different */}
+          <div className="bg-gradient-to-br from-[#060606] via-[#0b0b10] to-[#151821] border border-white/10 rounded-2xl p-8 space-y-6">
+            <div className="flex items-center gap-3">
+              <Building className="h-8 w-8 text-battery" />
+              <h2 className="text-3xl font-black text-white">
+                Understanding Commercial & Heavy-Duty Batteries
+              </h2>
+            </div>
+            <p className="text-lg text-white/80 leading-relaxed">
+              Commercial vehicles face unique challenges: high-compression diesel engines, extreme vibration, extended idling periods, and heavy electrical loads (refrigeration units, lift gates, sleeper amenities). Standard automotive batteries simply cannot handle these demands.
+            </p>
+            <div className="grid md:grid-cols-2 gap-6 pt-4">
+              <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+                <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                  <Zap className="h-5 w-5 text-battery" />
+                  High CCA Requirements
+                </h3>
+                <p className="text-white/80">
+                  Diesel engines require significantly more cranking power than petrol engines, especially in cold conditions. Our commercial batteries deliver 600-900+ CCA to ensure reliable starts every time.
+                </p>
+              </div>
+              <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+                <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                  <ShieldCheck className="h-5 w-5 text-battery" />
+                  Vibration Resistance
+                </h3>
+                <p className="text-white/80">
+                  Heavy-duty batteries feature reinforced construction and special plate design to withstand constant vibration from rough roads, preventing premature failure and internal damage.
+                </p>
               </div>
             </div>
-            <div className="flex items-start space-x-3">
-              <ShieldCheck className="h-6 w-6 text-battery flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="text-xl font-semibold text-foreground">Full Manufacturer Warranties</h3>
-                <p className="text-muted-foreground">Protect your fleet. All our heavy-duty batteries are backed by a full manufacturer warranty, giving you total peace of mind and predictable operational costs.</p>
+          </div>
+
+          {/* Fleet & B2B Solutions */}
+          <div className="bg-gradient-to-br from-[#060606] via-[#0b0b10] to-[#151821] border-2 border-battery/30 rounded-2xl p-8 space-y-6">
+            <div className="flex items-center gap-3">
+              <Building className="h-10 w-10 text-battery flex-shrink-0" />
+              <h2 className="text-3xl font-black text-white">
+                Fleet & B2B Solutions for Alberton Businesses
+              </h2>
+            </div>
+            <p className="text-lg text-white/80 leading-relaxed">
+              We understand that for a commercial fleet, downtime is not an option. We are a dedicated B2B partner for Alberton's logistics, construction, and transport companies. We provide not just batteries, but reliable power solutions that protect your bottom line.
+            </p>
+            <div className="grid md:grid-cols-2 gap-6 pt-4">
+              <div className="flex items-start gap-3">
+                <Zap className="h-6 w-6 text-battery flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="text-xl font-semibold text-white">High-CCA & Vibration Resistance</h3>
+                  <p className="text-white/70">Our commercial range (from brands like Exide) is built for the demands of heavy-duty diesel engines, offering high Cold Cranking Amps (CCA) and superior vibration resistance for tough South African roads.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <ShieldCheck className="h-6 w-6 text-battery flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="text-xl font-semibold text-white">Full Manufacturer Warranties</h3>
+                  <p className="text-white/70">Protect your fleet. All our heavy-duty batteries are backed by a full manufacturer warranty, giving you total peace of mind and predictable operational costs.</p>
+                </div>
               </div>
             </div>
+            <div className="text-center pt-6">
+              <Button
+                asChild
+                size="lg"
+                variant="battery"
+                trackingId="type-truck-commercial-quote"
+              >
+                <Link href="/quote">Request a Free Fleet/B2B Quote</Link>
+              </Button>
+            </div>
           </div>
-          <div className="text-center pt-6">
-            <Button
-              asChild
-              size="lg"
-              variant="battery"
-              trackingId="type-truck-commercial-quote"
-            >
-              <Link href="/quote">Request a Free Fleet/B2B Quote</Link>
-            </Button>
+
+          {/* Common Applications */}
+          <div className="bg-gradient-to-br from-[#060606] via-[#0b0b10] to-[#151821] border border-white/10 rounded-2xl p-8 space-y-4">
+            <h3 className="text-2xl font-black text-white flex items-center gap-3">
+              <Truck className="h-6 w-6 text-battery" />
+              Common Commercial Applications
+            </h3>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <p className="font-semibold text-white mb-2">Heavy-Duty Trucks & Lorries</p>
+                <ul className="text-white/80 space-y-1 list-disc list-inside text-sm">
+                  <li>Long-haul transport vehicles</li>
+                  <li>Construction and mining trucks</li>
+                  <li>Delivery and logistics fleets</li>
+                  <li>Agricultural and farming equipment</li>
+                </ul>
+              </div>
+              <div>
+                <p className="font-semibold text-white mb-2">Specialized Vehicles</p>
+                <ul className="text-white/80 space-y-1 list-disc list-inside text-sm">
+                  <li>Buses and passenger transport</li>
+                  <li>Emergency vehicles (ambulances, fire trucks)</li>
+                  <li>Refrigerated transport units</li>
+                  <li>Heavy-duty SUVs and 4x4s</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
-        {/* --- END NEW SECTION --- */}
 
         <Separator className="pt-4" />
 

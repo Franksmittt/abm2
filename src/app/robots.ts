@@ -2,14 +2,27 @@
 import { MetadataRoute } from 'next'
  
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://www.albertonbatterymart.co.za'; // [cite: 2469-2470]
+  const baseUrl = 'https://www.albertonbatterymart.co.za';
 
   return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: '/private/', // As a best practice [cite: 1345]
-    },
+    rules: [
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: ['/admin/', '/api/admin/', '/private/'],
+      },
+      {
+        userAgent: 'Googlebot',
+        allow: '/',
+        disallow: ['/admin/', '/api/admin/', '/private/'],
+      },
+      {
+        userAgent: 'Bingbot',
+        allow: '/',
+        disallow: ['/admin/', '/api/admin/', '/private/'],
+      },
+    ],
     sitemap: `${baseUrl}/sitemap.xml`,
+    host: baseUrl,
   }
 }

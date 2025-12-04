@@ -52,6 +52,7 @@ const filterLinks = {
         { title: "Willard Batteries", icon: Battery, href: "/products/results?brand=Willard" }, 
         { title: "Enertec Batteries", icon: Battery, href: "/products/results?brand=Enertec" }, 
         { title: "Exide Batteries", icon: Battery, href: "/products/results?brand=Exide" },
+        { title: "Power Plus Batteries", icon: Battery, href: "/products/results?brand=Power Plus" },
     ]
 };
 

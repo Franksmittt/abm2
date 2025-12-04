@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { GTM_ID } from "@/lib/gtm-constants";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { MobileStickyFooter } from "@/components/layout/MobileStickyFooter";
 import { Metadata } from "next";
 import Script from "next/script"; // --- NEW: Import next/script
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -150,6 +151,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
         {/* --- MODIFIED: Removed the manual <script> tag for GTM --- */}
 
         {/* --- Google tag (gtag.js) for Google Ads conversion tracking --- */}
@@ -206,10 +208,12 @@ export default function RootLayout({
           enableSystem
         >
           <Header />
-          <div className="pt-20">
+          <div className="pt-20 pb-20 md:pb-0">
             {children}
           </div>
           <Footer />
+          {/* Mobile Sticky Footer - Action Bar */}
+          <MobileStickyFooter />
         </ThemeProvider>
       </body>
     </html>

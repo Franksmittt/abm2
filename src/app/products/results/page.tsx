@@ -1,5 +1,5 @@
 // src/app/products/results/page.tsx
-import { ALL_PRODUCTS, ProductCardData } from "@/data/products";
+import { getAllProducts, ProductCardData, ALL_PRODUCTS } from "@/data/products";
 import ProductListPage from "@/components/layout/ProductListPage";
 import { notFound } from 'next/navigation';
 import CategoryFilterSidebar from "@/components/layout/CategoryFilterSidebar";
@@ -64,8 +64,8 @@ export async function generateMetadata({ searchParams }: ResultsPageProps): Prom
 }
 
 // Function now returns an object containing both the filtered list and the title string.
-const filterProducts = (params: ResultsPageProps['searchParams']): { products: ProductCardData[], title: string } => {
-  let filtered = ALL_PRODUCTS;
+const filterProducts = (allProducts: ProductCardData[], params: ResultsPageProps['searchParams']): { products: ProductCardData[], title: string } => {
+  let filtered = allProducts;
   let title = "Search Results";
 
   // --- Filter 1: SKU/Code Search (?q=619) ---
@@ -79,8 +79,8 @@ const filterProducts = (params: ResultsPageProps['searchParams']): { products: P
   
   // --- Filter 2: Brand Filter (?brand=Willard) ---
   else if (params.brand) {
-    const brandQuery = params.brand.toLowerCase();
-    filtered = filtered.filter(p => p.brandName.toLowerCase() === brandQuery);
+    const brandQuery = params.brand.toLowerCase().trim();
+    filtered = filtered.filter(p => p.brandName.toLowerCase().trim() === brandQuery);
     title = `${params.brand} Batteries`;
   }
 
@@ -113,8 +113,9 @@ const allCapacityFilters = [
     { label: "Heavy Duty (100 Ah+)", min: 100, max: 9999 },
 ];
 
-export default function SearchResultsPage({ searchParams }: ResultsPageProps) {
-  const { products: filteredProducts, title } = filterProducts(searchParams);
+export default async function SearchResultsPage({ searchParams }: ResultsPageProps) {
+  const allProducts = await getAllProducts();
+  const { products: filteredProducts, title } = filterProducts(allProducts, searchParams);
 
   if (filteredProducts.length === 0) {
     // We don't use notFound() here, because we want to show the sidebar and a "no results" message

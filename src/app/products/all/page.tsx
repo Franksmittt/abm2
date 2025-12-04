@@ -1,10 +1,13 @@
 // src/app/products/all/page.tsx
 import ProductListPage from "@/components/layout/ProductListPage";
-import { ALL_PRODUCTS, ProductCardData } from "@/data/products";
+import { getAllProducts, ProductCardData, ALL_PRODUCTS } from "@/data/products";
 import CategoryFilterSidebar from "@/components/layout/CategoryFilterSidebar";
 import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
 import { BASE_URL } from "@/lib/seo-constants";
+
+// Make this page dynamic so it can read updated prices from JSON
+export const dynamic = 'force-dynamic';
 
 // --- NEW: Page-Specific Metadata for SEO ---
 export const metadata: Metadata = {
@@ -51,9 +54,10 @@ const allCapacityFilters = [
     { label: "Heavy Duty (100 Ah+)", min: 100, max: 9999 },
 ];
 
-const { brands, sizes } = getFilterOptions(ALL_PRODUCTS);
-
-export default function AllProductsPage() {
+export default async function AllProductsPage() {
+  const products = await getAllProducts();
+  const { brands, sizes } = getFilterOptions(products);
+  
   return (
     <div className="container py-16 space-y-12">
         
@@ -85,8 +89,8 @@ export default function AllProductsPage() {
             <div className="lg:flex-grow">
                 <ProductListPage
                     title="Complete Inventory"
-                    description={`Displaying all ${ALL_PRODUCTS.length} products in stock.`}
-                    products={ALL_PRODUCTS}
+                    description={`Displaying all ${products.length} products in stock.`}
+                    products={products}
                 />
             </div>
 

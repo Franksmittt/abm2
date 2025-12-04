@@ -1,17 +1,20 @@
 // src/app/sitemap.ts
 import { MetadataRoute } from 'next'
-import { ALL_PRODUCTS } from '@/data/products'
+import { getAllProducts, ALL_PRODUCTS } from '@/data/products'
 import { ALL_POSTS } from '@/data/blog-posts'
 import { getAllProductSlugs } from '@/data/product-detail'
 import { getAllVehicleSlugs } from '@/data/vehicle-fitment'
 import { getAllServicePages } from '@/data/service-pages'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   
   // 1. Get the base URL from your layout
   const baseUrl = 'https://www.albertonbatterymart.co.za';
 
-  // 2. Create entries for your static pages
+  // 2. Get all products (from JSON if available, otherwise static)
+  const allProducts = await getAllProducts();
+
+  // 3. Create entries for your static pages
   const staticPages = [
     '/',
     '/about',
@@ -31,29 +34,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date().toISOString(),
-    changeFrequency: 'monthly' as 'monthly',
+    changeFrequency: 'monthly' as const,
     priority: route === '/' ? 1.0 : 0.9,
   }));
 
-  // 3. Create entries for all dynamic product pages
-  const productPages = ALL_PRODUCTS.map((product) => ({
-    url: `${baseUrl}/products/${product.id}`,
+  // 4. Create entries for all dynamic product pages (using getAllProducts)
+  const productPages = allProducts.map((product) => ({
+    url: `${baseUrl}/product/${product.id}`,
     lastModified: new Date().toISOString(),
-    changeFrequency: 'weekly' as 'weekly',
+    changeFrequency: 'weekly' as const,
     priority: 0.8,
   }));
 
-  // 4. Create entries for all dynamic blog post pages
+  // 5. Create entries for all dynamic blog post pages
   const blogPages = ALL_POSTS.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.date).toISOString(),
-    changeFrequency: 'weekly' as 'weekly',
+    changeFrequency: 'weekly' as const,
     priority: 0.7,
   }));
 
-  // 5. Create entries for product category/type silos
-  // --- FIX: Replaced [...new Set(...)] with Array.from(new Set(...)) ---
-  const productTypePages = Array.from(new Set(ALL_PRODUCTS.map(p => p.category)))
+  // 6. Create entries for product category/type silos (using getAllProducts)
+  const productTypePages = Array.from(new Set(allProducts.map(p => p.category)))
     .map((category) => {
       let slug = '';
       if (category === 'Standard Automotive') slug = 'automotive';
@@ -66,42 +68,41 @@ export default function sitemap(): MetadataRoute.Sitemap {
         return {
           url: `${baseUrl}/products/type/${slug}`,
           lastModified: new Date().toISOString(),
-          changeFrequency: 'monthly' as 'monthly',
+          changeFrequency: 'monthly' as const,
           priority: 0.9,
         };
       }
       return null;
     }).filter(Boolean) as MetadataRoute.Sitemap; // Filter out any nulls
 
-  // 6. Create entries for product brand silos
-  // --- FIX: Replaced [...new Set(...)] with Array.from(new Set(...)) ---
-  const productBrandPages = Array.from(new Set(ALL_PRODUCTS.map(p => p.brandName)))
+  // 7. Create entries for product brand silos (using getAllProducts)
+  const productBrandPages = Array.from(new Set(allProducts.map(p => p.brandName)))
     .map((brand) => ({
-      url: `${baseUrl}/products/brand/${brand.toLowerCase()}`,
+      url: `${baseUrl}/products/brand/${brand.toLowerCase().replace(/\s+/g, '-')}`,
       lastModified: new Date().toISOString(),
-      changeFrequency: 'monthly' as 'monthly',
+      changeFrequency: 'monthly' as const,
       priority: 0.8,
     }));
 
   const productDetailPages = getAllProductSlugs().map((slug) => ({
     url: `${baseUrl}/products/${slug}`,
     lastModified: new Date().toISOString(),
-    changeFrequency: 'monthly' as 'monthly',
+    changeFrequency: 'monthly' as const,
     priority: 0.8,
   }));
 
   const vehiclePages = getAllVehicleSlugs().map((slug) => ({
     url: `${baseUrl}/vehicles/${slug}`,
     lastModified: new Date().toISOString(),
-    changeFrequency: 'monthly' as 'monthly',
+    changeFrequency: 'monthly' as const,
     priority: 0.8,
   }));
 
-  // 7. Create entries for all service pages
+  // 8. Create entries for all service pages
   const servicePages = getAllServicePages().map((service) => ({
     url: `${baseUrl}/services/${service.serviceSlug}/${service.areaSlug}`,
     lastModified: new Date().toISOString(),
-    changeFrequency: 'monthly' as 'monthly',
+    changeFrequency: 'monthly' as const,
     priority: 0.8,
   }));
 

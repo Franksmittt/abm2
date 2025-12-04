@@ -109,7 +109,6 @@ export default function Home() {
 
       {/* 9. FINAL CTA: The final, unmissable call to action. */}
       <ThinCta />
-      
     </main>
   );
 }

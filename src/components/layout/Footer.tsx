@@ -130,7 +130,7 @@ const Footer = () => {
              ©{currentYear} Alberton Battery Mart. All rights reserved.
           </div>
           <div className="text-xs text-muted-foreground">
-            Designed, Developed & Maintained by 
+            Designed, Developed & Maintained by 
             <a
               href={AGENCY_URL}
               target="_blank"
@@ -139,6 +139,11 @@ const Footer = () => {
             >
               {AGENCY_NAME}
             </a>.
+          </div>
+          <div className="text-xs text-muted-foreground pt-2">
+            <Link href="/admin/login" className="hover:text-battery transition-colors">
+              Staff Login
+            </Link>
           </div>
         </div>
       </div>

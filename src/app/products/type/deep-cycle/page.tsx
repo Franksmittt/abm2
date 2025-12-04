@@ -1,6 +1,6 @@
 // src/app/products/type/deep-cycle/page.tsx
 import ProductListPage from "@/components/layout/ProductListPage";
-import { ALL_PRODUCTS, ProductCardData } from "@/data/products";
+import { getAllProducts, ProductCardData } from "@/data/products";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Sun, Zap, ShieldCheck } from "lucide-react";
@@ -8,6 +8,9 @@ import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BASE_URL } from "@/lib/seo-constants";
+
+// Make this page dynamic so it can read updated prices from JSON
+export const dynamic = 'force-dynamic';
 
 const PAGE_TITLE = "Solar, Inverter & Deep Cycle Batteries in Alberton";
 const PAGE_DESCRIPTION =
@@ -41,10 +44,7 @@ export const metadata: Metadata = {
   },
 };
 
-// Filters for: Deep Cycle
-const DEEP_CYCLE_PRODUCTS = ALL_PRODUCTS.filter((p: ProductCardData) => 
-  p.category === 'Deep Cycle'
-);
+// Filters will be applied in the component
 
 const SERVICE_LINKS = [
   {
@@ -71,7 +71,12 @@ const VEHICLE_LINKS = [
   { label: "Discovery 4 load-shedding build", slug: "land-rover/discovery-4" },
 ];
 
-export default function DeepCycleBatteriesPage() {
+export default async function DeepCycleBatteriesPage() {
+  const allProducts = await getAllProducts();
+  const DEEP_CYCLE_PRODUCTS = allProducts.filter((p: ProductCardData) => 
+    p.category === 'Deep Cycle'
+  );
+
   const productCollectionSchema = {
     "@context": "https://schema.org",
     "@type": "ProductCollection",

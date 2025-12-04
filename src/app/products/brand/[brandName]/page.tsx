@@ -1,7 +1,7 @@
 // src/app/products/brand/[brandName]/page.tsx
 import Link from "next/link";
 import ProductListPage from "@/components/layout/ProductListPage";
-import { ALL_PRODUCTS, ProductCardData } from "@/data/products";
+import { getAllProducts, ProductCardData, ALL_PRODUCTS } from "@/data/products";
 import { notFound } from "next/navigation";
 import CategoryFilterSidebar from "@/components/layout/CategoryFilterSidebar";
 import { Separator } from "@/components/ui/separator";
@@ -10,6 +10,9 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { BASE_URL, DEFAULT_LOGO } from "@/lib/seo-constants";
 import { Button } from "@/components/ui/button";
 import { Phone, MessageSquare } from "lucide-react";
+
+// Make this page dynamic so it can read updated prices from JSON
+export const dynamic = 'force-dynamic';
 
 // This function tells Next.js which brands to pre-build
 export function generateStaticParams() {
@@ -66,8 +69,8 @@ export async function generateMetadata({
 }
 
 // Helper to filter products and capitalize the brand name
-const getBrandData = (brandSlug: string) => {
-  const products = ALL_PRODUCTS.filter(
+const getBrandData = (allProducts: ProductCardData[], brandSlug: string) => {
+  const products = allProducts.filter(
     (p) => p.brandName.toLowerCase() === brandSlug.toLowerCase()
   );
   const brandName = products.length > 0 ? products[0].brandName : brandSlug;
@@ -160,9 +163,10 @@ const BRAND_POSITIONING: Record<string, string> = {
 };
 
 // The new page component
-export default function BrandPage({ params }: BrandPageProps) {
+export default async function BrandPage({ params }: BrandPageProps) {
   const { brandName: brandSlug } = params;
-  const { products, brandName, brands, sizes } = getBrandData(brandSlug);
+  const allProducts = await getAllProducts();
+  const { products, brandName, brands, sizes } = getBrandData(allProducts, brandSlug);
 
   if (products.length === 0) {
     notFound();

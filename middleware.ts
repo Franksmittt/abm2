@@ -97,6 +97,15 @@ function handleAbTesting(request: NextRequest) {
 
 export function middleware(request: NextRequest) {
   const userAgent = request.headers.get("user-agent") || "";
+  const pathname = request.nextUrl.pathname;
+
+  // Protect admin API routes (except login and check)
+  if (pathname.startsWith("/api/admin/") && !pathname.includes("/login") && !pathname.includes("/check") && !pathname.includes("/logout")) {
+    const session = request.cookies.get("admin_session");
+    if (!session || session.value !== "authenticated") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+  }
 
   const legacyProductMatch = request.nextUrl.pathname.match(productIdPattern);
   if (legacyProductMatch) {

@@ -1,6 +1,6 @@
 // src/app/products/type/automotive/page.tsx
 import ProductListPage from "@/components/layout/ProductListPage";
-import { ALL_PRODUCTS, ProductCardData } from "@/data/products";
+import { getAllProducts, ProductCardData } from "@/data/products";
 import CategoryFilterSidebar from "@/components/layout/CategoryFilterSidebar";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,9 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BASE_URL } from "@/lib/seo-constants";
+
+// Make this page dynamic so it can read updated prices from JSON
+export const dynamic = 'force-dynamic';
 
 const PAGE_TITLE = "Car Batteries in Alberton | Standard & AGM | Alberton Battery Mart";
 const PAGE_DESCRIPTION =
@@ -45,17 +48,11 @@ export const metadata: Metadata = {
 const EMERGENCY_PHONE_DISPLAY = "010 109 6211";
 const EMERGENCY_PHONE_LINK = "0101096211";
 
-// Filters for: Standard Automotive 
-const AUTOMOTIVE_PRODUCTS = ALL_PRODUCTS.filter((p: ProductCardData) => 
-  p.category === 'Standard Automotive' || p.category === 'Performance AGM/EFB'
-);
-
 const getFilterOptions = (products: ProductCardData[]) => {
     const brands = Array.from(new Set(products.map(p => p.brandName)));
     const sizes = Array.from(new Set(products.map(p => p.sku)));
     return { brands, sizes };
 };
-const { brands, sizes } = getFilterOptions(AUTOMOTIVE_PRODUCTS);
 
 const SERVICE_LINKS = [
   {
@@ -82,7 +79,13 @@ const VEHICLE_LINKS = [
   { label: "Mercedes C-Class W205 Start/Stop battery", slug: "mercedes/c-class-w205" },
 ];
 
-export default function StandardAutomotiveBatteriesPage() {
+export default async function StandardAutomotiveBatteriesPage() {
+  const allProducts = await getAllProducts();
+  const AUTOMOTIVE_PRODUCTS = allProducts.filter((p: ProductCardData) => 
+    p.category === 'Standard Automotive' || p.category === 'Performance AGM/EFB'
+  );
+  const { brands, sizes } = getFilterOptions(AUTOMOTIVE_PRODUCTS);
+
   const productCollectionSchema = {
     "@context": "https://schema.org",
     "@type": "ProductCollection",
