@@ -24,7 +24,9 @@ import {
 const inter = Inter({ 
   subsets: ['latin'],
   display: 'swap',
-  preload: true
+  preload: true,
+  adjustFontFallback: true,
+  fallback: ['system-ui', 'arial']
 });
 const ENVIRONMENT = process.env.NODE_ENV ?? "development";
 

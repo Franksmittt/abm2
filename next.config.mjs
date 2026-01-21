@@ -13,6 +13,8 @@ const nextConfig = {
   // Optimize production builds
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
+    emotion: false,
+    reactRemoveProperties: process.env.NODE_ENV === 'production',
   },
 
   // Enable SWC minification
@@ -54,6 +56,19 @@ const nextConfig = {
           {
             key: 'X-DNS-Prefetch-Control',
             value: 'on'
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },
