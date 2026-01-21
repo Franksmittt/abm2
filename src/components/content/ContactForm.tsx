@@ -11,31 +11,49 @@ import { pushDataLayerEvent } from "@/lib/analytics";
 
 const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false); // --- NEW: Success state
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
 
   useEffect(() => {
     pushDataLayerEvent("contact_form_view");
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setIsSuccess(false);
+    setError(null);
 
-    // Placeholder: Simulate API submission delay
-    setTimeout(() => {
-      console.log("Form Submitted:", formData);
-      
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message');
+      }
+
+      // Track successful submission
       pushDataLayerEvent("generate_lead", {
         value: "contact_form_submission",
         subject: formData.subject,
       });
 
       setIsSubmitting(false);
-      setIsSuccess(true); // --- NEW: Set success
+      setIsSuccess(true);
       setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 1500);
+    } catch (err) {
+      console.error("Error submitting form:", err);
+      setError(err instanceof Error ? err.message : 'Failed to send message. Please try again.');
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -61,14 +79,13 @@ const ContactForm = () => {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       
-      {/* --- DEMO MODE WARNING --- */}
-      <div className="p-4 bg-yellow-900/20 border border-yellow-700 text-yellow-300 rounded-lg flex items-center space-x-3">
-        <AlertTriangle className="h-5 w-5 flex-shrink-0" />
-        <p className="text-sm font-medium">
-          <strong>Demo Mode:</strong> This form is not active. Submissions will only be logged to the console and fire a test conversion event.
-        </p>
-      </div>
-      {/* --- END WARNING --- */}
+      {/* --- ERROR MESSAGE --- */}
+      {error && (
+        <div className="p-4 bg-red-900/20 border border-red-700 text-red-300 rounded-lg flex items-center space-x-3">
+          <AlertTriangle className="h-5 w-5 flex-shrink-0" />
+          <p className="text-sm font-medium">{error}</p>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
