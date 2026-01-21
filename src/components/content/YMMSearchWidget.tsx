@@ -82,39 +82,54 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
       <Card className="w-full bg-gradient-to-br from-[#060606] via-[#0b0b10] to-[#151821] border border-white/10 text-white">
         <CardContent className="p-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-            <select
-              value={year}
-              onChange={(e) => setYear(e.target.value)}
-              className="h-12 px-4 rounded-md border border-white/20 bg-white/5 text-white focus:border-battery focus:outline-none"
-            >
-              <option value="">Year</option>
-              {YEARS.map(y => (
-                <option key={y} value={y.toString()} className="bg-[#060606]">{y}</option>
-              ))}
-            </select>
+            <div>
+              <label htmlFor="compact-year" className="sr-only">Vehicle Year</label>
+              <select
+                id="compact-year"
+                value={year}
+                onChange={(e) => setYear(e.target.value)}
+                aria-label="Select vehicle year"
+                className="h-12 px-4 rounded-md border border-white/20 bg-white/5 text-white focus:border-battery focus:outline-none w-full"
+              >
+                <option value="">Year</option>
+                {YEARS.map(y => (
+                  <option key={y} value={y.toString()} className="bg-[#060606]">{y}</option>
+                ))}
+              </select>
+            </div>
             
-            <select
-              value={make}
-              onChange={(e) => handleMakeChange(e.target.value)}
-              className="h-12 px-4 rounded-md border border-white/20 bg-white/5 text-white focus:border-battery focus:outline-none"
-            >
-              <option value="">Make</option>
-              {MAKES.map(m => (
-                <option key={m} value={m} className="bg-[#060606]">{m}</option>
-              ))}
-            </select>
+            <div>
+              <label htmlFor="compact-make" className="sr-only">Vehicle Make</label>
+              <select
+                id="compact-make"
+                value={make}
+                onChange={(e) => handleMakeChange(e.target.value)}
+                aria-label="Select vehicle make"
+                className="h-12 px-4 rounded-md border border-white/20 bg-white/5 text-white focus:border-battery focus:outline-none w-full"
+              >
+                <option value="">Make</option>
+                {MAKES.map(m => (
+                  <option key={m} value={m} className="bg-[#060606]">{m}</option>
+                ))}
+              </select>
+            </div>
             
-            <select
-              value={model}
-              onChange={(e) => setModel(e.target.value)}
-              disabled={!make}
-              className="h-12 px-4 rounded-md border border-white/20 bg-white/5 text-white focus:border-battery focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <option value="">Model</option>
-              {availableModels.map(m => (
-                <option key={m} value={m} className="bg-[#060606]">{m}</option>
-              ))}
-            </select>
+            <div>
+              <label htmlFor="compact-model" className="sr-only">Vehicle Model</label>
+              <select
+                id="compact-model"
+                value={model}
+                onChange={(e) => setModel(e.target.value)}
+                disabled={!make}
+                aria-label="Select vehicle model"
+                className="h-12 px-4 rounded-md border border-white/20 bg-white/5 text-white focus:border-battery focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed w-full"
+              >
+                <option value="">Model</option>
+                {availableModels.map(m => (
+                  <option key={m} value={m} className="bg-[#060606]">{m}</option>
+                ))}
+              </select>
+            </div>
             
             <Button
               onClick={handleSearch}
@@ -149,12 +164,14 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
       <CardContent className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="space-y-2">
-            <label className="text-sm font-semibold text-white/80 uppercase tracking-wider">
+            <label htmlFor="hero-year" className="text-sm font-semibold text-white/80 uppercase tracking-wider">
               Year
             </label>
             <select
+              id="hero-year"
               value={year}
               onChange={(e) => setYear(e.target.value)}
+              aria-label="Select vehicle year"
               className="w-full h-14 px-4 rounded-lg border border-white/20 bg-white/5 text-white text-lg font-medium focus:border-battery focus:ring-2 focus:ring-battery/20 focus:outline-none transition-all"
             >
               <option value="" className="bg-[#060606]">Select Year</option>
@@ -165,12 +182,14 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
           </div>
           
           <div className="space-y-2">
-            <label className="text-sm font-semibold text-white/80 uppercase tracking-wider">
+            <label htmlFor="hero-make" className="text-sm font-semibold text-white/80 uppercase tracking-wider">
               Make
             </label>
             <select
+              id="hero-make"
               value={make}
               onChange={(e) => handleMakeChange(e.target.value)}
+              aria-label="Select vehicle make"
               className="w-full h-14 px-4 rounded-lg border border-white/20 bg-white/5 text-white text-lg font-medium focus:border-battery focus:ring-2 focus:ring-battery/20 focus:outline-none transition-all"
             >
               <option value="" className="bg-[#060606]">Select Make</option>
@@ -181,13 +200,15 @@ export function YMMSearchWidget({ variant = 'hero', onVehicleSelect }: YMMSearch
           </div>
           
           <div className="space-y-2">
-            <label className="text-sm font-semibold text-white/80 uppercase tracking-wider">
+            <label htmlFor="hero-model" className="text-sm font-semibold text-white/80 uppercase tracking-wider">
               Model
             </label>
             <select
+              id="hero-model"
               value={model}
               onChange={(e) => setModel(e.target.value)}
               disabled={!make}
+              aria-label="Select vehicle model"
               className={cn(
                 "w-full h-14 px-4 rounded-lg border text-white text-lg font-medium focus:border-battery focus:ring-2 focus:ring-battery/20 focus:outline-none transition-all",
                 !make 

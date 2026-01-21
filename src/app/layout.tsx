@@ -174,12 +174,12 @@ export default function RootLayout({
           />
         </noscript>
 
-        {/* --- Google Ads (gtag.js) - Optimized loading --- */}
+        {/* --- Google Ads (gtag.js) - Deferred for performance --- */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-969671559"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-ads-init" strategy="afterInteractive">
+        <Script id="google-ads-init" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -188,8 +188,8 @@ export default function RootLayout({
           `}
         </Script>
 
-        {/* --- Google Tag Manager --- */}
-        <Script id="google-tag-manager" strategy="afterInteractive">
+        {/* --- Google Tag Manager - Deferred for performance --- */}
+        <Script id="google-tag-manager" strategy="lazyOnload">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

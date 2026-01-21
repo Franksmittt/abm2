@@ -95,6 +95,53 @@ function handleAbTesting(request: NextRequest) {
   return response;
 }
 
+function addSecurityHeaders(response: NextResponse) {
+  // Security headers for better Lighthouse scores
+  response.headers.set(
+    'Strict-Transport-Security',
+    'max-age=31536000; includeSubDomains'
+  );
+  
+  response.headers.set(
+    'X-Frame-Options',
+    'SAMEORIGIN'
+  );
+  
+  response.headers.set(
+    'X-Content-Type-Options',
+    'nosniff'
+  );
+  
+  response.headers.set(
+    'Referrer-Policy',
+    'strict-origin-when-cross-origin'
+  );
+  
+  response.headers.set(
+    'Permissions-Policy',
+    'camera=(), microphone=(), geolocation=()'
+  );
+  
+  // Content Security Policy - allow Google Tag Manager and Google Ads
+  response.headers.set(
+    'Content-Security-Policy',
+    "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.google.com https://www.google.co.za https://web3forms.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://analytics.google.com https://web3forms.com https://api.web3forms.com; frame-src https://www.google.com;"
+  );
+  
+  // Cross-Origin policies
+  response.headers.set(
+    'Cross-Origin-Opener-Policy',
+    'same-origin-allow-popups'
+  );
+  
+  response.headers.set(
+    'Cross-Origin-Resource-Policy',
+    'cross-origin'
+  );
+  
+  return response;
+}
+
 export function middleware(request: NextRequest) {
   const userAgent = request.headers.get("user-agent") || "";
   const pathname = request.nextUrl.pathname;
@@ -117,23 +164,26 @@ export function middleware(request: NextRequest) {
         to: url.pathname,
       });
     }
-    return NextResponse.rewrite(url);
+    const response = NextResponse.rewrite(url);
+    return addSecurityHeaders(response);
   }
 
   if (isBot(userAgent)) {
-    return NextResponse.next();
+    const response = NextResponse.next();
+    return addSecurityHeaders(response);
   }
 
   const suburbRewrite = maybeRewriteForSuburb(request);
-  if (suburbRewrite) return suburbRewrite;
+  if (suburbRewrite) return addSecurityHeaders(suburbRewrite);
 
   const geoRewrite = maybeRewriteForCountry(request);
-  if (geoRewrite) return geoRewrite;
+  if (geoRewrite) return addSecurityHeaders(geoRewrite);
 
   const abResponse = handleAbTesting(request);
-  if (abResponse) return abResponse;
+  if (abResponse) return addSecurityHeaders(abResponse);
 
-  return NextResponse.next();
+  const response = NextResponse.next();
+  return addSecurityHeaders(response);
 }
 
 export const config = {

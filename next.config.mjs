@@ -7,6 +7,7 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60,
   },
   
   // Optimize production builds
@@ -16,6 +17,17 @@ const nextConfig = {
 
   // Enable SWC minification
   swcMinify: true,
+
+  // Optimize chunks
+  experimental: {
+    optimizePackageImports: ['lucide-react', '@radix-ui/react-accordion', '@radix-ui/react-dialog'],
+  },
+
+  // Modern JavaScript output (reduces polyfills)
+  transpilePackages: [],
+  
+  // Reduce JavaScript for better performance
+  productionBrowserSourceMaps: false,
 
   // --- NEW: Add redirect configuration ---
   async redirects() {
@@ -31,6 +43,21 @@ const nextConfig = {
         permanent: true,
       },
     ]
+  },
+  
+  // Add headers for performance
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-DNS-Prefetch-Control',
+            value: 'on'
+          },
+        ],
+      },
+    ];
   },
 };
 
