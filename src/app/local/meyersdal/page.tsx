@@ -34,6 +34,14 @@ export const metadata: Metadata = {
         alt: 'Mobile Battery Service Meyersdal - Alberton Battery Mart',
       },
     ],
+    locale: 'en_ZA',
+    siteName: 'Alberton Battery Mart',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Mobile Battery Replacement Meyersdal | Alberton Battery Mart',
+    description: 'Fast, on-site mobile battery replacement for Meyersdal. We come to you. Free fitment & alternator testing.',
+    images: ['/images/og-image.jpg'],
   },
   alternates: {
     canonical: 'https://www.albertonbatterymart.co.za/local/meyersdal',

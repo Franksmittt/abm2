@@ -22,6 +22,7 @@ const Footer = () => {
         { href: "/products/type/truck-commercial", label: "Truck & Commercial" }, 
         { href: "/products/type/motorcycle", label: "Motorcycle Batteries" }, 
         { href: "/products/type/deep-cycle", label: "Deep Cycle & Solar" }, 
+        { href: "/golf-cart-batteries", label: "Golf Cart Batteries" },
         { href: "/services", label: "Mobile Fitment" },
         { href: "/testing", label: "Free Battery Testing" },
       ],

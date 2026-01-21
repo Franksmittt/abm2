@@ -61,6 +61,14 @@ export async function generateMetadata({
           alt: `${make} Battery Replacement - Alberton Battery Mart`,
         },
       ],
+      locale: 'en_ZA',
+      siteName: 'Alberton Battery Mart',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${make} Battery Replacement in Alberton | Alberton Battery Mart`,
+      description,
+      images: [`${BASE_URL}/images/og-image.jpg`],
     },
     alternates: {
       canonical: url,
@@ -121,6 +129,25 @@ export default async function VehicleMakePage({ params }: { params: Params }) {
     })),
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: BASE_URL,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: `${make} Batteries`,
+        item: `${BASE_URL}/vehicles/${makeSlug}`,
+      },
+    ],
+  };
+
   return (
     <div className="container py-16 space-y-16">
       <JsonLd data={makeSchema} id={`${makeSlug}-make-schema`} />
@@ -128,6 +155,7 @@ export default async function VehicleMakePage({ params }: { params: Params }) {
         data={vehicleCollectionSchema}
         id={`${makeSlug}-vehicle-collection-schema`}
       />
+      <JsonLd data={breadcrumbSchema} id={`${makeSlug}-breadcrumb-schema`} />
 
       <section className="text-center space-y-4">
         <div className="flex items-center justify-center gap-3 mb-4">

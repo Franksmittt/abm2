@@ -39,6 +39,14 @@ export const metadata: Metadata = {
         alt: 'Commercial & Powersport Batteries - Alberton Battery Mart',
       },
     ],
+    locale: 'en_ZA',
+    siteName: 'Alberton Battery Mart',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+    images: ['/images/og-image.jpg'],
   },
 };
 

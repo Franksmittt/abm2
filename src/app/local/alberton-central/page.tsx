@@ -26,6 +26,22 @@ export const metadata: Metadata = {
     description: 'Fast, on-site mobile battery replacement for Alberton Central. We come to you. Free fitment & alternator testing.',
     url: 'https://www.albertonbatterymart.co.za/local/alberton-central',
     type: 'website',
+    locale: 'en_ZA',
+    siteName: 'Alberton Battery Mart',
+    images: [
+      {
+        url: '/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Mobile Battery Replacement Alberton Central - Alberton Battery Mart',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Mobile Battery Replacement Alberton Central | Alberton Battery Mart',
+    description: 'Fast, on-site mobile battery replacement for Alberton Central. We come to you. Free fitment & alternator testing.',
+    images: ['/images/og-image.jpg'],
   },
   alternates: {
     canonical: 'https://www.albertonbatterymart.co.za/local/alberton-central',

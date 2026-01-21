@@ -3,7 +3,8 @@ import { Zap, ShieldCheck, Phone, MapPin, Gauge } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Metadata } from "next";
-import { BASE_URL } from "@/lib/seo-constants";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { BASE_URL, BUSINESS_ADDRESS, BUSINESS_CONTACT } from "@/lib/seo-constants";
 
 // --- NEW: Page-Specific Metadata for SEO ---
 export const metadata: Metadata = {
@@ -21,6 +22,8 @@ export const metadata: Metadata = {
     description: "We offer free, professional battery fitment and alternator testing in Alberton. We ensure your warranty is validated and your car's BMS is correctly calibrated.",
     url: `${BASE_URL}/fitment`,
     type: 'website',
+    locale: 'en_ZA',
+    siteName: 'Alberton Battery Mart',
     images: [
       {
         url: '/images/og-image.jpg',
@@ -30,6 +33,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Free Battery Fitment & Testing Service in Alberton",
+    description: "We offer free, professional battery fitment and alternator testing in Alberton. We ensure your warranty is validated and your car's BMS is correctly calibrated.",
+    images: ['/images/og-image.jpg'],
+  },
   alternates: {
     canonical: `${BASE_URL}/fitment`,
   },
@@ -37,9 +46,55 @@ export const metadata: Metadata = {
 
 const EMERGENCY_PHONE = "0101096211";
 
+const SERVICE_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Free Professional Battery Fitment & Testing",
+  provider: {
+    "@type": "LocalBusiness",
+    name: "Alberton Battery Mart",
+    address: {
+      "@type": "PostalAddress",
+      ...BUSINESS_ADDRESS,
+    },
+    telephone: BUSINESS_CONTACT.telephone,
+  },
+  areaServed: ["Alberton", "New Redruth", "Meyersdal"],
+  serviceType: "Battery Installation",
+  description: "Free, professional battery fitment and alternator testing in Alberton. We ensure your warranty is validated and your car's BMS is correctly calibrated.",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "ZAR",
+    description: "Free fitment with battery purchase",
+  },
+};
+
+const BREADCRUMB_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: BASE_URL,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Free Battery Fitment",
+      item: `${BASE_URL}/fitment`,
+    },
+  ],
+};
+
 export default function FitmentPage() {
   return (
-    <div className="container py-16 text-center space-y-8 max-w-3xl">
+    <>
+      <JsonLd data={SERVICE_SCHEMA} id="service-schema" />
+      <JsonLd data={BREADCRUMB_SCHEMA} id="breadcrumb-schema" />
+      <div className="container py-16 text-center space-y-8 max-w-3xl">
       <ShieldCheck className="h-12 w-12 text-battery mx-auto" />
       
       {/* --- NEW: SEO-Optimized H1 --- */}
@@ -68,5 +123,6 @@ export default function FitmentPage() {
         </a>
       </Button>
     </div>
+    </>
   );
 }

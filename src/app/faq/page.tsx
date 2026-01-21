@@ -1,6 +1,8 @@
 // src/app/faq/page.tsx
 import FaqPageContent from "@/components/layout/FaqPageContent";
 import { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { BASE_URL } from "@/lib/seo-constants";
 
 // --- NEW: Page-Specific Metadata for SEO with Open Graph ---
 export const metadata: Metadata = {
@@ -20,6 +22,8 @@ export const metadata: Metadata = {
     description: "Answers to common battery questions in Alberton. Learn about our free callouts, warranty, and AGM/EFB batteries.",
     url: 'https://www.albertonbatterymart.co.za/faq',
     type: 'website',
+    locale: 'en_ZA',
+    siteName: 'Alberton Battery Mart',
     images: [
       {
         url: '/images/og-image.jpg',
@@ -29,12 +33,42 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: "FAQ - Alberton Battery Mart | Free Testing & Fitment",
+    description: "Answers to common battery questions in Alberton. Learn about our free callouts, warranty, and AGM/EFB batteries.",
+    images: ['/images/og-image.jpg'],
+  },
   alternates: {
     canonical: 'https://www.albertonbatterymart.co.za/faq',
   },
 };
 
+const BREADCRUMB_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: BASE_URL,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "FAQ",
+      item: `${BASE_URL}/faq`,
+    },
+  ],
+};
+
 // This page serves as the dedicated SEO resource for FAQ keywords
 export default function FaqPage() {
-  return <FaqPageContent />;
+  return (
+    <>
+      <JsonLd data={BREADCRUMB_SCHEMA} id="breadcrumb-schema" />
+      <FaqPageContent />
+    </>
+  );
 }

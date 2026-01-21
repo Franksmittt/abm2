@@ -2,8 +2,8 @@
 import { Gauge, Phone, ShieldCheck, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Metadata } from "next";
-
-import { BASE_URL } from "@/lib/seo-constants";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { BASE_URL, BUSINESS_ADDRESS, BUSINESS_CONTACT } from "@/lib/seo-constants";
 
 // --- NEW: Page-Specific Metadata for SEO ---
 export const metadata: Metadata = {
@@ -21,6 +21,8 @@ export const metadata: Metadata = {
     description: "Get a 100% free, no-obligation battery, starter, and alternator test at our Alberton store. We only sell you a battery if you actually need one.",
     url: `${BASE_URL}/testing`,
     type: 'website',
+    locale: 'en_ZA',
+    siteName: 'Alberton Battery Mart',
     images: [
       {
         url: '/images/og-image.jpg',
@@ -30,6 +32,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Free Battery, Starter & Alternator Test in Alberton | Alberton Battery Mart",
+    description: "Get a 100% free, no-obligation battery, starter, and alternator test at our Alberton store. We only sell you a battery if you actually need one.",
+    images: ['/images/og-image.jpg'],
+  },
   alternates: {
     canonical: `${BASE_URL}/testing`,
   },
@@ -38,9 +46,55 @@ export const metadata: Metadata = {
 const EMERGENCY_PHONE = "0101096211";
 const EMERGENCY_PHONE_DISPLAY = "010 109 6211"; // Added for display
 
+const SERVICE_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Free Battery, Starter & Alternator Testing",
+  provider: {
+    "@type": "LocalBusiness",
+    name: "Alberton Battery Mart",
+    address: {
+      "@type": "PostalAddress",
+      ...BUSINESS_ADDRESS,
+    },
+    telephone: BUSINESS_CONTACT.telephone,
+  },
+  areaServed: ["Alberton", "New Redruth", "Meyersdal"],
+  serviceType: "Battery Diagnostics",
+  description: "100% free, no-obligation battery, starter, and alternator test at our Alberton store.",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "ZAR",
+    description: "Free diagnostic testing",
+  },
+};
+
+const BREADCRUMB_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: BASE_URL,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Free Battery Testing",
+      item: `${BASE_URL}/testing`,
+    },
+  ],
+};
+
 export default function TestingPage() {
   return (
-    <div className="container py-16 space-y-12 max-w-4xl">
+    <>
+      <JsonLd data={SERVICE_SCHEMA} id="service-schema" />
+      <JsonLd data={BREADCRUMB_SCHEMA} id="breadcrumb-schema" />
+      <div className="container py-16 space-y-12 max-w-4xl">
       <div className="text-center space-y-4">
         <Gauge className="h-16 w-16 text-battery mx-auto" />
         <h1 className="text-5xl font-extrabold text-foreground">
@@ -88,5 +142,6 @@ export default function TestingPage() {
         </Button> {/* <-- This was the line with the error. It is now fixed. */}
       </div>
     </div>
+    </>
   );
 }

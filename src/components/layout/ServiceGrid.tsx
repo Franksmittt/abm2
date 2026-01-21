@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
-import { Car, Zap, ShieldCheck, Clock, Truck, Bike } from "lucide-react"; 
+import { Car, Zap, ShieldCheck, Clock, Truck, Bike, Battery } from "lucide-react"; 
 import { pushDataLayerEvent } from "@/lib/analytics";
 
 // --- UPDATED: New service features with SEO keywords and correct links ---
@@ -37,6 +37,12 @@ const SERVICE_FEATURES = [
         description: "Explore our deep-cycle lineup for inverters and dual-battery setups before visiting the Fortuner guide.",
         icon: Clock,
         href: "/products/type/deep-cycle",
+    },
+    {
+        title: "Golf Cart Batteries",
+        description: "Professional golf cart battery replacement and lithium conversions for estate carts. Trojan, Enertec, Club Car, EZGO, Yamaha.",
+        icon: Battery,
+        href: "/golf-cart-batteries",
     },
     {
         title: "Guaranteed Warranty",
@@ -75,7 +81,7 @@ const ServiceGrid = () => {
                     </p>
                 </div>
 
-                {/* --- UPDATED: Grid now supports 6 items gracefully --- */}
+                {/* --- UPDATED: Grid now supports 7 items gracefully --- */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {SERVICE_FEATURES.map((feature, index) => (
                         <Link key={index} href={feature.href} passHref className="group block h-full">

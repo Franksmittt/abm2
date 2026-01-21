@@ -5,7 +5,8 @@ import { Metadata } from "next";
 import ContactForm from "@/components/content/ContactForm"; // <-- IMPORTED
 import QuoteTrackingWrapper from "@/components/layout/QuoteTrackingWrapper";
 import { headers } from "next/headers";
-import { BASE_URL } from "@/lib/seo-constants";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { BASE_URL, BUSINESS_ADDRESS, BUSINESS_CONTACT } from "@/lib/seo-constants";
 
 // Mark route as dynamic since we're using headers()
 export const dynamic = 'force-dynamic';
@@ -26,6 +27,8 @@ export const metadata: Metadata = {
     description: "Request a free quote for solar, inverter, or bulk battery orders in Alberton. Our specialists will design a custom power solution for you.",
     url: `${BASE_URL}/quote`,
     type: 'website',
+    locale: 'en_ZA',
+    siteName: 'Alberton Battery Mart',
     images: [
       {
         url: '/images/og-image.jpg',
@@ -35,6 +38,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Solar & Inverter Quote Alberton | Alberton Battery Mart",
+    description: "Request a free quote for solar, inverter, or bulk battery orders in Alberton. Our specialists will design a custom power solution for you.",
+    images: ['/images/og-image.jpg'],
+  },
   alternates: {
     canonical: `${BASE_URL}/quote`,
   },
@@ -43,14 +52,60 @@ export const metadata: Metadata = {
 const EMERGENCY_PHONE = "0101096211";
 const EMAIL_ADDRESS = "admin@albertonbatterymart.co.za";
 
+const SERVICE_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Solar & Inverter Battery Quote Service",
+  provider: {
+    "@type": "LocalBusiness",
+    name: "Alberton Battery Mart",
+    address: {
+      "@type": "PostalAddress",
+      ...BUSINESS_ADDRESS,
+    },
+    telephone: BUSINESS_CONTACT.telephone,
+  },
+  areaServed: ["Alberton", "New Redruth", "Meyersdal"],
+  serviceType: "Battery Consultation",
+  description: "Request a free quote for solar, inverter, or bulk battery orders in Alberton. Our specialists will design a custom power solution for you.",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "ZAR",
+    description: "Free consultation and quote",
+  },
+};
+
+const BREADCRUMB_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: BASE_URL,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Request Quote",
+      item: `${BASE_URL}/quote`,
+    },
+  ],
+};
+
 export default function QuotePage() {
   const bucketHeader = headers().get("x-ab-bucket");
   const bucket = bucketHeader === "variant" ? "variant" : "control";
 
   return (
-    <QuoteTrackingWrapper bucket={bucket} viewEventName="quote_page_view" ctaEventName="quote_page_cta_click">
-      {({ trackCta }) => (
-        <div className="container py-16 space-y-12 max-w-4xl">
+    <>
+      <JsonLd data={SERVICE_SCHEMA} id="service-schema" />
+      <JsonLd data={BREADCRUMB_SCHEMA} id="breadcrumb-schema" />
+      <QuoteTrackingWrapper bucket={bucket} viewEventName="quote_page_view" ctaEventName="quote_page_cta_click">
+        {({ trackCta }) => (
+          <div className="container py-16 space-y-12 max-w-4xl">
       
       <div className="text-center space-y-4">
         <Battery className="h-16 w-16 text-battery mx-auto" />
@@ -113,7 +168,8 @@ export default function QuotePage() {
         </div>
       </div>
     </div>
-      )}
-  </QuoteTrackingWrapper>
+        )}
+      </QuoteTrackingWrapper>
+    </>
   );
 }

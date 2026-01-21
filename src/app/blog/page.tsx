@@ -32,6 +32,14 @@ export const metadata: Metadata = {
         alt: 'Battery Blog - Alberton Battery Mart',
       },
     ],
+    locale: 'en_ZA',
+    siteName: 'Alberton Battery Mart',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Battery Blog & Expert Guides | Alberton Battery Mart",
+    description: "Read expert guides from Alberton Battery Mart on car battery maintenance, AGM vs. EFB technology, mobile fitment, and load shedding solutions.",
+    images: ['/images/og-image.jpg'],
   },
   alternates: {
     canonical: 'https://www.albertonbatterymart.co.za/blog',

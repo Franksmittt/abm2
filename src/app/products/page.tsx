@@ -5,6 +5,8 @@ import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import CodeLookup from "@/components/content/CodeLookup";
 import { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { BASE_URL } from "@/lib/seo-constants";
 
 // --- NEW: Page-Specific Metadata for SEO with Open Graph ---
 export const metadata: Metadata = {
@@ -33,6 +35,14 @@ export const metadata: Metadata = {
         alt: 'Batteries for Sale - Alberton Battery Mart',
       },
     ],
+    locale: 'en_ZA',
+    siteName: 'Alberton Battery Mart',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Batteries for Sale in Alberton | Car, Truck, Motorcycle, Solar",
+    description: "Browse all batteries at Alberton Battery Mart. We stock Willard, Exide, & Enertec for cars, trucks, motorcycles, and solar inverters. Free fitment & testing.",
+    images: ['/images/og-image.jpg'],
   },
   alternates: {
     canonical: 'https://www.albertonbatterymart.co.za/products',
@@ -56,9 +66,30 @@ const filterLinks = {
     ]
 };
 
+const BREADCRUMB_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: BASE_URL,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Products",
+      item: `${BASE_URL}/products`,
+    },
+  ],
+};
+
 export default function ProductsBasePage() {
   return (
-    <div className="container py-16 space-y-16">
+    <>
+      <JsonLd data={BREADCRUMB_SCHEMA} id="breadcrumb-schema" />
+      <div className="container py-16 space-y-16">
         
         {/* H1 and Introduction (SEO Focus) */}
         <div className="text-center space-y-4">
@@ -123,5 +154,6 @@ export default function ProductsBasePage() {
             </div>
         </div>
     </div>
+    </>
   );
 }

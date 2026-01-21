@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Sun, Zap, ShieldCheck } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { BASE_URL } from "@/lib/seo-constants";
 
 // --- NEW: Page-Specific Metadata for SEO ---
@@ -25,6 +26,8 @@ export const metadata: Metadata = {
     description: "Get the best batteries for load shedding in Alberton. We stock Deep Cycle, AGM, and Lithium (LiFePO₄) batteries for inverters and solar systems.",
     url: `${BASE_URL}/deep-cycle`,
     type: 'website',
+    locale: 'en_ZA',
+    siteName: 'Alberton Battery Mart',
     images: [
       {
         url: '/images/og-image.jpg',
@@ -33,6 +36,12 @@ export const metadata: Metadata = {
         alt: 'Deep Cycle & Solar Batteries - Alberton Battery Mart',
       },
     ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Solar, Inverter & Deep Cycle Batteries in Alberton",
+    description: "Get the best batteries for load shedding in Alberton. We stock Deep Cycle, AGM, and Lithium (LiFePO₄) batteries for inverters and solar systems.",
+    images: ['/images/og-image.jpg'],
   },
   alternates: {
     canonical: `${BASE_URL}/deep-cycle`,
@@ -44,9 +53,51 @@ const DEEP_CYCLE_PRODUCTS = ALL_PRODUCTS.filter((p: ProductCardData) =>
   p.category === 'Deep Cycle'
 );
 
+const PRODUCT_COLLECTION_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "ProductCollection",
+  name: "Solar, Inverter & Deep Cycle Batteries",
+  description: "Get the best batteries for load shedding in Alberton. We stock Deep Cycle, AGM, and Lithium (LiFePO₄) batteries for inverters and solar systems.",
+  url: `${BASE_URL}/deep-cycle`,
+  hasPart: DEEP_CYCLE_PRODUCTS.slice(0, 20).map((product) => ({
+    "@type": "Product",
+    name: product.name,
+    sku: product.id.toString(),
+    url: `${BASE_URL}/product/${product.id}`,
+  })),
+};
+
+const BREADCRUMB_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: BASE_URL,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Products",
+      item: `${BASE_URL}/products`,
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Deep Cycle & Solar Batteries",
+      item: `${BASE_URL}/deep-cycle`,
+    },
+  ],
+};
+
 export default function DeepCycleBatteriesPage() {
   return (
-    <div className="container py-16 space-y-16">
+    <>
+      <JsonLd data={PRODUCT_COLLECTION_SCHEMA} id="product-collection-schema" />
+      <JsonLd data={BREADCRUMB_SCHEMA} id="breadcrumb-schema" />
+      <div className="container py-16 space-y-16">
       
       {/* --- NEW: Full Landing Page Content --- */}
       <div className="text-center space-y-4">
@@ -99,5 +150,6 @@ export default function DeepCycleBatteriesPage() {
         products={DEEP_CYCLE_PRODUCTS}
       />
     </div>
+    </>
   );
 }

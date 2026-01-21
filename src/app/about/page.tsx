@@ -3,6 +3,8 @@ import { Battery, MapPin, ShieldCheck, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { BASE_URL, BUSINESS_ADDRESS, BUSINESS_CONTACT } from "@/lib/seo-constants";
 
 // --- NEW: Page-Specific Metadata for SEO with Open Graph ---
 export const metadata: Metadata = {
@@ -20,6 +22,8 @@ export const metadata: Metadata = {
     description: "Learn about Alberton Battery Mart. We are your local, multi-brand battery specialists offering expert advice, free fitment, and mobile callouts.",
     url: 'https://www.albertonbatterymart.co.za/about',
     type: 'website',
+    locale: 'en_ZA',
+    siteName: 'Alberton Battery Mart',
     images: [
       {
         url: '/images/og-image.jpg',
@@ -29,14 +33,70 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: "About Alberton Battery Mart | Your Local Battery Experts",
+    description: "Learn about Alberton Battery Mart. We are your local, multi-brand battery specialists offering expert advice, free fitment, and mobile callouts.",
+    images: ['/images/og-image.jpg'],
+  },
   alternates: {
     canonical: 'https://www.albertonbatterymart.co.za/about',
   },
 };
 
+const ORGANIZATION_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Alberton Battery Mart",
+  description: "Alberton's independent, multi-brand battery specialists offering expert advice, free fitment, and mobile callouts.",
+  url: BASE_URL,
+  address: {
+    "@type": "PostalAddress",
+    ...BUSINESS_ADDRESS,
+  },
+  telephone: BUSINESS_CONTACT.telephone,
+  email: "admin@albertonbatterymart.co.za",
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "08:00",
+      closes: "17:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: "Saturday",
+      opens: "08:00",
+      closes: "13:00",
+    },
+  ],
+};
+
+const BREADCRUMB_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: BASE_URL,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "About",
+      item: `${BASE_URL}/about`,
+    },
+  ],
+};
+
 export default function AboutPage() {
   return (
-    <div className="container py-16 space-y-12 max-w-5xl">
+    <>
+      <JsonLd data={ORGANIZATION_SCHEMA} id="organization-schema" />
+      <JsonLd data={BREADCRUMB_SCHEMA} id="breadcrumb-schema" />
+      <div className="container py-16 space-y-12 max-w-5xl">
       
       {/* --- NEW: SEO-Optimized H1 & Subtitle --- */}
       <div className="text-center space-y-4">
@@ -85,5 +145,6 @@ export default function AboutPage() {
         </Button>
       </div>
     </div>
+    </>
   );
 }

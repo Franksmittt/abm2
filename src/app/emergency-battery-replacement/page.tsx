@@ -30,6 +30,14 @@ export const metadata: Metadata = {
         alt: 'Emergency Battery Replacement - Alberton Battery Mart',
       },
     ],
+    locale: 'en_ZA',
+    siteName: 'Alberton Battery Mart',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Emergency Battery Replacement | We Come to You in 30 Mins | Alberton",
+    description: "Dead battery? We come to you in Alberton, New Redruth & Meyersdal. Mobile battery replacement in 30 minutes. Call 010 109 6211 now.",
+    images: ['/images/og-image.jpg'],
   },
   alternates: {
     canonical: `${BASE_URL}/emergency-battery-replacement`,

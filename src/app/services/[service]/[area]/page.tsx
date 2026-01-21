@@ -54,6 +54,14 @@ export async function generateMetadata({
           alt: entry.title,
         },
       ],
+      locale: 'en_ZA',
+      siteName: 'Alberton Battery Mart',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: entry.title,
+      description: entry.description,
+      images: [entry.ogImage || `${BASE_URL}/images/og-image.jpg`],
     },
     alternates: {
       canonical: url,

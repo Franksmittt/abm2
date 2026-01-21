@@ -33,6 +33,14 @@ export const metadata: Metadata = {
         alt: 'Mobile Battery Replacement Service - Alberton Battery Mart',
       },
     ],
+    locale: 'en_ZA',
+    siteName: 'Alberton Battery Mart',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Mobile Battery Replacement Service in Alberton | Alberton Battery Mart",
+    description: "Fast mobile battery replacement and fitment in Alberton, New Redruth, & Meyersdal. We come to you. Free alternator testing with every callout.",
+    images: ['/images/og-image.jpg'],
   },
   alternates: {
     canonical: 'https://www.albertonbatterymart.co.za/services',

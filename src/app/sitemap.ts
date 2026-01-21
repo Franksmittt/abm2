@@ -31,6 +31,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/local/meyersdal',
     '/local/new-redruth',
     '/blog',
+    '/golf-cart-batteries',
+    '/golf-cart-batteries/lithium-conversion',
+    '/golf-cart-batteries/lead-acid',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date().toISOString(),
