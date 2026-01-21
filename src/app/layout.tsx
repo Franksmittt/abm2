@@ -21,7 +21,11 @@ import {
   SERVICE_AREAS,
 } from "@/lib/seo-constants";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ 
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true
+});
 const ENVIRONMENT = process.env.NODE_ENV ?? "development";
 
 // --- SEO: Root Metadata with Open Graph & Twitter Cards ---
@@ -154,22 +158,6 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
         {/* --- MODIFIED: Removed the manual <script> tag for GTM --- */}
 
-        {/* --- Google tag (gtag.js) for Google Ads conversion tracking --- */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=AW-969671559"
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'AW-969671559');
-            `,
-          }}
-        />
-
         {/* --- Add LocalBusiness Schema to HEAD --- */}
         <JsonLd data={localBusinessSchema} id="local-business-schema" />
         <JsonLd data={organizationSchema} id="organization-schema" />
@@ -186,7 +174,21 @@ export default function RootLayout({
           />
         </noscript>
 
-        {/* --- NEW: Add GTM <Script> tag --- */}
+        {/* --- Google Ads (gtag.js) - Optimized loading --- */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-969671559"
+          strategy="afterInteractive"
+        />
+        <Script id="google-ads-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-969671559');
+          `}
+        </Script>
+
+        {/* --- Google Tag Manager --- */}
         <Script id="google-tag-manager" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

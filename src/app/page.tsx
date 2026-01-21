@@ -2,10 +2,9 @@
 import dynamicImport from 'next/dynamic';
 import { Metadata } from 'next';
 import HeroSection from "@/components/layout/HeroSection";
-import { headers } from "next/headers";
 
-// Mark route as dynamic since we're using headers()
-export const dynamic = 'force-dynamic';
+// Optimized for static generation
+export const dynamic = 'auto';
 
 // Lazy-load all components below the fold
 const TrustAuthoritySection = dynamicImport(() => import('@/components/layout/TrustAuthoritySection'));
@@ -64,14 +63,11 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  const bucketHeader = headers().get("x-ab-bucket");
-  const bucket: "control" | "variant" =
-    bucketHeader === "variant" ? "variant" : "control";
   return (
     <main>
       
       {/* 1. HERO: Grabs immediate attention & captures urgent leads. */}
-      <HeroSection variant={bucket} />
+      <HeroSection variant="control" />
       
       {/* 2. TRUST & AUTHORITY: Instantly builds trust and authority. Answers "Why you?" */}
       <TrustAuthoritySection />

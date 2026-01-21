@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useEffect, useState } from "react";
-import { Send, AlertTriangle, CheckCircle } from "lucide-react"; // --- NEW: Added CheckCircle
+import { Send, AlertTriangle, CheckCircle } from "lucide-react";
 import { pushDataLayerEvent } from "@/lib/analytics";
 
 const ContactForm = () => {
@@ -26,18 +26,28 @@ const ContactForm = () => {
     setError(null);
 
     try {
-      const response = await fetch('/api/contact', {
+      // Use Web3Forms - free form submission service
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          access_key: '8f2e8c3a-4d7b-4e9a-9f2c-1a3b5c7d9e0f', // Public key, will be replaced
+          name: formData.name,
+          email: formData.email,
+          subject: `Contact Form: ${formData.subject}`,
+          message: formData.message,
+          from_name: 'Alberton Battery Mart Website',
+          to_email: 'admin@albertonbatterymart.co.za'
+        }),
       });
 
       const data = await response.json();
 
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to send message');
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || 'Failed to send message');
       }
 
       // Track successful submission
