@@ -63,6 +63,7 @@ const filterLinks = {
         { title: "Enertec Batteries", icon: Battery, href: "/products/results?brand=Enertec" }, 
         { title: "Exide Batteries", icon: Battery, href: "/products/results?brand=Exide" },
         { title: "Power Plus Batteries", icon: Battery, href: "/products/results?brand=Power Plus" },
+        { title: "Eco Plus Batteries", icon: Battery, href: "/products/results?brand=Eco Plus" },
     ]
 };
 

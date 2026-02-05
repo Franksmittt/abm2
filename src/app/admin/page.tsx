@@ -216,6 +216,8 @@ export default function AdminPage() {
                     <option>Exide</option>
                     <option>Enertec</option>
                     <option>Raylite</option>
+                    <option>Power Plus</option>
+                    <option>Eco Plus</option>
                   </select>
                 </div>
                 <div>
